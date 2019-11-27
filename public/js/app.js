@@ -37087,6 +37087,11 @@ function createPlace(lat, _long) {
   L.marker([lat, _long]).addTo(map).bindPopup(popupHtml);
 }
 
+var createPlaceButton = document.getElementById("sendPlace");
+createPlaceButton.addEventListener("click", function (e) {
+  alert();
+});
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":
