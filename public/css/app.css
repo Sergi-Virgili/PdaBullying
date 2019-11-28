@@ -11352,20 +11352,3 @@ a.text-dark:focus {
   }
 }
 
-.map {
-  height: 500px;
-  width: 600px;
-  background-color: burlywood;
-  margin: 0 auto;
-}
-
-.container {
-  display: -webkit-box;
-  display: flex;
-}
-
-.mapForm {
-  width: 20%;
-  background-color: red;
-}
-

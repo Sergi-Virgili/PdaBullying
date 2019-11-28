@@ -35,9 +35,10 @@
                     @endauth
                 </div>
             @endif
-
-            <div class="container">
-                <div class="map" id="map">
+            
+            <div class="container" id="app">
+                <example-component></example-component>
+                {{-- <div class="map" id="map">
                 </div>
                 
                 <div class="mapform">
@@ -77,8 +78,8 @@
                         </div>
                         <button class="btn btn-success mt-4 " id='sendPlace'>Register</button>
                     </div>
-                </div>
-            </div>
+                </div> --}}
+            </div> 
         </div>
     </body>
 </html>
