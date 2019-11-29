@@ -22,8 +22,8 @@ class CreateResourcesTable extends Migration
             $table->string('link')->nullable();
             $table->integer('type_id')->nullable();
             $table->string('adress')->nullable();
-            $table->integer('lat');
-            $table->integer('lng');
+            $table->float('lat');
+            $table->float('lng');
             
             $table->timestamps();
 
