@@ -2,19 +2,22 @@
   <div>
     <l-map class="map" :zoom="zoom" :min-zoom="3" :center="center">
       <l-tile-layer :url="url" />
-      <l-marker :lat-lng="geoMarker" />
+      <l-marker :lat-lng="geoMarker">
+        <l-popup>Hello!</l-popup>
+      </l-marker>
     </l-map>
   </div>
 </template>
 
 <script>
-import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 
 export default {
   components: {
     LMap,
     LTileLayer,
-    LMarker
+    LMarker,
+    LPopup
   },
   data() {
     return {
