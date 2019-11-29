@@ -1856,6 +1856,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1870,6 +1877,7 @@ __webpack_require__.r(__webpack_exports__);
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       center: [41.3876768, 2.169259],
       zoom: 13,
+      animation: true,
       resources: []
     };
   },
@@ -1884,6 +1892,11 @@ __webpack_require__.r(__webpack_exports__);
         _this.resources = response.data.resources;
         console.log(_this.resources);
       });
+    },
+    //TODO: ANIMATE CENTER MAP
+    centerMap: function centerMap(geoMarker) {
+      console.log(geoMarker);
+      this.center = geoMarker;
     }
   }
 });
@@ -52156,7 +52169,12 @@ var render = function() {
         "l-map",
         {
           staticClass: "map",
-          attrs: { zoom: _vm.zoom, "min-zoom": 3, center: _vm.center }
+          attrs: {
+            noBlockingAnimations: _vm.animation,
+            zoom: _vm.zoom,
+            "min-zoom": 3,
+            center: _vm.center
+          }
         },
         [
           _c("l-tile-layer", { attrs: { url: _vm.url } }),
@@ -52164,7 +52182,15 @@ var render = function() {
           _vm._l(_vm.resources, function(resource) {
             return _c(
               "l-marker",
-              { key: resource.index, attrs: { "lat-lng": resource.geoMarker } },
+              {
+                key: resource.index,
+                attrs: { "lat-lng": resource.geoMarker },
+                on: {
+                  click: function($event) {
+                    return _vm.centerMap(resource.geoMarker)
+                  }
+                }
+              },
               [_c("l-popup", [_vm._v(_vm._s(resource.name))])],
               1
             )
