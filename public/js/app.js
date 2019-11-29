@@ -1839,6 +1839,8 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_leaflet__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-leaflet */ "./node_modules/vue2-leaflet/dist/vue2-leaflet.es.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -1850,6 +1852,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1863,9 +1870,21 @@ __webpack_require__.r(__webpack_exports__);
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       center: [41.3876768, 2.169259],
       zoom: 13,
-      markers: [],
-      geoMarker: [41.3876768, 2.169259]
+      resources: []
     };
+  },
+  mounted: function mounted() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData: function fetchData() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/v1/resources").then(function (response) {
+        _this.resources = response.data.resources;
+        console.log(_this.resources);
+      });
+    }
   }
 });
 
@@ -52142,14 +52161,16 @@ var render = function() {
         [
           _c("l-tile-layer", { attrs: { url: _vm.url } }),
           _vm._v(" "),
-          _c(
-            "l-marker",
-            { attrs: { "lat-lng": _vm.geoMarker } },
-            [_c("l-popup", [_vm._v("Hello!")])],
-            1
-          )
+          _vm._l(_vm.resources, function(resource) {
+            return _c(
+              "l-marker",
+              { key: resource.index, attrs: { "lat-lng": resource.geoMarker } },
+              [_c("l-popup", [_vm._v(_vm._s(resource.name))])],
+              1
+            )
+          })
         ],
-        1
+        2
       )
     ],
     1

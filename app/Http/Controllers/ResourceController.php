@@ -11,6 +11,9 @@ class ResourceController extends Controller
     public function index()
     {
         $resources = Resource::all();
+        foreach ($resources as $resource){
+            $resource['geoMarker']= [$resource['lat'],$resource['lng']];
+        }
 
         return response()->json([
             'resources'=>$resources,

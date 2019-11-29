@@ -2,8 +2,12 @@
     <div>
         <l-map class="map" :zoom="zoom" :min-zoom="3" :center="center">
             <l-tile-layer :url="url" />
-            <l-marker :lat-lng="geoMarker">
-                <l-popup>Hello!</l-popup>
+            <l-marker
+                v-for="resource in resources"
+                :key="resource.index"
+                :lat-lng="resource.geoMarker"
+            >
+                <l-popup>{{ resource.name }}</l-popup>
             </l-marker>
         </l-map>
     </div>
@@ -11,6 +15,7 @@
 
 <script>
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
+import axios from "axios";
 
 export default {
     components: {
@@ -24,9 +29,19 @@ export default {
             url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
             center: [41.3876768, 2.169259],
             zoom: 13,
-            markers: [],
-            geoMarker: [41.3876768, 2.169259]
+            resources: []
         };
+    },
+    mounted() {
+        this.fetchData();
+    },
+    methods: {
+        fetchData() {
+            axios.get("/api/v1/resources").then(response => {
+                this.resources = response.data.resources;
+                console.log(this.resources);
+            });
+        }
     }
 };
 </script>
