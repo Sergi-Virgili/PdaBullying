@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Refuge;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\Resource;
 
 class RefugeController extends Controller
 {
@@ -25,6 +27,16 @@ class RefugeController extends Controller
     public function store(Request $request)
     {
 
+        Refuge::create([
+
+            'name'=> $request->name,
+            'description'=> $request->description,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
+
+        ]);
+
+        return response()->json([], 201);
     }
 
 

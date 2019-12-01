@@ -9,7 +9,7 @@
     >
       <l-tile-layer :url="url" />
       <l-marker
-        v-for="(refuge, index) in refuges"
+        v-for="refuge in refuges"
         :key="refuge.index"
         :lat-lng="refuge.geoMarker"
         @click="centerMap(refuge.geoMarker)"
@@ -17,24 +17,6 @@
         <l-popup>{{ refuge.name }}</l-popup>
       </l-marker>
     </l-map>
-    <svg
-      id="contact_icon_01"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-      width="142"
-      height="127"
-      viewBox="0 0 142 127"
-    >
-      <g id="Group_2" data-name="Group 2">
-        <path
-          id="Clip_13-2"
-          data-name="Clip 13"
-          d="M59.059,0C38.868.024,19.614,3.378,9.29,16.285h0C3,24.141.016,35.518,0,47.84H0v.185a86.392,86.392,0,0,0,12.837,44.8h0c15.178,23.923,43.185,36.765,64.551,32.771h0c21.366-3.951,36.131-24.739,47.845-46.6h0c8.724-16.224,15.744-33.062,15.767-46.2h0v-.127a24.969,24.969,0,0,0-2.733-12.045h0C130.884,7.093,107.456,3.013,80.522.951h0C73.627.412,66.507.008,59.491,0h0"
-          transform="translate(1)"
-          fill="#C5D700"
-        />
-      </g>
-    </svg>
   </div>
 </template>
 
