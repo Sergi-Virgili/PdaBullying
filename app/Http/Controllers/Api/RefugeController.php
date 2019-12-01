@@ -27,7 +27,7 @@ class RefugeController extends Controller
     public function store(Request $request)
     {
 
-        Refuge::create([
+        $refuge = Refuge::create([
 
             'name'=> $request->name,
             'description'=> $request->description,
@@ -36,7 +36,7 @@ class RefugeController extends Controller
 
         ]);
 
-        return response()->json([], 201);
+        return response()->json($refuge, 201);
     }
 
 
