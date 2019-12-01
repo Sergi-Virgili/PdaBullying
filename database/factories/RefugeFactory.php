@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Resource;
+use App\Refuge;
 use Faker\Generator as Faker;
 
-$factory->define(Resource::class, function (Faker $faker) {
+$factory->define(Refuge::class, function (Faker $faker) {
     return [
         //
     ];

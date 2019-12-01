@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Resource API Routes
 
-Route::get('/v1/resources','ResourceController@index');
-Route::get('/v1/resources/{resource}','ResourceController@show');
-Route::delete('/v1/resources/{resource}','ResourceController@destroy');
-Route::post('/v1/resources/','ResourceController@store');
+Route::get('/refuges','RefugeController@index');
+Route::get('/refuges/{resource}','RefugeController@show');
+Route::delete('/refuges/{resource}','RefugeController@destroy');
+Route::post('/refuges','RefugeController@store');
