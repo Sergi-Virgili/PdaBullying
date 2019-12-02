@@ -42,6 +42,10 @@ Vue.component(
     "map-component",
     require("./components/map-component.vue").default
 );
+Vue.component(
+    "userAdmin-component",
+    require("./components/userAdmin-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
