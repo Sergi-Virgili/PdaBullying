@@ -13,9 +13,8 @@ class RefugeController extends Controller
     public function index()
     {
         $refuges = Refuge::all();
-        foreach ($refuges as $refuge){
-            $refuge['geoMarker']= [$refuge['lat'],$refuge['lng']];
-        }
+
+        $refuges = Refuge::addGeoMarkerFields($refuges);
 
         return response()->json([
             'refuge'=>$refuges,

@@ -50,6 +50,10 @@ Vue.component(
     "refugeList-component",
     require("./components/refugeList-component.vue").default
 );
+Vue.component(
+    "refugeNew-component",
+    require("./components/refugeNew-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

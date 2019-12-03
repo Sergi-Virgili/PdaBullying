@@ -1869,6 +1869,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1912,6 +1922,16 @@ __webpack_require__.r(__webpack_exports__);
     },
     test: function test(params) {
       alert(params);
+    },
+    OnClickMyMap: function OnClickMyMap() {
+      this.fetchMyRefuges();
+    },
+    fetchMyRefuges: function fetchMyRefuges() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/maps/1").then(function (response) {
+        _this2.refuges = response.data;
+      });
     }
   }
 });
@@ -1972,6 +1992,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/refugeNew-component.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/refugeNew-component.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -1980,7 +2017,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap v4.4.0 (https://getbootstrap.com/)
+  * Bootstrap v4.4.1 (https://getbootstrap.com/)
   * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
@@ -2065,7 +2102,7 @@ __webpack_require__.r(__webpack_exports__);
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.4.0): util.js
+   * Bootstrap (v4.4.1): util.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -2242,7 +2279,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME = 'alert';
-  var VERSION = '4.4.0';
+  var VERSION = '4.4.1';
   var DATA_KEY = 'bs.alert';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -2406,7 +2443,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$1 = 'button';
-  var VERSION$1 = '4.4.0';
+  var VERSION$1 = '4.4.1';
   var DATA_KEY$1 = 'bs.button';
   var EVENT_KEY$1 = "." + DATA_KEY$1;
   var DATA_API_KEY$1 = '.data-api';
@@ -2607,7 +2644,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$2 = 'carousel';
-  var VERSION$2 = '4.4.0';
+  var VERSION$2 = '4.4.1';
   var DATA_KEY$2 = 'bs.carousel';
   var EVENT_KEY$2 = "." + DATA_KEY$2;
   var DATA_API_KEY$2 = '.data-api';
@@ -3205,7 +3242,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$3 = 'collapse';
-  var VERSION$3 = '4.4.0';
+  var VERSION$3 = '4.4.1';
   var DATA_KEY$3 = 'bs.collapse';
   var EVENT_KEY$3 = "." + DATA_KEY$3;
   var DATA_API_KEY$3 = '.data-api';
@@ -3564,7 +3601,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$4 = 'dropdown';
-  var VERSION$4 = '4.4.0';
+  var VERSION$4 = '4.4.1';
   var DATA_KEY$4 = 'bs.dropdown';
   var EVENT_KEY$4 = "." + DATA_KEY$4;
   var DATA_API_KEY$4 = '.data-api';
@@ -4096,7 +4133,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$5 = 'modal';
-  var VERSION$5 = '4.4.0';
+  var VERSION$5 = '4.4.1';
   var DATA_KEY$5 = 'bs.modal';
   var EVENT_KEY$5 = "." + DATA_KEY$5;
   var DATA_API_KEY$5 = '.data-api';
@@ -4693,7 +4730,7 @@ __webpack_require__.r(__webpack_exports__);
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.4.0): tools/sanitizer.js
+   * Bootstrap (v4.4.1): tools/sanitizer.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4819,7 +4856,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$6 = 'tooltip';
-  var VERSION$6 = '4.4.0';
+  var VERSION$6 = '4.4.1';
   var DATA_KEY$6 = 'bs.tooltip';
   var EVENT_KEY$6 = "." + DATA_KEY$6;
   var JQUERY_NO_CONFLICT$6 = $.fn[NAME$6];
@@ -5543,7 +5580,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$7 = 'popover';
-  var VERSION$7 = '4.4.0';
+  var VERSION$7 = '4.4.1';
   var DATA_KEY$7 = 'bs.popover';
   var EVENT_KEY$7 = "." + DATA_KEY$7;
   var JQUERY_NO_CONFLICT$7 = $.fn[NAME$7];
@@ -5729,7 +5766,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$8 = 'scrollspy';
-  var VERSION$8 = '4.4.0';
+  var VERSION$8 = '4.4.1';
   var DATA_KEY$8 = 'bs.scrollspy';
   var EVENT_KEY$8 = "." + DATA_KEY$8;
   var DATA_API_KEY$6 = '.data-api';
@@ -6035,7 +6072,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$9 = 'tab';
-  var VERSION$9 = '4.4.0';
+  var VERSION$9 = '4.4.1';
   var DATA_KEY$9 = 'bs.tab';
   var EVENT_KEY$9 = "." + DATA_KEY$9;
   var DATA_API_KEY$7 = '.data-api';
@@ -6269,7 +6306,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$a = 'toast';
-  var VERSION$a = '4.4.0';
+  var VERSION$a = '4.4.1';
   var DATA_KEY$a = 'bs.toast';
   var EVENT_KEY$a = "." + DATA_KEY$a;
   var JQUERY_NO_CONFLICT$a = $.fn[NAME$a];
@@ -6515,7 +6552,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".map[data-v-402fb791] {\n  width: 60%;\n  height: 400px;\n}\n.refugeSider[data-v-402fb791] {\n  width: 40%;\n}\n.popUp[data-v-402fb791] {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n}", ""]);
+exports.push([module.i, ".map[data-v-402fb791] {\n  height: 400px;\n}\n.popUp[data-v-402fb791] {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n}", ""]);
 
 // exports
 
@@ -52238,60 +52275,98 @@ var render = function() {
         "div",
         { staticClass: "row" },
         [
-          _c(
-            "l-map",
-            {
-              staticClass: "map",
-              attrs: {
-                noBlockingAnimations: _vm.animation,
-                zoom: _vm.zoom,
-                "min-zoom": 3,
-                center: _vm.center
-              }
-            },
-            [
-              _c("l-tile-layer", { attrs: { url: _vm.url } }),
+          _c("div", { staticClass: "card col-md-8" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  on: { click: _vm.fetchData }
+                },
+                [_vm._v("PDA mapa")]
+              ),
               _vm._v(" "),
-              _vm._l(_vm.refuges, function(refuge, index) {
-                return _c(
-                  "div",
-                  { key: index },
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  on: { click: _vm.OnClickMyMap }
+                },
+                [_vm._v("Mi mapa")]
+              ),
+              _vm._v(" "),
+              _c("button", { staticClass: "btn btn-success" }, [
+                _vm._v("+ Add Place")
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-body" },
+              [
+                _c(
+                  "l-map",
+                  {
+                    staticClass: "map",
+                    attrs: {
+                      noBlockingAnimations: _vm.animation,
+                      zoom: _vm.zoom,
+                      "min-zoom": 3,
+                      center: _vm.center
+                    }
+                  },
                   [
-                    _c(
-                      "l-marker",
-                      {
-                        attrs: { "lat-lng": refuge.geoMarker },
-                        on: {
-                          click: function($event) {
-                            return _vm.OnClickRefuge(index, refuge.geoMarker)
-                          }
-                        }
-                      },
-                      [
-                        _c("l-popup", [
-                          _c("div", { staticClass: "popUp" }, [
-                            _c("img", {
-                              attrs: { src: refuge.logoUrl, alt: "" }
-                            }),
-                            _vm._v(" "),
-                            _c("div", [_vm._v(_vm._s(refuge.name))])
-                          ])
-                        ])
-                      ],
-                      1
-                    )
+                    _c("l-tile-layer", { attrs: { url: _vm.url } }),
+                    _vm._v(" "),
+                    _vm._l(_vm.refuges, function(refuge, index) {
+                      return _c(
+                        "div",
+                        { key: index },
+                        [
+                          _c(
+                            "l-marker",
+                            {
+                              attrs: { "lat-lng": refuge.geoMarker },
+                              on: {
+                                click: function($event) {
+                                  return _vm.OnClickRefuge(
+                                    index,
+                                    refuge.geoMarker
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("l-popup", [
+                                _c("div", { staticClass: "popUp" }, [
+                                  _c("img", {
+                                    attrs: { src: refuge.logoUrl, alt: "" }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", [_vm._v(_vm._s(refuge.name))])
+                                ])
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    })
                   ],
-                  1
+                  2
                 )
-              })
-            ],
-            2
-          ),
+              ],
+              1
+            )
+          ]),
           _vm._v(" "),
           _c("refuge-component", {
-            staticClass: "refugeSider",
+            staticClass: "refugeSider col-md-3",
             attrs: { refugeSelected: _vm.refugeSelected }
-          })
+          }),
+          _vm._v(" "),
+          _c("refugeNew-component", { staticClass: "refugeSider col-md-3" })
         ],
         1
       ),
@@ -52388,6 +52463,30 @@ var render = function() {
         2
       )
     : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/refugeNew-component.vue?vue&type=template&id=59781455&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/refugeNew-component.vue?vue&type=template&id=59781455& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("h3", [_vm._v("NEW")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -75720,6 +75819,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component("map-component", __webpack_require__(/*! ./components/map-component.vue */ "./resources/js/components/map-component.vue")["default"]);
 Vue.component("refuge-component", __webpack_require__(/*! ./components/refuge-component.vue */ "./resources/js/components/refuge-component.vue")["default"]);
 Vue.component("refugeList-component", __webpack_require__(/*! ./components/refugeList-component.vue */ "./resources/js/components/refugeList-component.vue")["default"]);
+Vue.component("refugeNew-component", __webpack_require__(/*! ./components/refugeNew-component.vue */ "./resources/js/components/refugeNew-component.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -76002,6 +76102,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/refugeNew-component.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/refugeNew-component.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _refugeNew_component_vue_vue_type_template_id_59781455___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./refugeNew-component.vue?vue&type=template&id=59781455& */ "./resources/js/components/refugeNew-component.vue?vue&type=template&id=59781455&");
+/* harmony import */ var _refugeNew_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./refugeNew-component.vue?vue&type=script&lang=js& */ "./resources/js/components/refugeNew-component.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _refugeNew_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _refugeNew_component_vue_vue_type_template_id_59781455___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _refugeNew_component_vue_vue_type_template_id_59781455___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/refugeNew-component.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/refugeNew-component.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/refugeNew-component.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_refugeNew_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./refugeNew-component.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/refugeNew-component.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_refugeNew_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/refugeNew-component.vue?vue&type=template&id=59781455&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/refugeNew-component.vue?vue&type=template&id=59781455& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_refugeNew_component_vue_vue_type_template_id_59781455___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./refugeNew-component.vue?vue&type=template&id=59781455& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/refugeNew-component.vue?vue&type=template&id=59781455&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_refugeNew_component_vue_vue_type_template_id_59781455___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_refugeNew_component_vue_vue_type_template_id_59781455___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -76020,8 +76189,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/Factoria/PdaBullying/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Factoria/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
