@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->integer('number');
             $table->string('city');
             $table->integer('CP');
-            $table->boolean('is_admin')->false;
+            $table->boolean('is_admin')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

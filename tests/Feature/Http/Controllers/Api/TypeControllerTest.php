@@ -24,15 +24,15 @@ class TypeControllerTest extends TestCase
 
 
         $response= $this->post('/api/types', [
-            'name'=> "RAquel s.a.",
-            'description'=> "hola que tal sisi qye tal"
+            'name'=> $name = "RAquel s.a.",
+            'description'=> $description ="hola que tal sisi qye tal"
         ]);
         
         $response->assertStatus(201);
 
         $this->assertDatabaseHas('types', [
-        'name'=> "RAquel s.a.",
-        'description'=> "hola que tal sisi qye tal"
+        'name'=> $name,
+        'description'=> $description
         ]);
     }
 }

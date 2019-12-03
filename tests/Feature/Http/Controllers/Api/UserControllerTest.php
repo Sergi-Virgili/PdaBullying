@@ -19,6 +19,8 @@ class UserControllerTest extends TestCase
     {
 
         $faker = Factory::create();
+
+        $this->withoutExceptionHandling();
         
 
         $response = $this->json('POST', 'api/users', [
