@@ -1,22 +1,28 @@
 <template>
   <div>
-    <l-map
-      class="map"
-      :noBlockingAnimations="animation"
-      :zoom="zoom"
-      :min-zoom="3"
-      :center="center"
-    >
-      <l-tile-layer :url="url" />
-      <l-marker
-        v-for="refuge in refuges"
-        :key="refuge.index"
-        :lat-lng="refuge.geoMarker"
-        @click="centerMap(refuge.geoMarker)"
+    <div class="row">
+      <l-map
+        class="map"
+        :noBlockingAnimations="animation"
+        :zoom="zoom"
+        :min-zoom="3"
+        :center="center"
       >
-        <l-popup>{{ refuge.name }}</l-popup>
-      </l-marker>
-    </l-map>
+        <l-tile-layer :url="url" />
+        <div v-for="(refuge, index) in refuges" :key="index">
+          <l-marker :lat-lng="refuge.geoMarker" @click="OnClickRefuge(index, refuge.geoMarker)">
+            <l-popup>
+              <div class="popUp">
+                <img :src="refuge.logoUrl" alt />
+                <div>{{ refuge.name }}</div>
+              </div>
+            </l-popup>
+          </l-marker>
+        </div>
+      </l-map>
+      <refuge-component class="refugeSider" :refugeSelected="refugeSelected"></refuge-component>
+    </div>
+    <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
   </div>
 </template>
 
@@ -37,7 +43,8 @@ export default {
       center: [41.3876768, 2.169259],
       zoom: 13,
       animation: true,
-      refuges: []
+      refuges: [],
+      refugeSelected: null
     };
   },
   created() {
@@ -47,21 +54,39 @@ export default {
     fetchData() {
       axios.get("/api/refuges").then(response => {
         this.refuges = response.data.refuge;
-        console.log(this.refuges);
       });
     },
-    //TODO: ANIMATE CENTER MAP
+
     centerMap(geoMarker) {
-      console.log(geoMarker);
       this.center = geoMarker;
+    },
+    OnClickRefuge(index, geoMarker) {
+      this.selectRefuge(index);
+      this.centerMap(geoMarker);
+    },
+    selectRefuge(index) {
+      this.refugeSelected = this.refuges[index];
+      console.log(this.refuges[index]);
+    },
+    test(params) {
+      alert(params);
     }
   }
 };
 </script>
 <style lang="scss" scoped>
 .map {
-  width: 100%;
+  width: 60%;
   height: 400px;
   //background-color: grey;
+}
+.refugeSider {
+  width: 40%;
+}
+.popUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>

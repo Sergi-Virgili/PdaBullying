@@ -12,25 +12,32 @@ class RefugesSeeder extends Seeder
     public function run()
     {
         DB::table('refuges')->insert([
-            'name'=> 'resource1',
-            'description'=> 'description1',
+            'name'=> 'Salut i educació emocional',
+            'logoUrl' => 'https://pdabullying.com/uploads/2019/08/Logo-SEER-gestora_thu.png',
+            'description'=> 'Prevenció, detecció i actuació davant l’assetjament entre iguals',
             'lat'=> 41.3876768,
             'lng'=> 2.1692590,
         ]);
         DB::table('refuges')->insert([
-            'name'=> 'resource2',
-            'description'=> 'description2',
+    
+            'name'=> "Concorci d'educació de Barcelona",
+            'logoUrl'=> 'https://pdabullying.com/uploads/2019/08/Logo-Consorci-d-39-Educacio-de-Barcelona_thu.png',
+            'description'=> 'hola',
             'lat'=> 41.4104479,
             'lng'=> 2.1584852,
         ]);
         DB::table('refuges')->insert([
-            'name'=> 'resource3',
+            'name'=> 'Salut i educació emocional',
+            'logoUrl' => 'https://pdabullying.com/uploads/2019/08/Logo-SEER-gestora_thu.png',
+
             'description'=> 'description3',
             'lat'=> 41.3987704,
             'lng'=> 2.1634544,
         ]);
         DB::table('refuges')->insert([
-            'name'=> 'resource4',
+            'name'=> 'Salut i educació emocional',
+            'logoUrl' => 'https://pdabullying.com/uploads/2019/08/Logo-SEER-gestora_thu.png',
+
             'description'=> 'description4',
             'lat'=>  41.3988499,
             'lng'=> 2.16369090,

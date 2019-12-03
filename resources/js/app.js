@@ -42,6 +42,14 @@ Vue.component(
     "map-component",
     require("./components/map-component.vue").default
 );
+Vue.component(
+    "refuge-component",
+    require("./components/refuge-component.vue").default
+);
+Vue.component(
+    "refugeList-component",
+    require("./components/refugeList-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
