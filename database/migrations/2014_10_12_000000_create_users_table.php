@@ -22,9 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('entity');
             $table->string('street');
-            $table->string('number');
+            $table->integer('number');
             $table->string('city');
-            $table->string('CP');
+            $table->integer('CP');
             $table->boolean('is_admin')->false;
             $table->rememberToken();
             $table->timestamps();
