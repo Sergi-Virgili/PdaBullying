@@ -14,6 +14,7 @@
             :zoom="zoom"
             :min-zoom="3"
             :center="center"
+            @click="OnClickPosition"
           >
             <l-tile-layer :url="url" />
             <div v-for="(refuge, index) in refuges" :key="index">
@@ -30,7 +31,7 @@
         </div>
       </div>
       <refuge-component class="refugeSider col-md-3" :refugeSelected="refugeSelected"></refuge-component>
-      <refugeNew-component class="refugeSider col-md-3"></refugeNew-component>
+      <refugeNew-component :newGeoMarker="newGeoMarker" class="refugeSider col-md-3"></refugeNew-component>
     </div>
     <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
   </div>
@@ -54,7 +55,8 @@ export default {
       zoom: 13,
       animation: true,
       refuges: [],
-      refugeSelected: null
+      refugeSelected: null,
+      newGeoMarker: null
     };
   },
   created() {
@@ -69,6 +71,7 @@ export default {
 
     centerMap(geoMarker) {
       this.center = geoMarker;
+      //console.log(geoMarker);
     },
     OnClickRefuge(index, geoMarker) {
       this.selectRefuge(index);
@@ -88,6 +91,12 @@ export default {
       axios.get("/api/maps/1").then(response => {
         this.refuges = response.data;
       });
+    },
+    OnClickPosition(event) {
+      this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
+      let refuge = {};
+      refuge.geoMarker = this.newGeoMarker;
+      this.refuges.push(refuge);
     }
   }
 };

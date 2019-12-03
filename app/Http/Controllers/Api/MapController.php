@@ -15,7 +15,6 @@ class MapController extends Controller
 
         $user = User::find($userId);
 
-
         $refuges = $user->refuges();
         $refuges = Refuge::addGeoMarkerFields($refuges);
 

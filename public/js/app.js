@@ -1879,6 +1879,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1895,7 +1896,8 @@ __webpack_require__.r(__webpack_exports__);
       zoom: 13,
       animation: true,
       refuges: [],
-      refugeSelected: null
+      refugeSelected: null,
+      newGeoMarker: null
     };
   },
   created: function created() {
@@ -1910,7 +1912,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     centerMap: function centerMap(geoMarker) {
-      this.center = geoMarker;
+      this.center = geoMarker; //console.log(geoMarker);
     },
     OnClickRefuge: function OnClickRefuge(index, geoMarker) {
       this.selectRefuge(index);
@@ -1932,6 +1934,12 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/maps/1").then(function (response) {
         _this2.refuges = response.data;
       });
+    },
+    OnClickPosition: function OnClickPosition(event) {
+      this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
+      var refuge = {};
+      refuge.geoMarker = this.newGeoMarker;
+      this.refuges.push(refuge);
     }
   }
 });
@@ -2005,7 +2013,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["newGeoMarker"]
+});
 
 /***/ }),
 
@@ -52313,7 +52335,8 @@ var render = function() {
                       zoom: _vm.zoom,
                       "min-zoom": 3,
                       center: _vm.center
-                    }
+                    },
+                    on: { click: _vm.OnClickPosition }
                   },
                   [
                     _c("l-tile-layer", { attrs: { url: _vm.url } }),
@@ -52366,7 +52389,10 @@ var render = function() {
             attrs: { refugeSelected: _vm.refugeSelected }
           }),
           _vm._v(" "),
-          _c("refugeNew-component", { staticClass: "refugeSider col-md-3" })
+          _c("refugeNew-component", {
+            staticClass: "refugeSider col-md-3",
+            attrs: { newGeoMarker: _vm.newGeoMarker }
+          })
         ],
         1
       ),
@@ -52407,7 +52433,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-header" }, [
-      _c("img", { attrs: { src: _vm.refugeSelected.logoUrl } }),
+      _vm.refugeSelected
+        ? _c("img", { attrs: { src: _vm.refugeSelected.logoUrl } })
+        : _vm._e(),
       _vm._v(" "),
       _vm.refugeSelected
         ? _c("h3", [_vm._v(_vm._s(_vm.refugeSelected.name))])
@@ -52486,7 +52514,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h3", [_vm._v("NEW")])
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-header" }, [_vm._v("Nova Localització")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("label", { attrs: { for: "name" } }, [_vm._v("Nom")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "name", id: "name" }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "name" } }, [_vm._v("description")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "description", id: "description" }
+      }),
+      _vm._v(" "),
+      _c("div", [
+        _c("p", [_vm._v("geoposition: " + _vm._s(_vm.newGeoMarker))])
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-success" }, [_vm._v("OK")])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

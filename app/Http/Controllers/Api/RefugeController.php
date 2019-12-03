@@ -45,12 +45,6 @@ class RefugeController extends Controller
     }
 
 
-    public function edit(Resource $resource)
-    {
-
-    }
-
-
     public function update(Request $request, Resource $resource)
     {
 
