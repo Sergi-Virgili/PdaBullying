@@ -1880,6 +1880,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1897,7 +1907,8 @@ __webpack_require__.r(__webpack_exports__);
       animation: true,
       refuges: [],
       refugeSelected: null,
-      newGeoMarker: null
+      newGeoMarker: null,
+      sider: ""
     };
   },
   created: function created() {
@@ -1919,6 +1930,7 @@ __webpack_require__.r(__webpack_exports__);
       this.centerMap(geoMarker);
     },
     selectRefuge: function selectRefuge(index) {
+      this.openSider("refuge");
       this.refugeSelected = this.refuges[index];
       console.log(this.refuges[index]);
     },
@@ -1936,10 +1948,18 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     OnClickPosition: function OnClickPosition(event) {
+      this.openSider("newRefuge");
       this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
       var refuge = {};
       refuge.geoMarker = this.newGeoMarker;
       this.refuges.push(refuge);
+    },
+    openSider: function openSider(sider) {
+      this.sider = sider;
+      console.log(sider);
+    },
+    newRefuge: function newRefuge() {
+      this.openSider("newRefuge");
     }
   }
 });
@@ -2042,7 +2062,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap v4.4.1 (https://getbootstrap.com/)
+  * Bootstrap v4.4.0 (https://getbootstrap.com/)
   * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
@@ -2127,7 +2147,7 @@ __webpack_require__.r(__webpack_exports__);
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.4.1): util.js
+   * Bootstrap (v4.4.0): util.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -2304,7 +2324,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME = 'alert';
-  var VERSION = '4.4.1';
+  var VERSION = '4.4.0';
   var DATA_KEY = 'bs.alert';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -2468,7 +2488,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$1 = 'button';
-  var VERSION$1 = '4.4.1';
+  var VERSION$1 = '4.4.0';
   var DATA_KEY$1 = 'bs.button';
   var EVENT_KEY$1 = "." + DATA_KEY$1;
   var DATA_API_KEY$1 = '.data-api';
@@ -2669,7 +2689,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$2 = 'carousel';
-  var VERSION$2 = '4.4.1';
+  var VERSION$2 = '4.4.0';
   var DATA_KEY$2 = 'bs.carousel';
   var EVENT_KEY$2 = "." + DATA_KEY$2;
   var DATA_API_KEY$2 = '.data-api';
@@ -3267,7 +3287,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$3 = 'collapse';
-  var VERSION$3 = '4.4.1';
+  var VERSION$3 = '4.4.0';
   var DATA_KEY$3 = 'bs.collapse';
   var EVENT_KEY$3 = "." + DATA_KEY$3;
   var DATA_API_KEY$3 = '.data-api';
@@ -3626,7 +3646,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$4 = 'dropdown';
-  var VERSION$4 = '4.4.1';
+  var VERSION$4 = '4.4.0';
   var DATA_KEY$4 = 'bs.dropdown';
   var EVENT_KEY$4 = "." + DATA_KEY$4;
   var DATA_API_KEY$4 = '.data-api';
@@ -4158,7 +4178,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$5 = 'modal';
-  var VERSION$5 = '4.4.1';
+  var VERSION$5 = '4.4.0';
   var DATA_KEY$5 = 'bs.modal';
   var EVENT_KEY$5 = "." + DATA_KEY$5;
   var DATA_API_KEY$5 = '.data-api';
@@ -4755,7 +4775,7 @@ __webpack_require__.r(__webpack_exports__);
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.4.1): tools/sanitizer.js
+   * Bootstrap (v4.4.0): tools/sanitizer.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4881,7 +4901,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$6 = 'tooltip';
-  var VERSION$6 = '4.4.1';
+  var VERSION$6 = '4.4.0';
   var DATA_KEY$6 = 'bs.tooltip';
   var EVENT_KEY$6 = "." + DATA_KEY$6;
   var JQUERY_NO_CONFLICT$6 = $.fn[NAME$6];
@@ -5605,7 +5625,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$7 = 'popover';
-  var VERSION$7 = '4.4.1';
+  var VERSION$7 = '4.4.0';
   var DATA_KEY$7 = 'bs.popover';
   var EVENT_KEY$7 = "." + DATA_KEY$7;
   var JQUERY_NO_CONFLICT$7 = $.fn[NAME$7];
@@ -5791,7 +5811,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$8 = 'scrollspy';
-  var VERSION$8 = '4.4.1';
+  var VERSION$8 = '4.4.0';
   var DATA_KEY$8 = 'bs.scrollspy';
   var EVENT_KEY$8 = "." + DATA_KEY$8;
   var DATA_API_KEY$6 = '.data-api';
@@ -6097,7 +6117,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$9 = 'tab';
-  var VERSION$9 = '4.4.1';
+  var VERSION$9 = '4.4.0';
   var DATA_KEY$9 = 'bs.tab';
   var EVENT_KEY$9 = "." + DATA_KEY$9;
   var DATA_API_KEY$7 = '.data-api';
@@ -6331,7 +6351,7 @@ __webpack_require__.r(__webpack_exports__);
    */
 
   var NAME$a = 'toast';
-  var VERSION$a = '4.4.1';
+  var VERSION$a = '4.4.0';
   var DATA_KEY$a = 'bs.toast';
   var EVENT_KEY$a = "." + DATA_KEY$a;
   var JQUERY_NO_CONFLICT$a = $.fn[NAME$a];
@@ -6577,7 +6597,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".map[data-v-402fb791] {\n  height: 400px;\n}\n.popUp[data-v-402fb791] {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n}", ""]);
+exports.push([module.i, ".map[data-v-402fb791] {\n  height: 400px;\n}\n.sider[data-v-402fb791] {\n  height: 100%;\n}\n.map-wraper[data-v-402fb791] {\n  width: 100%;\n  display: grid;\n  gap: 1em;\n  grid-template-columns: 2fr 1fr;\n}\n.popUp[data-v-402fb791] {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n          flex-direction: column;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n}", ""]);
 
 // exports
 
@@ -52296,109 +52316,116 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "div",
-        { staticClass: "row" },
-        [
-          _c("div", { staticClass: "card col-md-8" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success",
-                  on: { click: _vm.fetchData }
-                },
-                [_vm._v("PDA mapa")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success",
-                  on: { click: _vm.OnClickMyMap }
-                },
-                [_vm._v("Mi mapa")]
-              ),
-              _vm._v(" "),
-              _c("button", { staticClass: "btn btn-success" }, [
-                _vm._v("+ Add Place")
-              ])
-            ]),
+      _c("div", { staticClass: "map-wraper" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-success", on: { click: _vm.fetchData } },
+              [_vm._v("PDA mapa")]
+            ),
             _vm._v(" "),
             _c(
-              "div",
-              { staticClass: "card-body" },
-              [
-                _c(
-                  "l-map",
-                  {
-                    staticClass: "map",
-                    attrs: {
-                      noBlockingAnimations: _vm.animation,
-                      zoom: _vm.zoom,
-                      "min-zoom": 3,
-                      center: _vm.center
-                    },
-                    on: { click: _vm.OnClickPosition }
-                  },
-                  [
-                    _c("l-tile-layer", { attrs: { url: _vm.url } }),
-                    _vm._v(" "),
-                    _vm._l(_vm.refuges, function(refuge, index) {
-                      return _c(
-                        "div",
-                        { key: index },
-                        [
-                          _c(
-                            "l-marker",
-                            {
-                              attrs: { "lat-lng": refuge.geoMarker },
-                              on: {
-                                click: function($event) {
-                                  return _vm.OnClickRefuge(
-                                    index,
-                                    refuge.geoMarker
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c("l-popup", [
-                                _c("div", { staticClass: "popUp" }, [
-                                  _c("img", {
-                                    attrs: { src: refuge.logoUrl, alt: "" }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("div", [_vm._v(_vm._s(refuge.name))])
-                                ])
-                              ])
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    })
-                  ],
-                  2
-                )
-              ],
-              1
+              "button",
+              {
+                staticClass: "btn btn-success",
+                on: { click: _vm.OnClickMyMap }
+              },
+              [_vm._v("Mi mapa")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-success", on: { click: _vm.newRefuge } },
+              [_vm._v("+ Add Place")]
             )
           ]),
           _vm._v(" "),
-          _c("refuge-component", {
-            staticClass: "refugeSider col-md-3",
-            attrs: { refugeSelected: _vm.refugeSelected }
-          }),
-          _vm._v(" "),
-          _c("refugeNew-component", {
-            staticClass: "refugeSider col-md-3",
-            attrs: { newGeoMarker: _vm.newGeoMarker }
-          })
-        ],
-        1
-      ),
+          _c(
+            "div",
+            { staticClass: "card-body" },
+            [
+              _c(
+                "l-map",
+                {
+                  staticClass: "map",
+                  attrs: {
+                    noBlockingAnimations: _vm.animation,
+                    zoom: _vm.zoom,
+                    "min-zoom": 3,
+                    center: _vm.center
+                  },
+                  on: { click: _vm.OnClickPosition }
+                },
+                [
+                  _c("l-tile-layer", { attrs: { url: _vm.url } }),
+                  _vm._v(" "),
+                  _vm._l(_vm.refuges, function(refuge, index) {
+                    return _c(
+                      "div",
+                      { key: index },
+                      [
+                        _c(
+                          "l-marker",
+                          {
+                            attrs: { "lat-lng": refuge.geoMarker },
+                            on: {
+                              click: function($event) {
+                                return _vm.OnClickRefuge(
+                                  index,
+                                  refuge.geoMarker
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("l-popup", [
+                              _c("div", { staticClass: "popUp" }, [
+                                _c("img", {
+                                  attrs: { src: refuge.logoUrl, alt: "" }
+                                }),
+                                _vm._v(" "),
+                                _c("div", [_vm._v(_vm._s(refuge.name))])
+                              ])
+                            ])
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  })
+                ],
+                2
+              )
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _vm.sider
+          ? _c(
+              "section",
+              { staticClass: "sider" },
+              [
+                _vm.sider == "refuge"
+                  ? _c("refuge-component", {
+                      staticClass: "refugeSider",
+                      attrs: { refugeSelected: _vm.refugeSelected }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.sider == "newRefuge"
+                  ? _c("refugeNew-component", {
+                      staticClass: "refugeSider",
+                      attrs: { newGeoMarker: _vm.newGeoMarker }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          : _vm._e()
+      ]),
       _vm._v(" "),
       _c("refugeList-component", {
         attrs: { refuges: _vm.refuges },
@@ -76255,8 +76282,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/Factoria/PdaBullying/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Factoria/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

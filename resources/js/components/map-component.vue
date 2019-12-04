@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="row">
-      <div class="card col-md-8">
+    <div class="map-wraper">
+      <div class="card">
         <div class="card-header">
           <button class="btn btn-success" @click="fetchData">PDA mapa</button>
           <button class="btn btn-success" @click="OnClickMyMap">Mi mapa</button>
-          <button class="btn btn-success">+ Add Place</button>
+          <button class="btn btn-success" @click="newRefuge">+ Add Place</button>
         </div>
         <div class="card-body">
           <l-map
@@ -30,8 +30,18 @@
           </l-map>
         </div>
       </div>
-      <refuge-component class="refugeSider col-md-3" :refugeSelected="refugeSelected"></refuge-component>
-      <refugeNew-component :newGeoMarker="newGeoMarker" class="refugeSider col-md-3"></refugeNew-component>
+      <section class="sider" v-if="sider">
+        <refuge-component
+          v-if="sider=='refuge'"
+          class="refugeSider"
+          :refugeSelected="refugeSelected"
+        ></refuge-component>
+        <refugeNew-component
+          v-if="sider=='newRefuge'"
+          :newGeoMarker="newGeoMarker"
+          class="refugeSider"
+        ></refugeNew-component>
+      </section>
     </div>
     <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
   </div>
@@ -56,7 +66,8 @@ export default {
       animation: true,
       refuges: [],
       refugeSelected: null,
-      newGeoMarker: null
+      newGeoMarker: null,
+      sider: ""
     };
   },
   created() {
@@ -78,6 +89,7 @@ export default {
       this.centerMap(geoMarker);
     },
     selectRefuge(index) {
+      this.openSider("refuge");
       this.refugeSelected = this.refuges[index];
       console.log(this.refuges[index]);
     },
@@ -93,23 +105,39 @@ export default {
       });
     },
     OnClickPosition(event) {
+      this.openSider("newRefuge");
       this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
       let refuge = {};
       refuge.geoMarker = this.newGeoMarker;
       this.refuges.push(refuge);
+    },
+    openSider(sider) {
+      this.sider = sider;
+      console.log(sider);
+    },
+    newRefuge() {
+      this.openSider("newRefuge");
     }
   }
 };
 </script>
 <style lang="scss" scoped>
 .map {
-  // width: 60%;
+  //width: 100%;
   height: 400px;
   //background-color: grey;
 }
-// .refugeSider {
-//   width: 40%;
-// }
+.sider {
+  //width: 40%;
+  height: 100%;
+}
+.map-wraper {
+  //background-color: red;
+  width: 100%;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 2fr 1fr;
+}
 .popUp {
   display: flex;
   flex-direction: column;
