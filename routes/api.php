@@ -30,4 +30,6 @@ Route::namespace('Api')->group(function(){
 
     //MAP ROUTES
     Route::get('/maps/{userId}','MapController@show');
+    Route::get('/maps/attach/{refugeId}','MapController@attachRefuge');
+    Route::get('/maps/detach/{refugeId}','MapController@detachRefuge');
 });

@@ -1890,6 +1890,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1960,6 +1962,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     newRefuge: function newRefuge() {
       this.openSider("newRefuge");
+    },
+    attachRefuge: function attachRefuge(event) {
+      alert(event);
+    },
+    detachRefuge: function detachRefuge() {
+      this.fetchMyRefuges();
     }
   }
 });
@@ -1987,8 +1995,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["refugeSelected"]
+  props: ["refugeSelected"],
+  methods: {
+    OnClickAttachRefuge: function OnClickAttachRefuge() {
+      axios.get("/api/maps/attach/".concat(this.refugeSelected.id)); //this.$emit("attachRefuge", this.refugeSelected.id);
+    },
+    OnClickDetachRefuge: function OnClickDetachRefuge() {
+      var _this = this;
+
+      axios.get("/api/maps/detach/".concat(this.refugeSelected.id)).then(function (response) {
+        _this.$emit("detachRefuge", _this.refugeSelected.id);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -52411,7 +52432,11 @@ var render = function() {
                 _vm.sider == "refuge"
                   ? _c("refuge-component", {
                       staticClass: "refugeSider",
-                      attrs: { refugeSelected: _vm.refugeSelected }
+                      attrs: { refugeSelected: _vm.refugeSelected },
+                      on: {
+                        attachRefuge: _vm.attachRefuge,
+                        detachRefuge: _vm.detachRefuge
+                      }
                     })
                   : _vm._e(),
                 _vm._v(" "),
@@ -52472,19 +52497,28 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    _vm._m(0)
+    _c("div", { staticClass: "card-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          on: { click: _vm.OnClickAttachRefuge }
+        },
+        [_vm._v("Al Meu Mapa")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          on: { click: _vm.OnClickDetachRefuge }
+        },
+        [_vm._v("Fora del Meu Mapa")]
+      )
+    ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Al Meu Mapa")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

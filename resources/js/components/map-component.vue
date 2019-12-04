@@ -35,6 +35,8 @@
           v-if="sider=='refuge'"
           class="refugeSider"
           :refugeSelected="refugeSelected"
+          @attachRefuge="attachRefuge"
+          @detachRefuge="detachRefuge"
         ></refuge-component>
         <refugeNew-component
           v-if="sider=='newRefuge'"
@@ -117,6 +119,12 @@ export default {
     },
     newRefuge() {
       this.openSider("newRefuge");
+    },
+    attachRefuge(event) {
+      alert(event);
+    },
+    detachRefuge() {
+      this.fetchMyRefuges();
     }
   }
 };

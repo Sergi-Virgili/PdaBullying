@@ -51,4 +51,8 @@ class User extends Authenticatable
         return $this->map->refuges;
 
     }
+
+    public function getId() {
+        return $this->id;
+    }
 }
