@@ -2069,8 +2069,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["newGeoMarker"]
+  props: ["newGeoMarker"],
+  data: function data() {
+    return {
+      lat: "",
+      lng: "",
+      refuge: {
+        road: "",
+        house_number: "",
+        city: "",
+        country: "",
+        postcode: ""
+      }
+    };
+  },
+  mounted: function mounted() {
+    this.lat = this.newGeoMarker[0];
+    this.lng = this.newGeoMarker[1];
+    this.fetchLocationData();
+  },
+  methods: {
+    fetchLocationData: function fetchLocationData() {
+      var _this = this;
+
+      axios.get("https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=".concat(this.lat, "&lon=").concat(this.lng, "&zoom=18")).then(function (response) {
+        console.log(response.data.address);
+        _this.refuge = response.data.address;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -52600,11 +52648,43 @@ var render = function() {
         attrs: { type: "text", name: "name", id: "name" }
       }),
       _vm._v(" "),
-      _c("label", { attrs: { for: "name" } }, [_vm._v("description")]),
+      _c("label", { attrs: { for: "description" } }, [_vm._v("Description")]),
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
         attrs: { type: "text", name: "description", id: "description" }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "street" } }, [_vm._v("Carrer")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "street", id: "street" },
+        domProps: { value: _vm.refuge.road }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "number" } }, [_vm._v("Número")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "number", id: "number" },
+        domProps: { value: _vm.refuge.house_number }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "city" } }, [_vm._v("Ciutat")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "city", id: "city" },
+        domProps: { value: _vm.refuge.city }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "postcode" } }, [_vm._v("Codi Postal")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "postcode", id: "postcode" },
+        domProps: { value: _vm.refuge.postcode }
       }),
       _vm._v(" "),
       _c("div", [

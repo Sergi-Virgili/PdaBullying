@@ -4,8 +4,28 @@
     <div class="card-body">
       <label for="name">Nom</label>
       <input class="form-control" type="text" name="name" id="name" />
-      <label for="name">description</label>
+      <label for="description">Description</label>
       <input class="form-control" type="text" name="description" id="description" />
+      <label for="street">Carrer</label>
+      <input class="form-control" type="text" name="street" id="street" :value="refuge.road" />
+      <label for="number">Número</label>
+      <input
+        class="form-control"
+        type="text"
+        name="number"
+        id="number"
+        :value="refuge.house_number"
+      />
+      <label for="city">Ciutat</label>
+      <input class="form-control" type="text" name="city" id="city" :value="refuge.city" />
+      <label for="postcode">Codi Postal</label>
+      <input
+        class="form-control"
+        type="text"
+        name="postcode"
+        id="postcode"
+        :value="refuge.postcode"
+      />
       <div>
         <p>geoposition: {{newGeoMarker}}</p>
       </div>
@@ -16,7 +36,38 @@
 
 <script>
 export default {
-  props: ["newGeoMarker"]
+  props: ["newGeoMarker"],
+  data() {
+    return {
+      lat: "",
+      lng: "",
+      refuge: {
+        road: "",
+        house_number: "",
+        city: "",
+        country: "",
+        postcode: ""
+      }
+    };
+  },
+  mounted() {
+    this.lat = this.newGeoMarker[0];
+    this.lng = this.newGeoMarker[1];
+
+    this.fetchLocationData();
+  },
+  methods: {
+    fetchLocationData() {
+      axios
+        .get(
+          `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${this.lat}&lon=${this.lng}&zoom=18`
+        )
+        .then(response => {
+          console.log(response.data.address);
+          this.refuge = response.data.address;
+        });
+    }
+  }
 };
 </script>
 
