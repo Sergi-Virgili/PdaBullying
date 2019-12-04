@@ -18,16 +18,15 @@ class TypeControllerTest extends TestCase
      */
     public function canCreateAType()
     {
-        // $faker = factory(Type::class)->create();
-        // dd($faker);
+        $faker = Factory::create();
+
         $this->withoutExceptionHandling();
 
 
         $response= $this->post('/api/types', [
-            'name'=> $name = "RAquel s.a.",
-            'description'=> $description ="hola que tal sisi qye tal"
+            'name' => $name = $faker->company,
+            'description'=> $description = $faker->company
         ]);
-        
         $response->assertStatus(201);
 
         $this->assertDatabaseHas('types', [
@@ -43,7 +42,12 @@ class TypeControllerTest extends TestCase
      */
     public function canReturnAType()
     {
+        
+        $type = $this->create('Type');
 
+        $response = $this->json('GET', "api/types/$type->id");
+
+        $response->assertStatus(200);
     }
     
 }
