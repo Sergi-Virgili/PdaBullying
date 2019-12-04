@@ -48,4 +48,15 @@ class UserControllerTest extends TestCase
             'CP'=>$CP,
         ]);
     }
+
+    /**
+     * A basic feature test example.
+     *
+     * @test
+     */
+    public function willFailWith404ErrorWeWantUpdate(){
+        $response = $this->json('PUT','api/users/-1');
+        $response->assertStatus(404);
+    }
+    
 }

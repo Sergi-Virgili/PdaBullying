@@ -35,4 +35,15 @@ class TypeControllerTest extends TestCase
         'description'=> $description
         ]);
     }
+
+   /**
+     * A basic feature test example.
+     *
+     * @test
+     */
+    public function canReturnAType()
+    {
+
+    }
+    
 }

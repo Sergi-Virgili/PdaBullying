@@ -27,6 +27,7 @@ Route::namespace('Api')->group(function(){
     Route::delete('/refuges/{resource}','RefugeController@destroy');
     //Users
     Route::post('/users', 'UserController@store');
+    Route::put('/users/{id}', 'UserController@update');
     //Types
     Route::post('/types', 'TypeController@store');
 
