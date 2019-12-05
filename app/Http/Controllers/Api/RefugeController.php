@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
 use App\Refuge;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,6 +35,11 @@ class RefugeController extends Controller
             'lng' => $request->lng,
 
         ]);
+
+        // TODO REFACTORING AND USER ID
+        $user = User::find(1);
+        $map = $user->map;
+        $map->refuges()->attach($refuge->id);
 
         return response()->json($refuge, 201);
     }
