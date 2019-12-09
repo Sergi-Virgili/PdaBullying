@@ -14,6 +14,7 @@ class RefugeController extends Controller
     public function index()
     {
         $refuges = Refuge::all();
+       
 
         $refuges = Refuge::addGeoMarkerFields($refuges);
 
@@ -57,9 +58,11 @@ class RefugeController extends Controller
     }
 
 
-    public function destroy(Resource $resource)
+    public function destroy($refugeId)
     {
-
+        $refuge = Refuge::find($refugeId);
+        $refuge->delete();
+        
     }
 
     public function publish(Request $request) {
@@ -69,7 +72,7 @@ class RefugeController extends Controller
         $refuge->update();
         return response()->json("$refuge->name is published");
     }
-    
+
     public function hidde(Request $request) {
         // return $request;
          $refuge = Refuge::find($request->id);

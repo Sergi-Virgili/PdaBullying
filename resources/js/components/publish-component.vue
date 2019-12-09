@@ -5,7 +5,7 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Recurso</th>
-          <th scope="col">Publico</th>
+          <th scope="col">Fecha</th>
           <th scope="col">Acción</th>
         </tr>
       </thead>
@@ -17,7 +17,7 @@
         >
           <th scope="row">{{refuge.id}}</th>
           <td>{{refuge.name}}</td>
-          <td>{{refuge.is_Public}}</td>
+          <td>{{refuge.created_at}}</td>
           <td>
             <button
               class="btn btn-success"
@@ -25,10 +25,11 @@
               @click="onClickPublish(index)"
             >Publicar</button>
             <button
-              class="btn btn-danger"
+              class="btn btn-primary"
               v-if="refuge.is_Public"
               @click="onClickHidde(index)"
             >Ocultar</button>
+            <button class="btn btn-danger" @click="onClickDelete(index)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -64,6 +65,12 @@ export default {
       let data = { id: this.refuges[index].id };
       axios.patch("/api/refuges/hidde", data).then(response => {
         this.refuges[index].is_Public = 0;
+      });
+    },
+    onClickDelete(index) {
+      alert("Estas seguro que quieres eliminar DEFINITIVAMENTE ");
+      axios.delete(`/api/refuges/${this.refuges[index].id}`).then(response => {
+        this.refuges.splice(index, 1);
       });
     }
   }

@@ -74,4 +74,7 @@ export default {
 </script>
 
 <style>
+.map {
+  min-height: 500px;
+}
 </style>
