@@ -23,17 +23,27 @@ class TypeControllerTest extends TestCase
         $this->withoutExceptionHandling();
 
 
-        $response= $this->post('/api/types', [
+        $response= $this->json('POST','/api/types', [
             'name' => $name = $faker->company,
             'description'=> $description = $faker->company
         ]);
-        $response->assertStatus(201);
+
+        \Log::info(1,[$response->getContent()]);
+
+        $response->assertJsonStructure([
+            'id','name', 'description'
+        ])
+        ->assertJson([
+            'name'=>$name,
+            'description'=>$description,
+        ])->assertStatus(201);
 
         $this->assertDatabaseHas('types', [
-        'name'=> $name,
-        'description'=> $description
-        ]);
+            'name'=> $name,
+            'description'=> $description
+            ]);
     }
+    
 
    /**
      * A basic feature test example.
@@ -48,6 +58,6 @@ class TypeControllerTest extends TestCase
         $response = $this->json('GET', "api/types/$type->id");
 
         $response->assertStatus(200);
-    }
+    }  
     
 }

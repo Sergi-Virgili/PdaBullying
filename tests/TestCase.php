@@ -9,7 +9,8 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    public function create(string $model, array $atributes = []){
+    public function create(string $model, array $atributes = [])
+    {
         $type = factory("App\\$model")->create($atributes);
 
         return new TypeResource($type);
