@@ -17,6 +17,7 @@ class RefugesSeeder extends Seeder
             'description'=> 'Prevenció, detecció i actuació davant l’assetjament entre iguals',
             'lat'=> 41.3876768,
             'lng'=> 2.1692590,
+            'is_Public' =>true
         ]);
         DB::table('refuges')->insert([
     
@@ -25,6 +26,7 @@ class RefugesSeeder extends Seeder
             'description'=> 'hola',
             'lat'=> 41.4104479,
             'lng'=> 2.1584852,
+            'is_Public' =>false
         ]);
         DB::table('refuges')->insert([
             'name'=> 'Salut i educació emocional',
@@ -33,6 +35,7 @@ class RefugesSeeder extends Seeder
             'description'=> 'description3',
             'lat'=> 41.3987704,
             'lng'=> 2.1634544,
+            'is_Public' =>true
         ]);
         DB::table('refuges')->insert([
             'name'=> 'Salut i educació emocional',
@@ -41,6 +44,7 @@ class RefugesSeeder extends Seeder
             'description'=> 'description4',
             'lat'=>  41.3988499,
             'lng'=> 2.16369090,
+            'is_Public' =>false
         ]);
 
         //

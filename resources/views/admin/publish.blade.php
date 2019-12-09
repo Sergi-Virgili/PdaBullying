@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-       publicar
+       <publish-component></publish-component>
 
 </div>
 @endsection
