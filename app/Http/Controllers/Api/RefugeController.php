@@ -20,7 +20,7 @@ class RefugeController extends Controller
 
         return response()->json([
             'refuge'=>$refuges,
-            'msg' => 'All resourrefugeces in the sistem'
+            'msg' => 'All resource fugeces in the sistem'
             ]);
     }
 

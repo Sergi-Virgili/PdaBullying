@@ -13,6 +13,7 @@ class MapsSeeder extends Seeder
     {
         DB::table('maps')->insert([
             'user_id'=> 1,
+            
         ]);
     }
 }
