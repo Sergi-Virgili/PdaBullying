@@ -61,4 +61,20 @@ class RefugeController extends Controller
     {
 
     }
+
+    public function publish(Request $request) {
+       // return $request;
+        $refuge = Refuge::find($request->id);
+        $refuge->is_Public = true;
+        $refuge->update();
+        return response()->json("$refuge->name is published");
+    }
+    
+    public function hidde(Request $request) {
+        // return $request;
+         $refuge = Refuge::find($request->id);
+         $refuge->is_Public = false;
+         $refuge->update();
+         return response()->json("$refuge->name is hidden");
+     }
 }

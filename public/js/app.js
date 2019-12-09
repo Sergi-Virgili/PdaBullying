@@ -2123,10 +2123,25 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     onClickPublish: function onClickPublish(index) {
-      this.refuges[index].is_Public = 1;
+      var _this2 = this;
+
+      var data = {
+        id: this.refuges[index].id
+      };
+      axios.patch("/api/refuges/publish", data).then(function (response) {
+        console.log(response);
+        _this2.refuges[index].is_Public = 1;
+      });
     },
     onClickHidde: function onClickHidde(index) {
-      this.refuges[index].is_Public = 0;
+      var _this3 = this;
+
+      var data = {
+        id: this.refuges[index].id
+      };
+      axios.patch("/api/refuges/hidde", data).then(function (response) {
+        _this3.refuges[index].is_Public = 0;
+      });
     }
   }
 });

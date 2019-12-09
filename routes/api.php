@@ -27,6 +27,8 @@ Route::namespace('Api')->group(function(){
     Route::get('/refuges','RefugeController@index');
     Route::get('/refuges/{resource}','RefugeController@show');
     Route::delete('/refuges/{resource}','RefugeController@destroy');
+    Route::patch('/refuges/publish','RefugeController@publish');
+    Route::patch('/refuges/hidde','RefugeController@hidde');
 
     //MAP ROUTES
     Route::get('/maps/{userId}','MapController@show');

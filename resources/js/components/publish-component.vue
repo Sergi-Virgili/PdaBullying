@@ -54,10 +54,17 @@ export default {
       });
     },
     onClickPublish(index) {
-      this.refuges[index].is_Public = 1;
+      let data = { id: this.refuges[index].id };
+      axios.patch("/api/refuges/publish", data).then(response => {
+        console.log(response);
+        this.refuges[index].is_Public = 1;
+      });
     },
     onClickHidde(index) {
-      this.refuges[index].is_Public = 0;
+      let data = { id: this.refuges[index].id };
+      axios.patch("/api/refuges/hidde", data).then(response => {
+        this.refuges[index].is_Public = 0;
+      });
     }
   }
 };
