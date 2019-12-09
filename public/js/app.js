@@ -2122,8 +2122,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=".concat(this.lat, "&lon=").concat(this.lng, "&zoom=18")).then(function (response) {
-        console.log(response.data.address);
+        console.log(response.data.lat);
         _this.refuge = response.data.address;
+        _this.lat = response.data.lat;
+        _this.lng = response.data.lon;
       });
     },
     saveNewRefuge: function saveNewRefuge() {
@@ -52741,7 +52743,9 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", [
-        _c("p", [_vm._v("geoposition: " + _vm._s(_vm.newGeoMarker))])
+        _c("p", [
+          _vm._v("geoposition: " + _vm._s(_vm.lat) + " " + _vm._s(_vm.lng))
+        ])
       ]),
       _vm._v(" "),
       _c(

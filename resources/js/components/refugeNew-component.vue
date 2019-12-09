@@ -33,7 +33,7 @@
         :value="refuge.postcode"
       />
       <div>
-        <p>geoposition: {{newGeoMarker}}</p>
+        <p>geoposition: {{lat}} {{lng}}</p>
       </div>
       <button class="btn btn-success" @click="saveNewRefuge">OK</button>
     </div>
@@ -71,8 +71,10 @@ export default {
           `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${this.lat}&lon=${this.lng}&zoom=18`
         )
         .then(response => {
-          console.log(response.data.address);
+          console.log(response.data.lat);
           this.refuge = response.data.address;
+          this.lat = response.data.lat;
+          this.lng = response.data.lon;
         });
     },
     saveNewRefuge() {
