@@ -2,9 +2,12 @@
 
 namespace App;
 
+
+
+use App\Refuge;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -41,4 +44,17 @@ class User extends Authenticatable
 
 
 
+    public function map() {
+        return $this->hasOne('App\Map');
+    }
+
+    public function refuges() {
+
+        return $this->map->refuges;
+
+    }
+
+    public function getId() {
+        return $this->id;
+    }
 }

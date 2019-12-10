@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
 use App\Refuge;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,13 +14,13 @@ class RefugeController extends Controller
     public function index()
     {
         $refuges = Refuge::all();
-        foreach ($refuges as $refuge){
-            $refuge['geoMarker']= [$refuge['lat'],$refuge['lng']];
-        }
+       
+
+        $refuges = Refuge::addGeoMarkerFields($refuges);
 
         return response()->json([
             'refuge'=>$refuges,
-            'msg' => 'All resourrefugeces in the sistem'
+            'msg' => 'All resource fugeces in the sistem'
             ]);
     }
 
@@ -36,17 +37,16 @@ class RefugeController extends Controller
 
         ]);
 
+        // TODO REFACTORING AND USER ID
+        $user = User::find(1);
+        $map = $user->map;
+        $map->refuges()->attach($refuge->id);
+
         return response()->json($refuge, 201);
     }
 
 
     public function show(Resource $resource)
-    {
-
-    }
-
-
-    public function edit(Resource $resource)
     {
 
     }
@@ -58,8 +58,26 @@ class RefugeController extends Controller
     }
 
 
-    public function destroy(Resource $resource)
+    public function destroy($refugeId)
     {
-
+        $refuge = Refuge::find($refugeId);
+        $refuge->delete();
+        
     }
+
+    public function publish(Request $request) {
+       // return $request;
+        $refuge = Refuge::find($request->id);
+        $refuge->is_Public = true;
+        $refuge->update();
+        return response()->json("$refuge->name is published");
+    }
+
+    public function hidde(Request $request) {
+        // return $request;
+         $refuge = Refuge::find($request->id);
+         $refuge->is_Public = false;
+         $refuge->update();
+         return response()->json("$refuge->name is hidden");
+     }
 }

@@ -42,6 +42,26 @@ Vue.component(
     "map-component",
     require("./components/map-component.vue").default
 );
+Vue.component(
+    "refuge-component",
+    require("./components/refuge-component.vue").default
+);
+Vue.component(
+    "refugeList-component",
+    require("./components/refugeList-component.vue").default
+);
+Vue.component(
+    "refugeNew-component",
+    require("./components/refugeNew-component.vue").default
+);
+Vue.component(
+    "publish-component",
+    require("./components/publish-component.vue").default
+);
+Vue.component(
+    "publicMap-component",
+    require("./components/publicMap-component.vue").default
+);
 
 Vue.component(
     "userAdmin-component",

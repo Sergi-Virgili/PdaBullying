@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    
-        <map-component></map-component>
-   
+
+       <publish-component></publish-component>
+
 </div>
 @endsection

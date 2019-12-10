@@ -24,6 +24,7 @@ class CreateRefugesTable extends Migration
             $table->string('adress')->nullable();
             $table->double('lat');
             $table->double('lng');
+            $table->boolean('is_Public')->default(false);
 
             $table->timestamps();
 
