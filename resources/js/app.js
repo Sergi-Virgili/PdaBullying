@@ -63,6 +63,16 @@ Vue.component(
     require("./components/publicMap-component.vue").default
 );
 
+Vue.component(
+    "userAdmin-component",
+    require("./components/userAdmin-component.vue").default
+);
+
+Vue.component(
+    "createType-component",
+    require("./components/createTypes-component.vue").default
+);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -19,14 +19,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Resource API Routes
 
-
-
-
 Route::namespace('Api')->group(function(){
+    //Refuges
     Route::post('/refuges','RefugeController@store');
     Route::get('/refuges','RefugeController@index');
     Route::get('/refuges/{resource}','RefugeController@show');
     Route::delete('/refuges/{resource}','RefugeController@destroy');
+    //Users
+    Route::post('/users', 'UserController@store');
+    Route::put('/users/{id}', 'UserController@update');
+    //Types
+    Route::resource('/types', 'TypeController', ['except'=>'edit']);
     Route::patch('/refuges/publish','RefugeController@publish');
     Route::patch('/refuges/hidde','RefugeController@hidde');
 
