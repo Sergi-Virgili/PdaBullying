@@ -42,9 +42,15 @@ Vue.component(
     "map-component",
     require("./components/map-component.vue").default
 );
+
 Vue.component(
     "userAdmin-component",
     require("./components/userAdmin-component.vue").default
+);
+
+Vue.component(
+    "createType-component",
+    require("./components/createTypes-component.vue").default
 );
 
 /**
