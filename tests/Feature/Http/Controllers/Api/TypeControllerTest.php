@@ -44,6 +44,17 @@ class TypeControllerTest extends TestCase
             ]);
     }
     
+    /**
+     * A basic feature test example.
+     *
+     * @test
+     */
+    public function willFailWith404IfTypeNotFound(){
+        $response = $this->json('GET', 'api/types/-1');
+
+        $response->assertStatus(404);
+    }
+
 
    /**
      * A basic feature test example.
@@ -59,5 +70,72 @@ class TypeControllerTest extends TestCase
 
         $response->assertStatus(200);
     }  
-    
+
+    /**
+     * A basic feature test example.
+     *
+     * @test
+     */
+    public function willGet404IfTypeWeWantUpdateNotExists(){
+        $response = $this->json('PUT', 'api/types/-1');
+
+        $response->assertStatus(404);
+    }
+
+
+    /**
+     * A basic feature test example.
+     *
+     * @test
+     */
+    public function canUpdateAType(){
+        $type = $this->create('Type');
+
+        $response = $this->json('PUT', "api/types/$type->id", [
+            'name' => $type->name.'_updated',
+            'description' => $type->description.'_updated'
+        ]);
+
+        $response->assertStatus(200)
+        ->assertExactJson([
+            'id' => $type->id,
+            'name' => $type->name.'_updated',
+            'description' => $type->description.'_updated'
+
+        ]);
+
+            $this->assertDatabaseHas('types', [
+                
+            'id' => $type->id,
+            'name' => $type->name.'_updated',
+            'description' => $type->description.'_updated',
+            ]);   
+    }
+
+        /**
+         * A basic feature test example.
+         *
+         * @test
+         */
+        public function willGet404IfTypeWeWantDeleteNotExists(){
+            $response = $this->json('DELETE', 'api/types/-1');
+
+            $response->assertStatus(404);
+        }
+
+        /**
+         * A basic feature test example.
+         *
+         * @test
+         */
+        public function canDeleteAType(){
+            $type = $this->create('Type');
+
+            $response = $this->json('DELETE', "api/types/$type->id");
+
+            $response->assertStatus(204)
+                ->assertSee(null);
+
+            $this->assertDatabaseMissing('types', ['id' => $type->id]);
+        }
 }

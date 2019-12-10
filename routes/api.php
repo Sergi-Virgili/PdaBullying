@@ -30,5 +30,7 @@ Route::namespace('Api')->group(function(){
     Route::put('/users/{id}', 'UserController@update');
     //Types
     Route::post('/types', 'TypeController@store');
-
+    Route::get('/types/{id}', 'TypeController@show');
+    Route::put('/types/{id}', 'TypeController@update');
+    Route::delete('/types/{id}', 'TypeController@destroy');
 });

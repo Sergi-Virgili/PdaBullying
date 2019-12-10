@@ -1,7 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\User;
+use App\Type;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -19,8 +19,10 @@ use Illuminate\Support\Str;
 $factory->define(Type::class, function (Faker $faker) {
 
     $name = $faker->company;
+    $description = $faker->company;
+
     return [
-        'name' => $faker->name,
-        'description' => $faker->company,
+        'name' => $name,
+        'description' => $description,
     ];
 });

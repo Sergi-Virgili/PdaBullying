@@ -22,4 +22,38 @@ class TypeController extends Controller
         }
         
     }
+    public function show(int $id)
+    {
+        try
+        {
+            $type = Type::findOrfail($id);
+            return response()->json(new TypeResource($type));
+        }
+        catch(Exception $exception)
+        {
+            dd($exception);
+        }
+        
+    }
+    public function update(Request $request, int $id)
+    {
+        $type = Type::findOrfail($id);
+
+        $type->update([
+            'name' => $request->name,
+            'description' => $request->description
+
+        ]);
+        
+        return response()->json(new TypeResource($type));
+    }
+
+    public function destroy(int $id)
+    {
+        $type = Type::findOrfail($id);
+
+        $type->delete();
+
+        return response()->json(null, 204);
+    }
 }
