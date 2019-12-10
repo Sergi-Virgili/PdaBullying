@@ -11,6 +11,35 @@ use App\Type;
 class TypeControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * A basic feature test example.
+     *
+     * @test
+     */
+    public function canReturnACollectionOfPaginatedTypes()
+    {
+        $type1= $this->create('Type');
+        $type2= $this->create('Type');
+        $type3= $this->create('Type');
+
+        $response = $this->json('GET', '/api/types');
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => ['id','name', 'description']],
+                    'links'=> ['first', 'last', 'prev', 'next'],
+                    'meta'=> [
+                        'current_page', 'last_page', 'from', 'to', 'path', 'per_page', 'total'
+                    ]
+                
+            ]);
+
+            \Log::info($response->getContent());
+    }
+
+
     /**
      * A basic feature test example.
      *
