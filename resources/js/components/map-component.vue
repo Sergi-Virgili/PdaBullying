@@ -6,6 +6,7 @@
           <button class="btn btn-success" @click="fetchData">PDA mapa</button>
           <button class="btn btn-success" @click="OnClickMyMap">Mi mapa</button>
           <button class="btn btn-success" @click="newRefuge">+ Add Place</button>
+          <button class="btn btn-success" @click="optionsMyMap">Map Options</button>
         </div>
         <div class="card-body">
           <l-map
@@ -43,6 +44,7 @@
           :newGeoMarker="newGeoMarker"
           class="refugeSider"
         ></refugeNew-component>
+        <mapOptions-component v-if="sider=='mapOptions'" class="refugeSider"></mapOptions-component>
       </section>
     </div>
     <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
@@ -125,6 +127,9 @@ export default {
     },
     detachRefuge() {
       this.fetchMyRefuges();
+    },
+    optionsMyMap() {
+      this.sider = "mapOptions";
     }
   }
 };

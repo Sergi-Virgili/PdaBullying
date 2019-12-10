@@ -19,7 +19,6 @@ class CreateMapsTable extends Migration
             $table->double('lat')->nullable;
             $table->double('lng')->nullable;
             $table->integer('zoom')->nullable;
-            
             $table->timestamps();
         });
     }

@@ -62,6 +62,15 @@ Vue.component(
     "publicMap-component",
     require("./components/publicMap-component.vue").default
 );
+Vue.component(
+    "iframe-component",
+    require("./components/iframe-component.vue").default
+);
+
+Vue.component(
+    "mapOptions-component",
+    require("./components/mapOptions-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
