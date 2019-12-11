@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">Crea el Type</div>
     <div class="card-body">
-      <label for="name">Nom del Type</label>
+      <label for="name">Name of the Type</label>
       <input class="form-control" type="text" name="name" id="name" v-model="name" />
       <label for="description">Description</label>
       <input
@@ -12,7 +12,7 @@
         id="description"
         v-model="description"
       />
-      <button class="btn btn-success" @click="saveNewRefuge">OK</button>
+      <button class="btn btn-success" @click="saveNewType">OK</button>
     </div>
   </div>
 </template>
