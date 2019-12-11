@@ -64,11 +64,6 @@ Vue.component(
 );
 
 Vue.component(
-    "userAdmin-component",
-    require("./components/userAdmin-component.vue").default
-);
-
-Vue.component(
     "createType-component",
     require("./components/createTypes-component.vue").default
 );
