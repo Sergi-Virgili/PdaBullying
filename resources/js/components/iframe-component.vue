@@ -30,7 +30,6 @@ export default {
   width: 100%;
 }
 .map-wrapper {
-  background-color: red;
   height: 100vh;
   width: 100%;
 }

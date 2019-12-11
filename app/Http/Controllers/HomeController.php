@@ -30,6 +30,6 @@ class HomeController extends Controller
         return view('admin.publish');
     }
     public function iframe() {
-        return view('iframe');
+        return view('iframe');  
     } 
 }

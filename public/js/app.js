@@ -2034,6 +2034,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -6934,7 +6938,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".map[data-v-4b738d42] {\n  height: 100vh;\n  width: 100%;\n}\n.map-wrapper[data-v-4b738d42] {\n  background-color: red;\n  height: 100vh;\n  width: 100%;\n}", ""]);
+exports.push([module.i, ".map[data-v-4b738d42] {\n  height: 100vh;\n  width: 100%;\n}\n.map-wrapper[data-v-4b738d42] {\n  height: 100vh;\n  width: 100%;\n}", ""]);
 
 // exports
 
@@ -52960,7 +52964,13 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("main", { staticClass: "card-body" }, [
-        _c("label", { attrs: { for: "center" } })
+        _c("button", { staticClass: "btn btn-success" }, [_vm._v("Centra")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Haz click en el mapa para centrar-lo")]),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "zoom" } }, [_vm._v("zoom")]),
+        _vm._v(" "),
+        _c("input", { attrs: { type: "number" } })
       ])
     ])
   }
