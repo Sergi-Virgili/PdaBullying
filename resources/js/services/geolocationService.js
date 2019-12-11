@@ -4,6 +4,11 @@ const geoFindMe = {
     lng: "",
     geoMarker: [],
 
+    getCoordinates() {
+        return new Promise(function(resolve, reject) {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+    },
     async findMe() {
         if (!navigator.geolocation) {
             this.msg = "Geolocalización no soportada";
@@ -11,12 +16,12 @@ const geoFindMe = {
         }
         if (navigator.geolocation) {
             this.msg = "Localizando..";
-            navigator.geolocation.getCurrentPosition(response => {
-                this.lat = response.coords.latitude;
-                this.lng = response.coords.longitude;
-                this.geoMarker = [this.lat, this.lng];
-                return this.geoMarker;
-            });
+            let response = await this.getCoordinates();
+
+            this.lat = response.coords.latitude;
+            this.lng = response.coords.longitude;
+            this.geoMarker = [this.lat, this.lng];
+            return this.geoMarker;
         }
     }
 };

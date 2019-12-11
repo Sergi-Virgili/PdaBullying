@@ -25,6 +25,7 @@
                         :min-zoom="3"
                         :center="center"
                         @click="OnClickPosition"
+                        @move="onMove"
                     >
                         <l-tile-layer :url="url" />
                         <div v-for="(refuge, index) in refuges" :key="index">
@@ -97,9 +98,12 @@ export default {
         this.fetchData();
     },
     methods: {
+        onMove(event) {
+            console.log(event);
+        },
         geo() {
             geoFindMe.findMe().then(res => {
-                console.log(res);
+                this.centerMap(res);
             });
 
             // this.centerMap(geoFindMe.geoMarker);

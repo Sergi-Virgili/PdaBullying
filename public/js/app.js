@@ -2011,6 +2011,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2037,16 +2038,21 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchData();
   },
   methods: {
+    onMove: function onMove(event) {
+      console.log(event);
+    },
     geo: function geo() {
+      var _this = this;
+
       _services_geolocationService__WEBPACK_IMPORTED_MODULE_2__["default"].findMe().then(function (res) {
-        console.log(res);
+        _this.centerMap(res);
       }); // this.centerMap(geoFindMe.geoMarker);
     },
     fetchData: function fetchData() {
-      var _this = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/refuges").then(function (response) {
-        _this.refuges = response.data.refuge;
+        _this2.refuges = response.data.refuge;
       });
     },
     centerMap: function centerMap(geoMarker) {
@@ -2068,10 +2074,10 @@ __webpack_require__.r(__webpack_exports__);
       this.fetchMyRefuges();
     },
     fetchMyRefuges: function fetchMyRefuges() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/maps/1").then(function (response) {
-        _this2.refuges = response.data;
+        _this3.refuges = response.data;
       });
     },
     OnClickPosition: function OnClickPosition(event) {
@@ -53748,7 +53754,7 @@ var render = function() {
                     "min-zoom": 3,
                     center: _vm.center
                   },
-                  on: { click: _vm.OnClickPosition }
+                  on: { click: _vm.OnClickPosition, move: _vm.onMove }
                 },
                 [
                   _c("l-tile-layer", { attrs: { url: _vm.url } }),
@@ -78396,9 +78402,13 @@ var geoFindMe = {
   lat: "",
   lng: "",
   geoMarker: [],
+  getCoordinates: function getCoordinates() {
+    return new Promise(function (resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  },
   findMe: function findMe() {
-    var _this = this;
-
+    var response;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function findMe$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -78412,17 +78422,23 @@ var geoFindMe = {
             return _context.abrupt("return", null);
 
           case 3:
-            if (navigator.geolocation) {
-              this.msg = "Localizando..";
-              navigator.geolocation.getCurrentPosition(function (response) {
-                _this.lat = response.coords.latitude;
-                _this.lng = response.coords.longitude;
-                _this.geoMarker = [_this.lat, _this.lng];
-                return _this.geoMarker;
-              });
+            if (!navigator.geolocation) {
+              _context.next = 12;
+              break;
             }
 
-          case 4:
+            this.msg = "Localizando..";
+            _context.next = 7;
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this.getCoordinates());
+
+          case 7:
+            response = _context.sent;
+            this.lat = response.coords.latitude;
+            this.lng = response.coords.longitude;
+            this.geoMarker = [this.lat, this.lng];
+            return _context.abrupt("return", this.geoMarker);
+
+          case 12:
           case "end":
             return _context.stop();
         }
