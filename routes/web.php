@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/admin/publicar', 'HomeController@publish')->name('publish');
+
+Route::get('/emailtest','MessegerController@mailtest');
