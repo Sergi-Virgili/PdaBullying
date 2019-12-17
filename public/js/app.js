@@ -1905,13 +1905,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      refuges: []
+      refuges: [],
+      center: "",
+      zoom: ""
     };
   },
-  created: function created() {
+  mounted: function mounted() {
     this.fetchMyRefuges();
   },
   methods: {
@@ -1919,7 +1924,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/api/maps/1").then(function (response) {
-        _this.refuges = response.data;
+        _this.refuges = response.data.refuges;
+        _this.center = response.data.center;
+        _this.zoom = response.data.zoom;
       });
     }
   }
@@ -1942,6 +1949,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_geolocationService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/geolocationService */ "./resources/js/services/geolocationService.js");
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_3__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2069,7 +2098,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/maps/1").then(function (response) {
-        _this3.refuges = response.data;
+        _this3.refuges = response.data.refuges;
       });
     },
     OnClickPosition: function OnClickPosition(event) {
@@ -2109,6 +2138,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -53791,7 +53823,7 @@ var render = function() {
             _c(
               "button",
               { staticClass: "btn btn-success", on: { click: _vm.fetchData } },
-              [_vm._v("PDA mapa")]
+              [_vm._v("\n                    PDA mapa\n                ")]
             ),
             _vm._v(" "),
             _c(
@@ -53800,13 +53832,13 @@ var render = function() {
                 staticClass: "btn btn-success",
                 on: { click: _vm.OnClickMyMap }
               },
-              [_vm._v("Mi mapa")]
+              [_vm._v("\n                    Mi mapa\n                ")]
             ),
             _vm._v(" "),
             _c(
               "button",
               { staticClass: "btn btn-success", on: { click: _vm.newRefuge } },
-              [_vm._v("+ Add Place")]
+              [_vm._v("\n                    + Add Place\n                ")]
             ),
             _vm._v(" "),
             _c(
@@ -53815,7 +53847,7 @@ var render = function() {
                 staticClass: "btn btn-success",
                 on: { click: _vm.optionsMyMap }
               },
-              [_vm._v("Map Options")]
+              [_vm._v("\n                    Map Options\n                ")]
             ),
             _vm._v(" "),
             _c(
@@ -53830,7 +53862,7 @@ var render = function() {
                 staticClass: "btn btn-success",
                 on: { click: _vm.OpenSearcher }
               },
-              [_vm._v("Buscar")]
+              [_vm._v("\n                    Buscar\n                ")]
             )
           ]),
           _vm._v(" "),
@@ -53982,13 +54014,25 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("main", { staticClass: "card-body" }, [
-        _c("button", { staticClass: "btn btn-success" }, [_vm._v("Centra")]),
+        _c("button", { staticClass: "btn btn-success" }, [
+          _vm._v("Mapa actual")
+        ]),
         _vm._v(" "),
-        _c("p", [_vm._v("Haz click en el mapa para centrar-lo")]),
+        _c("p", [_vm._v("Centro:")]),
         _vm._v(" "),
-        _c("label", { attrs: { for: "zoom" } }, [_vm._v("zoom")]),
+        _c("p", [_vm._v("zoom:")]),
         _vm._v(" "),
-        _c("input", { attrs: { type: "number" } })
+        _c("button", { staticClass: "btn btn-success" }, [
+          _vm._v("Actualizar")
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Centro:")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("zoom:")]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("Posiciona el mapa y el zoom para actualizar tu mapa público")
+        ])
       ])
     ])
   }

@@ -14,12 +14,17 @@ class MapController extends Controller
 {
     public function show($userId) {
 
+        //TODO USER ID IS FAKED!!!!
         $user = User::find($userId);
 
         $refuges = $user->refuges();
         $refuges = Refuge::addGeoMarkerFields($refuges);
-
-        return $refuges;
+        $center = [$user->map->lng , $user->map->lat];
+        $zoom = $user->map->zoom;
+        return response()->json([
+            'center' => $center,
+            'zoom' => $zoom,
+            'refuges' => $refuges]) ;
 
     }
     public function attachRefuge($refugeId) {
