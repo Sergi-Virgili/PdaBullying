@@ -16,15 +16,19 @@ class CreateRefugesTable extends Migration
         Schema::create('refuges', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('description');
-
+            $table->text('description');
             $table->string('logoUrl')->nullable();
             $table->string('link')->nullable();
-            $table->integer('type_id')->nullable();
-            $table->string('adress')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            $table->integer('postcode')->nullable();
+            $table->string('house_number')->nullable();
+            $table->string('road')->nullable();
             $table->double('lat');
             $table->double('lng');
             $table->boolean('is_Public')->default(false);
+            $table->bigInteger('user_id')->default(1);
 
             $table->timestamps();
 

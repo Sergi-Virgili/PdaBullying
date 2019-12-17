@@ -23,7 +23,7 @@ class MapController extends Controller
 
     }
     public function attachRefuge($refugeId) {
-        
+
         //TODO TOKEN AUTH !!
         $user = User::find(1);
         $map = $user->map;
@@ -40,6 +40,10 @@ class MapController extends Controller
         $map = $user->map;
         $map->refuges()->detach($refugeId);
         return $user->refuges();
+    }
+
+    public function updateProperties(Request $request, $refugeId ) {
+
     }
 
 }

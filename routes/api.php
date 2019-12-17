@@ -28,7 +28,8 @@ Route::namespace('Api')->group(function(){
     //Users
     Route::post('/users', 'UserController@store');
     Route::put('/users/{id}', 'UserController@update');
-    //Types
+    //Type
+
     Route::resource('/types', 'TypeController', ['except'=>'edit']);
     Route::patch('/refuges/publish','RefugeController@publish');
     Route::patch('/refuges/hidde','RefugeController@hidde');
@@ -37,4 +38,5 @@ Route::namespace('Api')->group(function(){
     Route::get('/maps/{userId}','MapController@show');
     Route::get('/maps/attach/{refugeId}','MapController@attachRefuge');
     Route::get('/maps/detach/{refugeId}','MapController@detachRefuge');
+    Route::patch('/maps/{mapId}', 'MapController@updateProperties');
 });

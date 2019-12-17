@@ -2368,6 +2368,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["refugeSelected"],
   methods: {
@@ -2425,6 +2430,40 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2473,31 +2512,42 @@ __webpack_require__.r(__webpack_exports__);
     return {
       lat: "",
       lng: "",
-      refuge: {
+      refuge: _defineProperty({
         road: "",
         house_number: "",
         city: "",
         country: "",
-        postcode: ""
-      },
+        postcode: "",
+        state: ""
+      }, "country", ""),
       name: "",
-      description: ""
+      description: "",
+      types: []
     };
   },
   mounted: function mounted() {
     this.lat = this.newGeoMarker[0];
     this.lng = this.newGeoMarker[1];
     this.fetchLocationData();
+    this.fetchTypeData();
   },
   methods: {
     fetchLocationData: function fetchLocationData() {
       var _this = this;
 
       axios.get("https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=".concat(this.lat, "&lon=").concat(this.lng, "&zoom=18")).then(function (response) {
-        console.log(response.data.lat);
+        console.log(response.data);
         _this.refuge = response.data.address;
         _this.lat = response.data.lat;
         _this.lng = response.data.lon;
+      });
+    },
+    fetchTypeData: function fetchTypeData() {
+      var _this2 = this;
+
+      axios.get("/api/types").then(function (response) {
+        _this2.types = response.data.data;
+        console.log(response.data.data);
       });
     },
     saveNewRefuge: function saveNewRefuge() {
@@ -2505,7 +2555,13 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name,
         description: this.description,
         lat: this.lat,
-        lng: this.lng
+        lng: this.lng,
+        road: this.refuge.road,
+        city: this.refuge.city,
+        postcode: this.refuge.postcode,
+        house_number: this.refuge.house_number,
+        country: this.refuge.country,
+        state: this.refuge.state
       };
       axios.post("/api/refuges/", formData).then(function (response) {
         return console.log(response);
@@ -54232,6 +54288,10 @@ var render = function() {
       _vm._v(" "),
       _vm.refugeSelected
         ? _c("h3", [_vm._v(_vm._s(_vm.refugeSelected.name))])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.refugeSelected
+        ? _c("p", [_vm._v(_vm._s(_vm.refugeSelected.description))])
         : _vm._e()
     ]),
     _vm._v(" "),
@@ -54242,7 +54302,7 @@ var render = function() {
           staticClass: "btn btn-success",
           on: { click: _vm.OnClickAttachRefuge }
         },
-        [_vm._v("Al Meu Mapa")]
+        [_vm._v("\n            Al Meu Mapa\n        ")]
       ),
       _vm._v(" "),
       _c(
@@ -54251,7 +54311,7 @@ var render = function() {
           staticClass: "btn btn-danger",
           on: { click: _vm.OnClickDetachRefuge }
         },
-        [_vm._v("Fora del Meu Mapa")]
+        [_vm._v("\n            Fora del Meu Mapa\n        ")]
       )
     ])
   ])
@@ -54330,99 +54390,136 @@ var render = function() {
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-header" }, [_vm._v("Nova Localització")]),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c("label", { attrs: { for: "name" } }, [_vm._v("Nom")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.name,
-            expression: "name"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", name: "name", id: "name" },
-        domProps: { value: _vm.name },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+    _c(
+      "div",
+      { staticClass: "card-body" },
+      [
+        _c("label", { attrs: { for: "name" } }, [_vm._v("Nom")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.name,
+              expression: "name"
             }
-            _vm.name = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "description" } }, [_vm._v("Description")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.description,
-            expression: "description"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", name: "description", id: "description" },
-        domProps: { value: _vm.description },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", name: "name", id: "name" },
+          domProps: { value: _vm.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.name = $event.target.value
             }
-            _vm.description = $event.target.value
           }
-        }
-      }),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "street" } }, [_vm._v("Carrer")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "street", id: "street" },
-        domProps: { value: _vm.refuge.road }
-      }),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "number" } }, [_vm._v("Número")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "number", id: "number" },
-        domProps: { value: _vm.refuge.house_number }
-      }),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "city" } }, [_vm._v("Ciutat")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "city", id: "city" },
-        domProps: { value: _vm.refuge.city }
-      }),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "postcode" } }, [_vm._v("Codi Postal")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "postcode", id: "postcode" },
-        domProps: { value: _vm.refuge.postcode }
-      }),
-      _vm._v(" "),
-      _c("div", [
-        _c("p", [
-          _vm._v("geoposition: " + _vm._s(_vm.lat) + " " + _vm._s(_vm.lng))
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success", on: { click: _vm.saveNewRefuge } },
-        [_vm._v("OK")]
-      )
-    ])
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "description" } }, [_vm._v("Description")]),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.description,
+              expression: "description"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", name: "description", id: "description" },
+          domProps: { value: _vm.description },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.description = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _vm._l(_vm.types, function(type) {
+          return _c("div", { key: type.index }, [
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  name: "exampleRadios",
+                  id: "exampleRadios1"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "exampleRadios1" }
+                },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(type.name) +
+                      "\n                "
+                  )
+                ]
+              )
+            ])
+          ])
+        }),
+        _vm._v(" "),
+        _c("p", [_vm._v("Dirección")]),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "street" } }, [_vm._v("Carrer")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", name: "street", id: "street" },
+          domProps: { value: _vm.refuge.road }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "number" } }, [_vm._v("Número")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", name: "number", id: "number" },
+          domProps: { value: _vm.refuge.house_number }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Ciutat")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", name: "city", id: "city" },
+          domProps: { value: _vm.refuge.city }
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "postcode" } }, [_vm._v("Codi Postal")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", name: "postcode", id: "postcode" },
+          domProps: { value: _vm.refuge.postcode }
+        }),
+        _vm._v(" "),
+        _c("div", [
+          _c("p", [
+            _vm._v("geoposition: " + _vm._s(_vm.lat) + " " + _vm._s(_vm.lng))
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-success", on: { click: _vm.saveNewRefuge } },
+          [_vm._v("OK")]
+        )
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = []
@@ -78647,8 +78744,8 @@ var geoFindMe = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/Factoria/PdaBullying/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Factoria/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
