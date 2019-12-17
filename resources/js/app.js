@@ -76,6 +76,10 @@ Vue.component(
     "createType-component",
     require("./components/createTypes-component.vue").default
 );
+Vue.component(
+    "mapSearch-component",
+    require("./components/mapSearch-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
