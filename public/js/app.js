@@ -1866,6 +1866,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     newType: function newType() {
+      var params = {
+        name: this.name
+      };
+      axios.post('/types', params).then(function (resonse) {
+        return console.log(response);
+      });
       var type = {
         id: 2,
         description: this.description,
@@ -1901,6 +1907,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1919,6 +1926,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteType: function deleteType(index) {
       this.types.splice(index, 1);
+    },
+    updateType: function updateType(index, type) {
+      this.types[index] = type;
     }
   }
 });
@@ -2446,10 +2456,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["type"],
   data: function data() {
-    return {};
+    return {
+      editMode: false
+    };
   },
   mounted: function mounted() {
     console.log("Component mounted");
@@ -2457,6 +2472,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     onClickDelete: function onClickDelete() {
       this.$emit("delete");
+    },
+    onClickEdit: function onClickEdit() {
+      this.editMode = true;
+      this.$emit("edit");
+    },
+    onClickUpdate: function onClickUpdate() {
+      this.editMode = false;
+      this.$emit("update", type);
     }
   }
 });
@@ -7045,7 +7068,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbutton {\r\n  max-width: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\nbutton {\n  max-width: 100px;\n}\n", ""]);
 
 // exports
 
@@ -7064,7 +7087,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.map {\r\n  min-height: 500px;\n}\r\n", ""]);
+exports.push([module.i, "\n.map {\n  min-height: 500px;\n}\n", ""]);
 
 // exports
 
@@ -7083,7 +7106,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbutton {\r\n  max-width: 100px;\n}\r\n", ""]);
+exports.push([module.i, "\nbutton {\n  max-width: 100px;\n}\n", ""]);
 
 // exports
 
@@ -52973,6 +52996,12 @@ var render = function() {
             on: {
               delete: function($event) {
                 return _vm.deleteType(index)
+              },
+              update: function($event) {
+                var i = arguments.length,
+                  argsArray = Array(i)
+                while (i--) argsArray[i] = arguments[i]
+                return _vm.updateType.apply(void 0, [index].concat(argsArray))
               }
             }
           })
@@ -53587,15 +53616,62 @@ var render = function() {
         "div",
         { staticClass: "form-group" },
         [
-          _c("lavel", { attrs: { for: "type-name" } }, [
-            _vm._v(_vm._s(_vm.type.name))
-          ])
+          _vm.editMode
+            ? _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.type.name,
+                    expression: "type.name"
+                  }
+                ],
+                attrs: { for: "type-name" },
+                domProps: { value: _vm.type.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.type, "name", $event.target.value)
+                  }
+                }
+              })
+            : _c("lavel", { attrs: { for: "type-name" } }, [
+                _vm._v(_vm._s(_vm.type.name))
+              ])
         ],
         1
       )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-footer" }, [
+      _vm.editMode
+        ? _c(
+            "button",
+            {
+              staticClass: "btn btn-success",
+              on: {
+                click: function($event) {
+                  return _vm.onClickUpdate()
+                }
+              }
+            },
+            [_vm._v("Guardar Cambios")]
+          )
+        : _c(
+            "button",
+            {
+              staticClass: "btn btn-default",
+              on: {
+                click: function($event) {
+                  return _vm.onClickEdit()
+                }
+              }
+            },
+            [_vm._v("Editar")]
+          ),
+      _vm._v(" "),
       _c(
         "button",
         {
@@ -53607,9 +53683,7 @@ var render = function() {
           }
         },
         [_vm._v("Eliminar")]
-      ),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-default" }, [_vm._v("Editar")])
+      )
     ])
   ])
 }
@@ -77718,8 +77792,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\PdaBullying\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\PdaBullying\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/PdaBullying/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

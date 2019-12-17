@@ -2,12 +2,15 @@
   <div class="card">
     <div class="card-body">
       <div class="form-group">
-        <lavel for="type-name">{{type.name}}</lavel>
+        <input v-if="editMode" for="type-name" v-model="type.name">
+        <lavel v-else for="type-name">{{type.name}}</lavel>
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn btn-danger" v-on:click="onClickDelete()">Eliminar</button>
-      <button class="btn btn-default">Editar</button>
+      <button v-if="editMode" class="btn btn-success" v-on:click="onClickUpdate()">Guardar Cambios</button>
+       <button v-else class="btn btn-default" v-on:click="onClickEdit()">Editar</button>
+       <button class="btn btn-danger" v-on:click="onClickDelete()">Eliminar</button>
+     
     </div>
   </div>
 </template>
@@ -16,7 +19,9 @@
 export default {
   props: ["type"],
   data() {
-    return {};
+    return {
+      editMode: false
+    };
   },
   mounted() {
     console.log("Component mounted");
@@ -24,6 +29,14 @@ export default {
   methods: {
     onClickDelete() {
       this.$emit("delete");
+    },
+    onClickEdit() {
+      this.editMode = true
+      this.$emit("edit");
+    },
+    onClickUpdate() {
+      this.editMode = false
+      this.$emit("update", type);
     }
   }
 };

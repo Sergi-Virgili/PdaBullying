@@ -25,13 +25,16 @@ Route::namespace('Api')->group(function(){
     Route::get('/refuges','RefugeController@index');
     Route::get('/refuges/{resource}','RefugeController@show');
     Route::delete('/refuges/{resource}','RefugeController@destroy');
+    Route::patch('/refuges/publish','RefugeController@publish');
+    Route::patch('/refuges/hidde','RefugeController@hidde');
     //Users
     Route::post('/users', 'UserController@store');
     Route::put('/users/{id}', 'UserController@update');
     //Types
     Route::resource('/types', 'TypeController', ['except'=>'edit']);
-    Route::patch('/refuges/publish','RefugeController@publish');
-    Route::patch('/refuges/hidde','RefugeController@hidde');
+    Route::delete('/types/{id}', 'TypeController@destroy');
+    Route::put('types/{id}', 'TypeController@update');
+
 
     //MAP ROUTES
     Route::get('/maps/{userId}','MapController@show');

@@ -7,6 +7,7 @@
         :key="type.id"
         :type="type"
         @delete="deleteType(index)"
+        @update="updateType(index, ...arguments)"
       ></type-component>
     </div>
   </div>
@@ -32,6 +33,9 @@ export default {
     },
     deleteType(index) {
       this.types.splice(index, 1);
+    },
+    updateType(index, type) {
+      this.types[index] = type
     }
   }
 };

@@ -27,6 +27,10 @@ export default {
   },
   methods: {
     newType() {
+      const params= {
+        name: this.name
+      };
+      axios.post('/types', params).then((resonse)=>console.log(response));
       let type = {
         id: 2,
         description: this.description,

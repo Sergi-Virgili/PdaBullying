@@ -21,4 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/admin/publicar', 'HomeController@publish')->name('publish');
 
-Route::get('/admin/type', 'api\TypeController@returnView');
+Route::get('/admin/type', 'Api\TypeController@returnView');

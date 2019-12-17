@@ -26,8 +26,10 @@ class TypeController extends Controller
     {
         try
         {
+            
             $type = Type::create($request->all());
             return response()->json(new TypeResource($type), 201);
+
         }
         catch(Exception $exception)
         {
@@ -54,7 +56,6 @@ class TypeController extends Controller
 
         $type->update([
             'name' => $request->name,
-            'description' => $request->description
 
         ]);
         
