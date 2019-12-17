@@ -64,10 +64,19 @@ Vue.component(
 );
 
 Vue.component(
-    "createType-component",
-    require("./components/createTypes-component.vue").default
+    "createtype-component",
+    require("./components/createtype-component.vue").default
 );
 
+Vue.component(
+    "type-component",
+    require("./components/type-component.vue").default
+);
+
+Vue.component(
+    "crudtype-component",
+    require("./components/crudtype-component.vue").default
+);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

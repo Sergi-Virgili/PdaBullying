@@ -16,6 +16,12 @@ class TypeController extends Controller
     {
         return new TypeCollection(Type::paginate());
     }
+
+    public function returnView()
+    {
+        return view('admin.type');
+    }
+
     public function store(Request $request)
     {
         try
