@@ -6,6 +6,9 @@
           <button class="btn btn-success" @click="fetchData">PDA mapa</button>
           <button class="btn btn-success" @click="OnClickMyMap">Mi mapa</button>
           <button class="btn btn-success" @click="newRefuge">+ Add Place</button>
+          <button class="btn btn-success" @click="optionsMyMap">Map Options</button>
+          <button class="btn btn-success" @click="geo">Geo</button>
+          <button class="btn btn-success" @click="OpenSearcher">Buscar</button>
         </div>
         <div class="card-body">
           <l-map
@@ -15,6 +18,7 @@
             :min-zoom="3"
             :center="center"
             @click="OnClickPosition"
+            @update:center="onMove"
           >
             <l-tile-layer :url="url" />
             <div v-for="(refuge, index) in refuges" :key="index">
@@ -32,17 +36,19 @@
       </div>
       <section class="sider" v-if="sider">
         <refuge-component
-          v-if="sider=='refuge'"
+          v-if="sider == 'refuge'"
           class="refugeSider"
           :refugeSelected="refugeSelected"
           @attachRefuge="attachRefuge"
           @detachRefuge="detachRefuge"
         ></refuge-component>
         <refugeNew-component
-          v-if="sider=='newRefuge'"
+          v-if="sider == 'newRefuge'"
           :newGeoMarker="newGeoMarker"
           class="refugeSider"
         ></refugeNew-component>
+        <mapOptions-component v-if="sider == 'mapOptions'" class="refugeSider"></mapOptions-component>
+        <mapSearch-component v-if="sider == 'mapSearch'" class="refugeSider"></mapSearch-component>
       </section>
     </div>
     <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
@@ -52,6 +58,8 @@
 <script>
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 import axios from "axios";
+import geoFindMe from "../services/geolocationService";
+import { LatLng } from "leaflet";
 
 export default {
   components: {
@@ -76,6 +84,21 @@ export default {
     this.fetchData();
   },
   methods: {
+    OpenSearcher() {
+      this.sider = "mapSearch";
+    },
+
+    onMove(event) {
+      let geoMarker = [event.lat, event.lng];
+      this.centerMap(geoMarker);
+    },
+    geo() {
+      geoFindMe.findMe().then(res => {
+        this.centerMap(res);
+      });
+
+      // this.centerMap(geoFindMe.geoMarker);
+    },
     fetchData() {
       axios.get("/api/refuges").then(response => {
         this.refuges = response.data.refuge;
@@ -125,6 +148,9 @@ export default {
     },
     detachRefuge() {
       this.fetchMyRefuges();
+    },
+    optionsMyMap() {
+      this.sider = "mapOptions";
     }
   }
 };
