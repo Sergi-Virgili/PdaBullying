@@ -2028,6 +2028,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2048,13 +2050,22 @@ __webpack_require__.r(__webpack_exports__);
       refuges: [],
       refugeSelected: null,
       newGeoMarker: null,
-      sider: ""
+      sider: "",
+      myMapCenter: ""
     };
   },
   created: function created() {
     this.fetchData();
+    this.fetchMyMap();
   },
   methods: {
+    fetchMyMap: function fetchMyMap() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/maps/1").then(function (response) {
+        _this.myMapCenter = response.data.center;
+      });
+    },
     OpenSearcher: function OpenSearcher() {
       this.sider = "mapSearch";
     },
@@ -2063,17 +2074,17 @@ __webpack_require__.r(__webpack_exports__);
       this.centerMap(geoMarker);
     },
     geo: function geo() {
-      var _this = this;
+      var _this2 = this;
 
       _services_geolocationService__WEBPACK_IMPORTED_MODULE_2__["default"].findMe().then(function (res) {
-        _this.centerMap(res);
+        _this2.centerMap(res);
       }); // this.centerMap(geoFindMe.geoMarker);
     },
     fetchData: function fetchData() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/refuges").then(function (response) {
-        _this2.refuges = response.data.refuge;
+        _this3.refuges = response.data.refuge;
       });
     },
     centerMap: function centerMap(geoMarker) {
@@ -2095,10 +2106,10 @@ __webpack_require__.r(__webpack_exports__);
       this.fetchMyRefuges();
     },
     fetchMyRefuges: function fetchMyRefuges() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/maps/1").then(function (response) {
-        _this3.refuges = response.data.refuges;
+        _this4.refuges = response.data.refuges;
       });
     },
     OnClickPosition: function OnClickPosition(event) {
@@ -2154,7 +2165,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["newCenter", "myMapCenter", "myMapZoom", "newZoom"],
+  methods: {
+    updateMyMapProperties: function updateMyMapProperties() {
+      alert("update");
+    }
+  }
+});
 
 /***/ }),
 
@@ -53955,7 +53975,13 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.sider == "mapOptions"
-                  ? _c("mapOptions-component", { staticClass: "refugeSider" })
+                  ? _c("mapOptions-component", {
+                      staticClass: "refugeSider",
+                      attrs: {
+                        newCenter: _vm.center,
+                        myMapCenter: _vm.myMapCenter
+                      }
+                    })
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.sider == "mapSearch"
@@ -54001,42 +54027,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "card mapOptions" }, [
-      _c("header", { staticClass: "card-header" }, [
-        _vm._v("Opciones de Mi Mapa")
-      ]),
+  return _c("section", { staticClass: "card mapOptions" }, [
+    _c("header", { staticClass: "card-header" }, [
+      _vm._v("Opciones de Mi Mapa")
+    ]),
+    _vm._v(" "),
+    _c("main", { staticClass: "card-body" }, [
+      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Mapa actual")]),
       _vm._v(" "),
-      _c("main", { staticClass: "card-body" }, [
-        _c("button", { staticClass: "btn btn-success" }, [
-          _vm._v("Mapa actual")
-        ]),
-        _vm._v(" "),
-        _c("p", [_vm._v("Centro:")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("zoom:")]),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn btn-success" }, [
-          _vm._v("Actualizar")
-        ]),
-        _vm._v(" "),
-        _c("p", [_vm._v("Centro:")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("zoom:")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("Posiciona el mapa y el zoom para actualizar tu mapa público")
-        ])
+      _c("p", [_vm._v("Centro: " + _vm._s(_vm.myMapCenter))]),
+      _vm._v(" "),
+      _c("p", [_vm._v("zoom: " + _vm._s(_vm.myMapZoom))]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          on: { click: _vm.updateMyMapProperties }
+        },
+        [_vm._v("\n            Actualizar\n        ")]
+      ),
+      _vm._v(" "),
+      _c("p", [_vm._v("Centro: " + _vm._s(_vm.newCenter))]),
+      _vm._v(" "),
+      _c("p", [_vm._v("zoom: " + _vm._s(_vm.newZoom))]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("Posiciona el mapa y el zoom para actualizar tu mapa público")
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

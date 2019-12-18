@@ -19,7 +19,7 @@ class MapController extends Controller
 
         $refuges = $user->refuges();
         $refuges = Refuge::addGeoMarkerFields($refuges);
-        $center = [$user->map->lng , $user->map->lat];
+        $center = [$user->map->lat , $user->map->lng];
         $zoom = $user->map->zoom;
         return response()->json([
             'center' => $center,

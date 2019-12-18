@@ -4,18 +4,27 @@
         <main class="card-body">
             <!-- <label for="mapCenter"></label> -->
             <button class="btn btn-success">Mapa actual</button>
-            <p>Centro:</p>
-            <p>zoom:</p>
-            <button class="btn btn-success">Actualizar</button>
-            <p>Centro:</p>
-            <p>zoom:</p>
+            <p>Centro: {{ myMapCenter }}</p>
+            <p>zoom: {{ myMapZoom }}</p>
+            <button class="btn btn-success" @click="updateMyMapProperties">
+                Actualizar
+            </button>
+            <p>Centro: {{ newCenter }}</p>
+            <p>zoom: {{ newZoom }}</p>
             <p>Posiciona el mapa y el zoom para actualizar tu mapa público</p>
         </main>
     </section>
 </template>
 
 <script>
-export default {};
+export default {
+    props: ["newCenter", "myMapCenter", "myMapZoom", "newZoom"],
+    methods: {
+        updateMyMapProperties() {
+            alert("update");
+        }
+    }
+};
 </script>
 
 <style></style>

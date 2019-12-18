@@ -61,6 +61,8 @@
                     class="refugeSider"
                 ></refugeNew-component>
                 <mapOptions-component
+                    :newCenter="center"
+                    :myMapCenter="myMapCenter"
                     v-if="sider == 'mapOptions'"
                     class="refugeSider"
                 ></mapOptions-component>
@@ -99,13 +101,20 @@ export default {
             refuges: [],
             refugeSelected: null,
             newGeoMarker: null,
-            sider: ""
+            sider: "",
+            myMapCenter: ""
         };
     },
     created() {
         this.fetchData();
+        this.fetchMyMap();
     },
     methods: {
+        fetchMyMap() {
+            axios.get("/api/maps/1").then(response => {
+                this.myMapCenter = response.data.center;
+            });
+        },
         OpenSearcher() {
             this.sider = "mapSearch";
         },
