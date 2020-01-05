@@ -1,8 +1,11 @@
 <template>
     <section class="map-wrapper">
         <publicMap-component
+        v-if="loaded"
             class="map"
             :refuges="refuges"
+            :center ="center"
+            :zoom ="zoom"
         ></publicMap-component>
     </section>
 </template>
@@ -13,10 +16,11 @@ export default {
         return {
             refuges: [],
             center: "",
-            zoom: ""
+            zoom: "",
+            loaded: false
         };
     },
-    mounted() {
+    created() {
         this.fetchMyRefuges();
     },
     methods: {
@@ -25,6 +29,7 @@ export default {
                 this.refuges = response.data.refuges;
                 this.center = response.data.center;
                 this.zoom = response.data.zoom;
+                this.loaded = true
             });
         }
     }

@@ -1908,15 +1908,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       refuges: [],
       center: "",
-      zoom: ""
+      zoom: "",
+      loaded: false
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     this.fetchMyRefuges();
   },
   methods: {
@@ -1927,6 +1931,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.refuges = response.data.refuges;
         _this.center = response.data.center;
         _this.zoom = response.data.zoom;
+        _this.loaded = true;
       });
     }
   }
@@ -2030,6 +2035,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2051,7 +2076,18 @@ __webpack_require__.r(__webpack_exports__);
       refugeSelected: null,
       newGeoMarker: null,
       sider: "",
-      myMapCenter: ""
+      myMapCenter: "",
+      myMapZoom: '',
+      icon: Object(leaflet__WEBPACK_IMPORTED_MODULE_3__["icon"])({
+        iconUrl: "storage/pda_logos/icons8-marker-30.png",
+        iconSize: [30, 30] //iconAnchor: [16, 37]
+
+      }),
+      icon2: Object(leaflet__WEBPACK_IMPORTED_MODULE_3__["icon"])({
+        iconUrl: "storage/pda_logos/icons8-marker-16.png",
+        iconSize: [30, 30] //iconAnchor: [16, 37]
+
+      })
     };
   },
   created: function created() {
@@ -2064,10 +2100,14 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/maps/1").then(function (response) {
         _this.myMapCenter = response.data.center;
+        _this.myMapZoom = response.data.zoom;
       });
     },
     OpenSearcher: function OpenSearcher() {
       this.sider = "mapSearch";
+    },
+    onZoom: function onZoom(event) {
+      this.zoom = event;
     },
     onMove: function onMove(event) {
       var geoMarker = [event.lat, event.lng];
@@ -2171,7 +2211,14 @@ __webpack_require__.r(__webpack_exports__);
   props: ["newCenter", "myMapCenter", "myMapZoom", "newZoom"],
   methods: {
     updateMyMapProperties: function updateMyMapProperties() {
-      alert("update");
+      //TODO FAKET MAP ID
+      var data = {
+        zoom: this.newZoom,
+        center: this.newCenter
+      };
+      axios.patch('/api/maps/1').then(function (response) {
+        console.log(response);
+      });
     }
   }
 });
@@ -2256,7 +2303,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["refuges"],
+  props: {
+    refuges: Array,
+    center: {
+      "default": [41.3876768, 2.169259]
+    },
+    zoom: {
+      "default": 13
+    }
+  },
   components: {
     LMap: vue2_leaflet__WEBPACK_IMPORTED_MODULE_0__["LMap"],
     LTileLayer: vue2_leaflet__WEBPACK_IMPORTED_MODULE_0__["LTileLayer"],
@@ -2269,9 +2324,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      center: [41.3876768, 2.169259],
-      zoom: 13,
-      animation: true
+      // tcenter: [0,0],
+      // tzoom: 13,
+      animation: true,
+      isLoaded: true
     };
   },
   methods: {
@@ -53804,10 +53860,12 @@ var render = function() {
     "section",
     { staticClass: "map-wrapper" },
     [
-      _c("publicMap-component", {
-        staticClass: "map",
-        attrs: { refuges: _vm.refuges }
-      })
+      _vm.loaded
+        ? _c("publicMap-component", {
+            staticClass: "map",
+            attrs: { refuges: _vm.refuges, center: _vm.center, zoom: _vm.zoom }
+          })
+        : _vm._e()
     ],
     1
   )
@@ -53902,7 +53960,8 @@ var render = function() {
                   },
                   on: {
                     click: _vm.OnClickPosition,
-                    "update:center": _vm.onMove
+                    "update:center": _vm.onMove,
+                    "update:zoom": _vm.onZoom
                   }
                 },
                 [
@@ -53913,32 +53972,71 @@ var render = function() {
                       "div",
                       { key: index },
                       [
-                        _c(
-                          "l-marker",
-                          {
-                            attrs: { "lat-lng": refuge.geoMarker },
-                            on: {
-                              click: function($event) {
-                                return _vm.OnClickRefuge(
-                                  index,
-                                  refuge.geoMarker
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("l-popup", [
-                              _c("div", { staticClass: "popUp" }, [
-                                _c("img", {
-                                  attrs: { src: refuge.logoUrl, alt: "" }
-                                }),
-                                _vm._v(" "),
-                                _c("div", [_vm._v(_vm._s(refuge.name))])
-                              ])
-                            ])
-                          ],
-                          1
-                        )
+                        refuge.is_Public
+                          ? _c(
+                              "l-marker",
+                              {
+                                staticClass: "marker",
+                                attrs: {
+                                  "lat-lng": refuge.geoMarker,
+                                  icon: _vm.icon
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.OnClickRefuge(
+                                      index,
+                                      refuge.geoMarker
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("l-popup", [
+                                  _c("div", { staticClass: "popUp" }, [
+                                    _c("img", {
+                                      attrs: { src: refuge.logoUrl, alt: "" }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("div", [_vm._v(_vm._s(refuge.name))])
+                                  ])
+                                ])
+                              ],
+                              1
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !refuge.is_Public
+                          ? _c(
+                              "l-marker",
+                              {
+                                staticClass: "marker",
+                                attrs: {
+                                  "lat-lng": refuge.geoMarker,
+                                  icon: _vm.icon2
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.OnClickRefuge(
+                                      index,
+                                      refuge.geoMarker
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("l-popup", [
+                                  _c("div", { staticClass: "popUp" }, [
+                                    _c("img", {
+                                      attrs: { src: refuge.logoUrl, alt: "" }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("div", [_vm._v(_vm._s(refuge.name))])
+                                  ])
+                                ])
+                              ],
+                              1
+                            )
+                          : _vm._e()
                       ],
                       1
                     )
@@ -53979,7 +54077,9 @@ var render = function() {
                       staticClass: "refugeSider",
                       attrs: {
                         newCenter: _vm.center,
-                        myMapCenter: _vm.myMapCenter
+                        myMapCenter: _vm.myMapCenter,
+                        myMapZoom: _vm.myMapZoom,
+                        newZoom: _vm.zoom
                       }
                     })
                   : _vm._e(),
@@ -54148,58 +54248,63 @@ var render = function() {
     "section",
     { staticClass: "publiMap" },
     [
-      _c(
-        "l-map",
-        {
-          staticClass: "map",
-          attrs: {
-            noBlockingAnimations: _vm.animation,
-            zoom: _vm.zoom,
-            "min-zoom": 3,
-            center: _vm.center
-          },
-          on: { click: _vm.OnClickPosition }
-        },
-        [
-          _c("l-tile-layer", { attrs: { url: _vm.url } }),
-          _vm._v(" "),
-          _vm._l(_vm.refuges, function(refuge, index) {
-            return _c(
-              "div",
-              { key: index },
-              [
-                refuge.is_Public
-                  ? _c(
-                      "l-marker",
-                      {
-                        attrs: { "lat-lng": refuge.geoMarker },
-                        on: {
-                          click: function($event) {
-                            return _vm.OnClickRefuge(index, refuge.geoMarker)
-                          }
-                        }
-                      },
-                      [
-                        _c("l-popup", [
-                          _c("div", { staticClass: "popUp" }, [
-                            _c("img", {
-                              attrs: { src: refuge.logoUrl, alt: "" }
-                            }),
-                            _vm._v(" "),
-                            _c("div", [_vm._v(_vm._s(refuge.name))])
-                          ])
-                        ])
-                      ],
-                      1
-                    )
-                  : _vm._e()
-              ],
-              1
-            )
-          })
-        ],
-        2
-      )
+      _vm.isLoaded
+        ? _c(
+            "l-map",
+            {
+              staticClass: "map",
+              attrs: {
+                noBlockingAnimations: _vm.animation,
+                zoom: _vm.zoom,
+                "min-zoom": 3,
+                center: _vm.center
+              },
+              on: { click: _vm.OnClickPosition }
+            },
+            [
+              _c("l-tile-layer", { attrs: { url: _vm.url } }),
+              _vm._v(" "),
+              _vm._l(_vm.refuges, function(refuge, index) {
+                return _c(
+                  "div",
+                  { key: index },
+                  [
+                    refuge.is_Public
+                      ? _c(
+                          "l-marker",
+                          {
+                            attrs: { "lat-lng": refuge.geoMarker },
+                            on: {
+                              click: function($event) {
+                                return _vm.OnClickRefuge(
+                                  index,
+                                  refuge.geoMarker
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("l-popup", [
+                              _c("div", { staticClass: "popUp" }, [
+                                _c("img", {
+                                  attrs: { src: refuge.logoUrl, alt: "" }
+                                }),
+                                _vm._v(" "),
+                                _c("div", [_vm._v(_vm._s(refuge.name))])
+                              ])
+                            ])
+                          ],
+                          1
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                )
+              })
+            ],
+            2
+          )
+        : _vm._e()
     ],
     1
   )
@@ -78810,8 +78915,8 @@ var geoFindMe = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/Factoria/PdaBullying/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Factoria/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

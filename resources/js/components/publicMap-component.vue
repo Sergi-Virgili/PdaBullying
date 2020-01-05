@@ -1,6 +1,6 @@
 <template>
   <section class="publiMap">
-    <l-map
+    <l-map v-if="isLoaded"
       class="map"
       :noBlockingAnimations="animation"
       :zoom="zoom"
@@ -31,7 +31,17 @@
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 
 export default {
-  props: ["refuges"],
+  props: {
+    refuges: Array,
+    center: {
+     
+      default: [41.3876768, 2.169259]
+    },
+    zoom: {
+      
+      default: 13 
+      }
+  },
   components: {
     LMap,
     LTileLayer,
@@ -44,9 +54,10 @@ export default {
   data() {
     return {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      center: [41.3876768, 2.169259],
-      zoom: 13,
-      animation: true
+      // tcenter: [0,0],
+      // tzoom: 13,
+      animation: true,
+      isLoaded:true
     };
   },
   methods: {

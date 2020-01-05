@@ -21,7 +21,14 @@ export default {
     props: ["newCenter", "myMapCenter", "myMapZoom", "newZoom"],
     methods: {
         updateMyMapProperties() {
-            alert("update");
+            //TODO FAKET MAP ID
+            let data = {
+                zoom: this.newZoom,
+                center: this.newCenter
+            }
+            axios.patch('/api/maps/1',).then(response => {
+                console.log(response)
+            })
         }
     }
 };

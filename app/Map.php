@@ -7,6 +7,7 @@ use App\Refuge;
 
 class Map extends Model
 {
+    protected $guarded = ['id'];
     public function refuges() {
         return $this->belongsToMany(Refuge::class);
     }

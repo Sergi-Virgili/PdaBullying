@@ -47,8 +47,14 @@ class MapController extends Controller
         return $user->refuges();
     }
 
-    public function updateProperties(Request $request, $refugeId ) {
-
+    public function updateProperties(Request $request, $mapId ) {
+        $map = Map::findOrfail($mapId);
+        $map->update([
+            'lat' => $request->center[0],
+            'lng' => $request->center[1],
+            'zoom' => $request->zoom
+        ]);
+        return response()->json($map);
     }
 
 }

@@ -29,11 +29,29 @@
                         :center="center"
                         @click="OnClickPosition"
                         @update:center="onMove"
+                        @update:zoom="onZoom"
                     >
                         <l-tile-layer :url="url" />
                         <div v-for="(refuge, index) in refuges" :key="index">
                             <l-marker
+                                class='marker'
+                                v-if="refuge.is_Public"
                                 :lat-lng="refuge.geoMarker"
+                                :icon="icon"
+                                @click="OnClickRefuge(index, refuge.geoMarker)"
+                            >
+                                <l-popup>
+                                    <div class="popUp">
+                                        <img :src="refuge.logoUrl" alt />
+                                        <div>{{ refuge.name }}</div>
+                                    </div>
+                                </l-popup>
+                            </l-marker>
+                            <l-marker
+                                class='marker'
+                                v-if="!refuge.is_Public"
+                                :lat-lng="refuge.geoMarker"
+                                :icon="icon2"
                                 @click="OnClickRefuge(index, refuge.geoMarker)"
                             >
                                 <l-popup>
@@ -63,6 +81,8 @@
                 <mapOptions-component
                     :newCenter="center"
                     :myMapCenter="myMapCenter"
+                    :myMapZoom="myMapZoom"
+                    :newZoom = "zoom"
                     v-if="sider == 'mapOptions'"
                     class="refugeSider"
                 ></mapOptions-component>
@@ -83,7 +103,7 @@
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 import axios from "axios";
 import geoFindMe from "../services/geolocationService";
-import { LatLng } from "leaflet";
+import { LatLng, icon } from "leaflet";
 
 export default {
     components: {
@@ -102,7 +122,18 @@ export default {
             refugeSelected: null,
             newGeoMarker: null,
             sider: "",
-            myMapCenter: ""
+            myMapCenter: "",
+            myMapZoom: '',
+            icon: icon({
+                iconUrl: "storage/pda_logos/icons8-marker-30.png",
+                iconSize: [30, 30],
+            //iconAnchor: [16, 37]
+            }),
+            icon2: icon({
+                iconUrl: "storage/pda_logos/icons8-marker-16.png",
+                iconSize: [30, 30],
+            //iconAnchor: [16, 37]
+            }),
         };
     },
     created() {
@@ -113,12 +144,17 @@ export default {
         fetchMyMap() {
             axios.get("/api/maps/1").then(response => {
                 this.myMapCenter = response.data.center;
+                this.myMapZoom = response.data.zoom;
+               
             });
         },
         OpenSearcher() {
             this.sider = "mapSearch";
         },
-
+        onZoom(event){
+            this.zoom = event
+            
+        },
         onMove(event) {
             let geoMarker = [event.lat, event.lng];
             this.centerMap(geoMarker);
