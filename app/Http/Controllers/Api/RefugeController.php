@@ -27,7 +27,13 @@ class RefugeController extends Controller
 
     public function store(Request $request)
     {
+        //NEW IMAGE ( base64 - save - cambias nombre - aleatorio /.jpg )
+        //SAVE IMAGE storage
 
+        //DEVOLVER URL
+        //
+
+        //TODO USER ID SAVE
         $refuge = Refuge::create([
 
             'name'=> $request->name,
@@ -40,6 +46,7 @@ class RefugeController extends Controller
             'state' => $request->state,
             'country' => $request->country,
             'postcode' => $request->postcode,
+            //'img_url' => 
 
         ]);
 
