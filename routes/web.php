@@ -21,3 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/map/{map}', 'HomeController@iframe')->name('iframe');
 
 Route::get('/admin/publicar', 'HomeController@publish')->name('publish');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
