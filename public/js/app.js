@@ -2039,22 +2039,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2077,14 +2061,14 @@ __webpack_require__.r(__webpack_exports__);
       newGeoMarker: null,
       sider: "",
       myMapCenter: "",
-      myMapZoom: '',
+      myMapZoom: "",
       icon: Object(leaflet__WEBPACK_IMPORTED_MODULE_3__["icon"])({
-        iconUrl: "storage/pda_logos/icons8-marker-30.png",
+        iconUrl: "img/icons8-marker-30.png",
         iconSize: [30, 30] //iconAnchor: [16, 37]
 
       }),
       icon2: Object(leaflet__WEBPACK_IMPORTED_MODULE_3__["icon"])({
-        iconUrl: "storage/pda_logos/icons8-marker-16.png",
+        iconUrl: "img/icons8-marker-16.png",
         iconSize: [30, 30] //iconAnchor: [16, 37]
 
       })
@@ -53901,7 +53885,7 @@ var render = function() {
             _c(
               "button",
               { staticClass: "btn btn-success", on: { click: _vm.fetchData } },
-              [_vm._v("\n                    PDA mapa\n                ")]
+              [_vm._v("PDA mapa")]
             ),
             _vm._v(" "),
             _c(
@@ -53910,13 +53894,13 @@ var render = function() {
                 staticClass: "btn btn-success",
                 on: { click: _vm.OnClickMyMap }
               },
-              [_vm._v("\n                    Mi mapa\n                ")]
+              [_vm._v("Mi mapa")]
             ),
             _vm._v(" "),
             _c(
               "button",
               { staticClass: "btn btn-success", on: { click: _vm.newRefuge } },
-              [_vm._v("\n                    + Add Place\n                ")]
+              [_vm._v("+ Add Place")]
             ),
             _vm._v(" "),
             _c(
@@ -53925,7 +53909,7 @@ var render = function() {
                 staticClass: "btn btn-success",
                 on: { click: _vm.optionsMyMap }
               },
-              [_vm._v("\n                    Map Options\n                ")]
+              [_vm._v("Map Options")]
             ),
             _vm._v(" "),
             _c(
@@ -53940,7 +53924,7 @@ var render = function() {
                 staticClass: "btn btn-success",
                 on: { click: _vm.OpenSearcher }
               },
-              [_vm._v("\n                    Buscar\n                ")]
+              [_vm._v("Buscar")]
             )
           ]),
           _vm._v(" "),
@@ -77736,7 +77720,7 @@ var findRealParent = function (firstVueParent) {
 /*!***********************************************************!*\
   !*** ./node_modules/vue2-leaflet/dist/vue2-leaflet.es.js ***!
   \***********************************************************/
-/*! exports provided: CircleMixin, ControlMixin, GridLayerMixin, ImageOverlayMixin, InteractiveLayerMixin, LayerMixin, LayerGroupMixin, OptionsMixin, PathMixin, PolygonMixin, PolylineMixin, PopperMixin, TileLayerMixin, TileLayerWMSMixin, LCircle, LCircleMarker, LControl, LControlAttribution, LControlLayers, LControlScale, LControlZoom, LFeatureGroup, LGeoJson, LGridLayer, LIcon, LIconDefault, LImageOverlay, LLayerGroup, LMap, LMarker, LPolygon, LPolyline, LPopup, LRectangle, LTileLayer, LTooltip, LWMSTileLayer, debounce, capitalizeFirstLetter, propsBinder, collectionCleaner, optionsMerger, findRealParent */
+/*! exports provided: debounce, capitalizeFirstLetter, propsBinder, collectionCleaner, optionsMerger, findRealParent, CircleMixin, ControlMixin, GridLayerMixin, ImageOverlayMixin, InteractiveLayerMixin, LayerMixin, LayerGroupMixin, OptionsMixin, PathMixin, PolygonMixin, PolylineMixin, PopperMixin, TileLayerMixin, TileLayerWMSMixin, LCircle, LCircleMarker, LControl, LControlAttribution, LControlLayers, LControlScale, LControlZoom, LFeatureGroup, LGeoJson, LGridLayer, LIcon, LIconDefault, LImageOverlay, LLayerGroup, LMap, LMarker, LPolygon, LPolyline, LPopup, LRectangle, LTileLayer, LTooltip, LWMSTileLayer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78915,8 +78899,8 @@ var geoFindMe = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/Factoria/PdaBullying/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Factoria/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
