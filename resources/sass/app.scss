@@ -1,5 +1,6 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap");
 
 // Variables
 @import "variables";
@@ -7,6 +8,9 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
-@import "map";
-
-@import "mapForm";
+.iframeMap {
+    height: 500px;
+    width: 600px;
+    background-color: burlywood;
+    margin: 0 auto;
+}

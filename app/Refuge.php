@@ -1,0 +1,21 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Refuge extends Model
+{
+    protected $guarded = ['id'];
+
+    public function maps() {
+       return $this->belongsToMany(Map::class);
+    }
+
+    public static function addGeoMarkerFields($refuges) {
+        foreach ($refuges as $refuge){
+            $refuge['geoMarker']= [$refuge['lat'],$refuge['lng']];
+        }
+        return $refuges;
+    }
+}

@@ -35,3 +35,9 @@ function createPlace(lat, long) {
         .addTo(map)
         .bindPopup(popupHtml);
 }
+
+let createPlaceButton = document.getElementById("sendPlace");
+
+createPlaceButton.addEventListener("click", e => {
+    alert();
+});

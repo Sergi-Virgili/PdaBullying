@@ -35,25 +35,51 @@
                     @endauth
                 </div>
             @endif
-
-            <div class="container">
-                <div class="map" id="map">
+            
+            <div class="container" id="app">
+                <example-component></example-component>
+                {{-- <div class="map" id="map">
                 </div>
                 
                 <div class="mapform">
                     <div class="form-control">
                         <div class="form-group">
                             <label for="adress">Direcció</label>
-                            <input type="text" id='adress' name="adress">
+                            <input type="text" id='street' name="street" placeholder="Carrer" required>
+                            <input type='number' id='streetNumber' name="streetNumber" placeholder="Numero" required>
+                        
                         </div>
                         <div>
+                            <label for="lat">Geo</label>
                             <input type="text" id='lat' placeholder="lat">
-                            <input type="text" id= 'long'placeholder="long">
+                            <input type="text" id= 'long' placeholder="long">
                         </div>
                         <button class="btn btn-success mt-4 " id='sendPlace'>send</button>
                     </div>
-                </div>
-            </div>
+                    <div class="form-control">
+                        <div class="form-group">
+                           <input type="email" placeholder="email">
+                           
+                        </div>
+                        <div class="form-group">
+                           <input type="password" placeholder="password">
+                           
+                        </div>
+                        <button class="btn btn-success mt-4 " id='sendPlace'>Login</button>
+                    </div>
+                    <div class="form-control">
+                        <div class="form-group">
+                           <input type="email" placeholder="email">
+                           
+                        </div>
+                        <div class="form-group">
+                           <input type="password" placeholder="password">
+                           
+                        </div>
+                        <button class="btn btn-success mt-4 " id='sendPlace'>Register</button>
+                    </div>
+                </div> --}}
+            </div> 
         </div>
     </body>
 </html>

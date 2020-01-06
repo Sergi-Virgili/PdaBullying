@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('iframe');
     }
 
     /**
@@ -25,4 +25,11 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function publish()
+    {
+        return view('admin.publish');
+    }
+    public function iframe() {
+        return view('iframe');  
+    } 
 }

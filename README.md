@@ -1,5 +1,3 @@
-
-
 # PDA Bullying
 
 ## Install
@@ -33,5 +31,3 @@ php artisan migrate:fresh --seed
 ### run front server
 
 npm run watch
-
-
