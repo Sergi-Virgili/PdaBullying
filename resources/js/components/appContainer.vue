@@ -95,9 +95,16 @@
             </v-list>
         </v-navigation-drawer>
 
-        <v-app-bar app color="indigo" dark>
+        <v-app-bar app color="white" >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-            <v-toolbar-title>PDA-Bullying</v-toolbar-title>
+            <v-img
+      src="https://pdabullying.com/img/logo.png"
+      lazy-src="https://pdabullying.com/img/logo.png"
+      
+      class="grey lighten-2"
+        max-width="150"
+      max-height="300"
+    ></v-img>
         </v-app-bar>
 
         <v-content>
