@@ -30,10 +30,21 @@ class RefugeController extends Controller
         //NEW IMAGE ( base64 - save - cambias nombre - aleatorio /.jpg )
         //SAVE IMAGE storage
 
+        
+     /*    if ($rquest->hasFile('image')){
+            $path = $request->image->store('public');
+            Image::create(['path'=>$path]);
+        }
+    } */
+
         //DEVOLVER URL
         //
 
         //TODO USER ID SAVE
+
+     
+      
+
         $refuge = Refuge::create([
 
             'name'=> $request->name,
@@ -46,7 +57,7 @@ class RefugeController extends Controller
             'state' => $request->state,
             'country' => $request->country,
             'postcode' => $request->postcode,
-            //'img_url' => 
+            // 'image' => $request->image,
 
         ]);
 

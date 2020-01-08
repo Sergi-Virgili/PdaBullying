@@ -2484,32 +2484,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["newGeoMarker"],
   data: function data() {
     return {
+      img: "",
       lat: "",
       lng: "",
       refuge: _defineProperty({
@@ -2550,20 +2529,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(response.data.data);
       });
     },
+    upload: function upload(event) {
+      console.log(event.target.files[0].name);
+      this.img = event.target.files[0];
+      var readerImg = new FileReader();
+      readerImg.readAsDataURL(this.img); //   readerImg.onload = event => {
+      //     console.log(event.target.result);
+      //     this.img = event.target;
+      //   };
+    },
     saveNewRefuge: function saveNewRefuge() {
-      var formData = {
-        name: this.name,
-        description: this.description,
-        lat: this.lat,
-        lng: this.lng,
-        road: this.refuge.road,
-        city: this.refuge.city,
-        postcode: this.refuge.postcode,
-        house_number: this.refuge.house_number,
-        country: this.refuge.country,
-        state: this.refuge.state
-      };
-      axios.post("/api/refuges/", formData).then(function (response) {
+      var formData = new FormData();
+      formData.append("img", this.img);
+      var config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }; //   let formData1 = {
+      //     name: this.name,
+      //     description: this.description,
+      //     lat: this.lat,
+      //     lng: this.lng,
+      //     road: this.refuge.road,
+      //     city: this.refuge.city,
+      //     postcode: this.refuge.postcode,
+      //     house_number: this.refuge.house_number,
+      //     country: this.refuge.country,
+      //     state: this.refuge.state,
+      //     img: this.img
+      //   };
+
+      axios.post("/api/refuges/", formData, config).then(function (response) {
         return console.log(response);
       });
     }
@@ -54394,6 +54390,14 @@ var render = function() {
       "div",
       { staticClass: "card-body" },
       [
+        _c("label", { attrs: { for: "image" } }, [_vm._v("Logo")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "file", name: "image", id: "image" },
+          on: { change: _vm.upload }
+        }),
+        _vm._v(" "),
         _c("label", { attrs: { for: "name" } }, [_vm._v("Nom")]),
         _vm._v(" "),
         _c("input", {
@@ -54460,13 +54464,7 @@ var render = function() {
                   staticClass: "form-check-label",
                   attrs: { for: "exampleRadios1" }
                 },
-                [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(type.name) +
-                      "\n                "
-                  )
-                ]
+                [_vm._v(_vm._s(type.name))]
               )
             ])
           ])
@@ -77565,7 +77563,7 @@ var findRealParent = function (firstVueParent) {
 /*!***********************************************************!*\
   !*** ./node_modules/vue2-leaflet/dist/vue2-leaflet.es.js ***!
   \***********************************************************/
-/*! exports provided: CircleMixin, ControlMixin, GridLayerMixin, ImageOverlayMixin, InteractiveLayerMixin, LayerMixin, LayerGroupMixin, OptionsMixin, PathMixin, PolygonMixin, PolylineMixin, PopperMixin, TileLayerMixin, TileLayerWMSMixin, LCircle, LCircleMarker, LControl, LControlAttribution, LControlLayers, LControlScale, LControlZoom, LFeatureGroup, LGeoJson, LGridLayer, LIcon, LIconDefault, LImageOverlay, LLayerGroup, LMap, LMarker, LPolygon, LPolyline, LPopup, LRectangle, LTileLayer, LTooltip, LWMSTileLayer, debounce, capitalizeFirstLetter, propsBinder, collectionCleaner, optionsMerger, findRealParent */
+/*! exports provided: debounce, capitalizeFirstLetter, propsBinder, collectionCleaner, optionsMerger, findRealParent, CircleMixin, ControlMixin, GridLayerMixin, ImageOverlayMixin, InteractiveLayerMixin, LayerMixin, LayerGroupMixin, OptionsMixin, PathMixin, PolygonMixin, PolylineMixin, PopperMixin, TileLayerMixin, TileLayerWMSMixin, LCircle, LCircleMarker, LControl, LControlAttribution, LControlLayers, LControlScale, LControlZoom, LFeatureGroup, LGeoJson, LGridLayer, LIcon, LIconDefault, LImageOverlay, LLayerGroup, LMap, LMarker, LPolygon, LPolyline, LPopup, LRectangle, LTileLayer, LTooltip, LWMSTileLayer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78744,8 +78742,8 @@ var geoFindMe = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/FactoriaF5/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/PdaBullying/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/PdaBullying/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

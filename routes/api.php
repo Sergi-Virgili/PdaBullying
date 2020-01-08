@@ -39,4 +39,10 @@ Route::namespace('Api')->group(function(){
     Route::get('/maps/attach/{refugeId}','MapController@attachRefuge');
     Route::get('/maps/detach/{refugeId}','MapController@detachRefuge');
     Route::patch('/maps/{mapId}', 'MapController@updateProperties');
+
+    //Image
+    Route::post('/images','ImageController@store');
+    Route::get('/images','ImageController@index');
+    Route::get('/images/{resource}','ImageController@show');
+    Route::delete('/images/{resource}','ImageController@destroy');
 });
