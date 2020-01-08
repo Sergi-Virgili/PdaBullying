@@ -2,14 +2,16 @@
   <div>
     <div class="map-wraper">
       <div class="card">
-        <div class="card-header">
+
+        <!-- TOOLS COMPONENT -->
+        <!-- <div class="card-header">
           <button class="btn btn-success" @click="fetchData">PDA mapa</button>
           <button class="btn btn-success" @click="OnClickMyMap">Mi mapa</button>
           <button class="btn btn-success" @click="newRefuge">+ Add Place</button>
           <button class="btn btn-success" @click="optionsMyMap">Map Options</button>
           <button class="btn btn-success" @click="geo">Geo</button>
           <button class="btn btn-success" @click="OpenSearcher">Buscar</button>
-        </div>
+        </div> -->
         <div class="card-body">
           <l-map
             class="map"
@@ -55,7 +57,7 @@
           </l-map>
         </div>
       </div>
-      <section class="sider" v-if="sider">
+      <!-- <section class="sider" v-if="sider">
         <refuge-component
           v-if="sider == 'refuge'"
           class="refugeSider"
@@ -77,9 +79,9 @@
           class="refugeSider"
         ></mapOptions-component>
         <mapSearch-component v-if="sider == 'mapSearch'" class="refugeSider"></mapSearch-component>
-      </section>
+      </section> -->
     </div>
-    <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
+    <!-- <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component> -->
   </div>
 </template>
 
@@ -206,20 +208,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .map {
-  //width: 100%;
-  height: 400px;
+  width: 100%;
+  height: 100%;
   //background-color: grey;
 }
 .sider {
   //width: 40%;
-  height: 100%;
+  //height: 100%;
 }
 .map-wraper {
   //background-color: red;
   width: 100%;
-  display: grid;
-  gap: 1em;
-  grid-template-columns: 2fr 1fr;
+  height: 100%;
+  //display: grid;
+ // gap: 1em;
+ // grid-template-columns: 2fr 1fr;
 }
 .popUp {
   display: flex;

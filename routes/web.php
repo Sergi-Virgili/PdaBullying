@@ -22,6 +22,9 @@ Route::get('/map/{map}', 'HomeController@iframe')->name('iframe');
 
 Route::get('/admin/publicar', 'HomeController@publish')->name('publish');
 
-Auth::routes();
+// Route::any('{all}', function () {
+//     return view('spa');
+// })->where(['all' => '.*']);
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+

@@ -5,9 +5,32 @@
  */
 
 require("./bootstrap");
+require("./bootstrap");
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import { Icon } from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+delete Icon.Default.prototype._getIconUrl;
+
+Icon.Default.mergeOptions({
+    iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+    iconUrl: require("leaflet/dist/images/marker-icon.png"),
+    shadowUrl: require("leaflet/dist/images/marker-shadow.png")
+});
+
+// this part resolve an issue where the markers would not appear
+delete Icon.Default.prototype._getIconUrl;
+
+Icon.Default.mergeOptions({
+    iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+    iconUrl: require("leaflet/dist/images/marker-icon.png"),
+    shadowUrl: require("leaflet/dist/images/marker-shadow.png")
+});
 
 window.Vue = require("vue");
 import Vuetify from "../plugins/vuetify";
+import router from "./routes"
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -23,6 +46,56 @@ Vue.component(
     "app-container",
     require("./components/appContainer.vue").default
 );
+Vue.component(
+    "mapcomponent",
+    require("./components/map-component.vue").default
+);
+Vue.component(
+    "pdaMap",
+    require("./views/pdaMap.vue").default
+);
+Vue.component(
+    "map-component",
+    require("./components/map-component.vue").default
+);
+Vue.component(
+    "refuge-component",
+    require("./components/refuge-component.vue").default
+);
+Vue.component(
+    "refugeList-component",
+    require("./components/refugeList-component.vue").default
+);
+Vue.component(
+    "refugeNew-component",
+    require("./components/refugeNew-component.vue").default
+);
+Vue.component(
+    "publish-component",
+    require("./components/publish-component.vue").default
+);
+Vue.component(
+    "publicMap-component",
+    require("./components/publicMap-component.vue").default
+);
+Vue.component(
+    "iframe-component",
+    require("./components/iframe-component.vue").default
+);
+
+Vue.component(
+    "mapOptions-component",
+    require("./components/mapOptions-component.vue").default
+);
+
+Vue.component(
+    "createType-component",
+    require("./components/createTypes-component.vue").default
+);
+Vue.component(
+    "mapSearch-component",
+    require("./components/mapSearch-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31,6 +104,7 @@ Vue.component(
  */
 
 const app = new Vue({
+    router,
     vuetify: Vuetify,
-    el: "#app"
+    el: "#app",
 });

@@ -21,11 +21,20 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <script>
+        window.Laravel = {!! json_encode([
+            'siteName' => config('app.name'),
+            'siteUrl' => config('app.url'),
+            'apiUrl' => config('app.url') . '/api'
+        ]) !!};
+    </script> --}}
 </head>
 <body>
     <div id="app">
         <app-container></app-container>
-
+        {{-- <publicMap-component></publicMap-component> --}}
+        {{-- <map-component></map-component> --}}
     </div>
+    <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>
