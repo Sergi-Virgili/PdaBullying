@@ -1,6 +1,5 @@
 <template>
   <section class="publishTable row">
-    
     <table class="table table-hover col-md-6">
       <thead>
         <tr>

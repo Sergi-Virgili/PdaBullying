@@ -6,16 +6,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+   
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('iframe');
     }
-
     /**
      * Show the application dashboard.
      *
@@ -25,4 +20,11 @@ class HomeController extends Controller
     {
         return view('spa');
     }
+    public function publish()
+    {
+        return view('admin.publish');
+    }
+    public function iframe() {
+        return view('iframe');  
+    } 
 }

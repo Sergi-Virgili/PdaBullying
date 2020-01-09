@@ -5,10 +5,12 @@
  */
 
 require("./bootstrap");
-require("./bootstrap");
+
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import Vuetify from "../plugins/vuetify";
+import router from "./routes"
 
 delete Icon.Default.prototype._getIconUrl;
 
@@ -28,8 +30,7 @@ Icon.Default.mergeOptions({
 });
 
 window.Vue = require("vue");
-import Vuetify from "../plugins/vuetify";
-import router from "./routes"
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -95,6 +96,10 @@ Vue.component(
 Vue.component(
     "mapSearch-component",
     require("./components/mapSearch-component.vue").default
+);
+Vue.component(
+    "app-container-publish",
+    require("./components/appContainerPublish.vue").default
 );
 
 /**

@@ -1,7 +1,8 @@
 <template>
-  <div>
+  
     <div class="map-wraper">
-      <div class="card">
+      
+      <div class="">
 
         <!-- TOOLS COMPONENT -->
         <!-- <div class="card-header">
@@ -12,7 +13,7 @@
           <button class="btn btn-success" @click="geo">Geo</button>
           <button class="btn btn-success" @click="OpenSearcher">Buscar</button>
         </div> -->
-        <div class="card-body">
+        <div class="">
           <l-map
             class="map"
             :noBlockingAnimations="animation"
@@ -55,6 +56,27 @@
               </l-marker>
             </div>
           </l-map>
+          <v-navigation-drawer
+        v-model="drawerRight"
+        right
+        absolute
+        temporary
+        
+        style="z-index:9999;"
+        >
+        <refuge-component
+          v-if="sider == 'refuge'"
+          class="refugeSider"
+          :refugeSelected="refugeSelected"
+          @attachRefuge="attachRefuge"
+          @detachRefuge="detachRefuge"
+        ></refuge-component>
+        <refugeNew-component
+          v-if="sider == 'newRefuge'"
+          :newGeoMarker="newGeoMarker"
+          class="refugeSider"
+        ></refugeNew-component>
+        </v-navigation-drawer>
         </div>
       </div>
       <!-- <section class="sider" v-if="sider">
@@ -80,9 +102,11 @@
         ></mapOptions-component>
         <mapSearch-component v-if="sider == 'mapSearch'" class="refugeSider"></mapSearch-component>
       </section> -->
+    
     </div>
+    
     <!-- <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component> -->
-  </div>
+ 
 </template>
 
 <script>
@@ -119,7 +143,9 @@ export default {
         iconUrl: "img/icons8-marker-16.png",
         iconSize: [30, 30]
         //iconAnchor: [16, 37]
-      })
+      }),
+      drawerRight: false,
+      
     };
   },
   created() {
@@ -163,15 +189,14 @@ export default {
     OnClickRefuge(index, geoMarker) {
       this.selectRefuge(index);
       this.centerMap(geoMarker);
+      this.drawerRight = true;
     },
     selectRefuge(index) {
       this.openSider("refuge");
       this.refugeSelected = this.refuges[index];
       console.log(this.refuges[index]);
     },
-    test(params) {
-      alert(params);
-    },
+    
     OnClickMyMap() {
       this.fetchMyRefuges();
     },
@@ -183,6 +208,8 @@ export default {
     OnClickPosition(event) {
       this.openSider("newRefuge");
       this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
+      this.centerMap(this.newGeoMarker)
+      this.drawerRight = true
       let refuge = {};
       refuge.geoMarker = this.newGeoMarker;
       this.refuges.push(refuge);
@@ -208,7 +235,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .map {
-  width: 100%;
+ // width: 100%;
   height: 100%;
   //background-color: grey;
 }
@@ -218,8 +245,8 @@ export default {
 }
 .map-wraper {
   //background-color: red;
-  width: 100%;
-  height: 100%;
+ // width: 100%;
+ // height: 100%;
   //display: grid;
  // gap: 1em;
  // grid-template-columns: 2fr 1fr;
