@@ -97,6 +97,11 @@ Vue.component(
     require("./components/mapSearch-component.vue").default
 );
 
+Vue.component(
+    "toolsbar-component",
+    require("./components/toolsbar-component.vue").default
+);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
