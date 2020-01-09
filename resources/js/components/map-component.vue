@@ -15,6 +15,7 @@
         </div> -->
         <div class="">
           <l-map
+          style="z-index:1;"
             class="map"
             :noBlockingAnimations="animation"
             :zoom="zoom"
@@ -62,7 +63,7 @@
         absolute
         temporary
         
-        style="z-index:9999;"
+        
         >
         <refuge-component
           v-if="sider == 'refuge'"
@@ -78,6 +79,23 @@
         ></refugeNew-component>
         </v-navigation-drawer>
         </div>
+        <v-bottom-sheet v-model="mode.list">
+         <template v-slot:activator="{ on }">
+        <v-btn
+          color="purple"
+          dark
+          v-on="on"
+        >
+          Lista
+        </v-btn>
+        </template>
+        <v-content>
+          <v-card>
+            <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
+          </v-card>
+        </v-content>
+       
+        </v-bottom-sheet>
       </div>
       <!-- <section class="sider" v-if="sider">
         <refuge-component
@@ -145,6 +163,9 @@ export default {
         //iconAnchor: [16, 37]
       }),
       drawerRight: false,
+      mode: {
+        list : false
+      }
       
     };
   },
