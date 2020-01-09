@@ -30,7 +30,11 @@ Route::namespace('Api')->group(function(){
     Route::put('/users/{id}', 'UserController@update');
     //Type
 
-    Route::resource('/types', 'TypeController', ['except'=>'edit']);
+    Route::get('/types','Typecontroller@index');
+    Route::post('/types', 'Typecontroller@store');
+    Route::delete('/types/{type}','Typecontroller@destroy');
+    Route::put('/types/{type}','Typecontroller@update');
+    
     Route::patch('/refuges/publish','RefugeController@publish');
     Route::patch('/refuges/hidde','RefugeController@hidde');
 

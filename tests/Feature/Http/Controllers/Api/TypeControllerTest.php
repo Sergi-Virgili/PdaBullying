@@ -79,7 +79,7 @@ class TypeControllerTest extends TestCase
      * @test
      */
     public function willFailWith404IfTypeNotFound(){
-        $response = $this->json('GET', 'api/types/-1');
+        $response = $this->json('get', '/types/-5');
 
         $response->assertStatus(404);
     }
@@ -95,7 +95,7 @@ class TypeControllerTest extends TestCase
         
         $type = $this->create('Type');
 
-        $response = $this->json('GET', "api/types/$type->id");
+        $response = $this->json('GET', "api/types");
 
         $response->assertStatus(200);
     }  
@@ -106,7 +106,7 @@ class TypeControllerTest extends TestCase
      * @test
      */
     public function willGet404IfTypeWeWantUpdateNotExists(){
-        $response = $this->json('PUT', 'api/types/-1');
+        $response = $this->json('put', '/types/-1');
 
         $response->assertStatus(404);
     }

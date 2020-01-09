@@ -14,8 +14,9 @@ class TypeController extends Controller
 
     public function index()
     {
-        return new TypeCollection(Type::paginate());
+        return $types = new TypeCollection(Type::paginate());
     }
+
     public function store(Request $request)
     {
         try
@@ -49,9 +50,8 @@ class TypeController extends Controller
         $type->update([
             'name' => $request->name,
             'description' => $request->description
-
         ]);
-        
+        $type->save();
         return response()->json(new TypeResource($type));
     }
 
