@@ -26,7 +26,7 @@ export default {
                 zoom: this.newZoom,
                 center: this.newCenter
             }
-            axios.patch('/api/maps/1',).then(response => {
+            axios.patch('/api/maps/1', data).then(response => {
                 console.log(response)
             })
         }
