@@ -31,9 +31,10 @@
 </head>
 <body>
     <div id="app">
-        <app-container></app-container>
-        {{-- <publicMap-component></publicMap-component> --}}
-        {{-- <map-component></map-component> --}}
+        <!-- <app-container></app-container> -->
+       
+        <box-component></box-component> 
+
     </div>
     <script src="{{ mix('/js/app.js') }}"></script>
 </body>

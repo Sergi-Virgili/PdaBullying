@@ -27,9 +27,9 @@ Icon.Default.mergeOptions({
     shadowUrl: require("leaflet/dist/images/marker-shadow.png")
 });
 
-window.Vue = require("vue");
 import Vuetify from "../plugins/vuetify";
-import router from "./routes"
+import router from "./routes";
+window.Vue = require("vue");
 
 /**
  * The following block of code may be used to automatically register your
@@ -50,10 +50,7 @@ Vue.component(
     "mapcomponent",
     require("./components/map-component.vue").default
 );
-Vue.component(
-    "pdaMap",
-    require("./views/pdaMap.vue").default
-);
+Vue.component("pdaMap", require("./views/pdaMap.vue").default);
 Vue.component(
     "map-component",
     require("./components/map-component.vue").default
@@ -97,6 +94,10 @@ Vue.component(
     require("./components/mapSearch-component.vue").default
 );
 
+Vue.component(
+    "box-component",
+    require("./components/box-component.vue").default
+);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -106,5 +107,5 @@ Vue.component(
 const app = new Vue({
     router,
     vuetify: Vuetify,
-    el: "#app",
+    el: "#app"
 });
