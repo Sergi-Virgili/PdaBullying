@@ -101,6 +101,10 @@ Vue.component(
     "app-container-publish",
     require("./components/appContainerPublish.vue").default
 );
+Vue.component(
+    "toolsbar-component",
+    require("./components/toolsbar-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -3,7 +3,21 @@
     <div class="map-wraper">
       
       <div class="">
-
+        <v-navigation-drawer
+        style="z-index:2"
+        color = 'rgba(255, 255, 255, 1'
+        floating
+        permanent
+        absolute
+        :mini-variant="true"
+        :mini-variant-width="50"
+        
+      >
+        <toolsbar-component
+          @addRefugeMode="addRefugeMode"
+        >
+        </toolsbar-component>
+        </v-navigation-drawer>
         <!-- TOOLS COMPONENT -->
         <!-- <div class="card-header">
           <button class="btn btn-success" @click="fetchData">PDA mapa</button>
@@ -27,13 +41,16 @@
           >
             <l-tile-layer :url="url" />
             <div v-for="(refuge, index) in refuges" :key="index">
+              
               <l-marker
+                
                 class="marker"
                 v-if="refuge.is_Public"
                 :lat-lng="refuge.geoMarker"
                 :icon="icon"
                 @click="OnClickRefuge(index, refuge.geoMarker)"
               >
+              
                 <l-popup>
                   <div class="popUp">
                     <img :src="refuge.logoUrl" alt />
@@ -41,6 +58,7 @@
                   </div>
                 </l-popup>
               </l-marker>
+              
               <l-marker
                 class="marker"
                 v-if="!refuge.is_Public"
@@ -164,7 +182,8 @@ export default {
       }),
       drawerRight: false,
       mode: {
-        list : false
+        list : false,
+        addRefuge: false
       }
       
     };
@@ -174,6 +193,11 @@ export default {
     this.fetchMyMap();
   },
   methods: {
+    addRefugeMode() {
+      //TODO CHANGE CURSOS IN MAP
+      this.mode.addRefuge = true
+      
+    },
     fetchMyMap() {
       axios.get("/api/maps/1").then(response => {
         this.myMapCenter = response.data.center;
@@ -227,13 +251,16 @@ export default {
       });
     },
     OnClickPosition(event) {
+      if (!this.mode.addRefuge) {return null}
       this.openSider("newRefuge");
       this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
       this.centerMap(this.newGeoMarker)
+      this.mode.addRefuge = false
       this.drawerRight = true
       let refuge = {};
       refuge.geoMarker = this.newGeoMarker;
       this.refuges.push(refuge);
+      
     },
     openSider(sider) {
       this.sider = sider;
