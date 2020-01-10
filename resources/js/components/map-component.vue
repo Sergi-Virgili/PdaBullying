@@ -2,7 +2,7 @@
   
     <div class="map-wraper">
       
-      <div class="">
+     
         <v-navigation-drawer
         style="z-index:2"
         color = 'rgba(255, 255, 255, 1'
@@ -114,7 +114,7 @@
         </v-content>
        
         </v-bottom-sheet>
-      </div>
+     
       <!-- <section class="sider" v-if="sider">
         <refuge-component
           v-if="sider == 'refuge'"
@@ -229,7 +229,7 @@ export default {
 
     centerMap(geoMarker) {
       this.center = geoMarker;
-      //console.log(geoMarker);
+    
     },
     OnClickRefuge(index, geoMarker) {
       this.selectRefuge(index);
@@ -283,9 +283,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .map {
- // width: 100%;
+  width: 100%;
   height: 100%;
   //background-color: grey;
+}
+.leaflet-container {
+  height: 100%;
 }
 .sider {
   //width: 40%;
@@ -294,7 +297,7 @@ export default {
 .map-wraper {
   //background-color: red;
  // width: 100%;
- // height: 100%;
+  height: 100%;
   //display: grid;
  // gap: 1em;
  // grid-template-columns: 2fr 1fr;

@@ -157,7 +157,5 @@ export default {
 };
 </script>
 <style scoped>
-    .map {
-        z-index: -1;
-    }
+    
 </style>
