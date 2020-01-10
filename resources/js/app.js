@@ -73,9 +73,20 @@ Vue.component(
 );
 
 Vue.component(
-    "createType-component",
-    require("./components/createTypes-component.vue").default
+    "createtype-component",
+    require("./components/createtype-component.vue").default
 );
+
+Vue.component(
+    "type-component",
+    require("./components/type-component.vue").default
+);
+
+Vue.component(
+    "crudtype-component",
+    require("./components/crudtype-component.vue").default
+);
+
 Vue.component(
     "mapSearch-component",
     require("./components/mapSearch-component.vue").default

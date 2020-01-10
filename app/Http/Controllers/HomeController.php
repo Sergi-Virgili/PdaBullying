@@ -32,4 +32,8 @@ class HomeController extends Controller
     public function iframe() {
         return view('iframe');  
     } 
+    
+    public function types() {
+        return view('admin.type');  
+    } 
 }
