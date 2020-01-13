@@ -12,20 +12,28 @@ class TypeSeeder extends Seeder
     public function run()
     {
         DB::table('types')->insert([
-            'name'=> 'resource1',
-            'description'=> 'description1',
+            'name'=> 'Prevención',
            ]);
         DB::table('types')->insert([
-            'name'=> 'resource2',
-            'description'=> 'description2',
+            'name'=> 'Detección',
            ]);
         DB::table('types')->insert([
-            'name'=> 'resource3',
-            'description'=> 'description3',
+            'name'=> 'Actuación',
            ]);
         DB::table('types')->insert([
-            'name'=> 'resource4',
-            'description'=> 'description4',
+            'name'=> 'Centro Educativo',
+           ]);
+        DB::table('types')->insert([
+            'name'=> 'Actividad / Proyecto',
+            
+           ]);
+        DB::table('types')->insert([
+            'name'=> 'Equipamiento',
+            
+           ]);
+        DB::table('types')->insert([
+            'name'=> 'Red Comunitaria',
+            
     
             ]);
     }

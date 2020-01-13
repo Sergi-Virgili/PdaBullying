@@ -11,7 +11,7 @@
                         <v-list-item-title>Home</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item :to="{name:'pdaMap'}" link>
+                <v-list-item :to="{name:'map'}" link>
                     
                     <v-list-item-action>
                         <v-icon>fa-map-marker-alt</v-icon>
@@ -120,6 +120,7 @@
             <v-container class="full-height" fluid>
                 <v-row align="center" justify="center">
                     <v-col class="text-center"> 
+                        <!-- <router-view></router-view> -->
                         <map-component class="map"></map-component>
                     
                       

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div id="app">
     
-        <map-component></map-component>
+        <app-container />
    
 </div>
 @endsection

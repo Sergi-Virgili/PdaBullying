@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Type extends Model
 {
-    protected $fillable = ["name", "description"];
+    protected $fillable = ["name"];
     protected $guarded = ['id'];
+    
+    public function refuges() {
+        return $this->belongsToMany(Refuge::class);
+    }
 }

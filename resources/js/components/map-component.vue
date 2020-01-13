@@ -152,6 +152,7 @@ import geoFindMe from "../services/geolocationService";
 import { LatLng, icon } from "leaflet";
 
 export default {
+  name: 'map-component',
   components: {
     LMap,
     LTileLayer,

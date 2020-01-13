@@ -5,12 +5,14 @@
  */
 
 require("./bootstrap");
-
+import Vue from "vue"
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Vuetify from "../plugins/vuetify";
-import router from "./routes"
+import VueRouter from "vue-router"
+import { routes } from "./routes"
+import MainApp from "./components/MainApp.vue"
 
 delete Icon.Default.prototype._getIconUrl;
 
@@ -29,9 +31,14 @@ Icon.Default.mergeOptions({
     shadowUrl: require("leaflet/dist/images/marker-shadow.png")
 });
 
-window.Vue = require("vue");
+//window.Vue = require("vue");
+Vue.use(VueRouter);
+//Vue.use(Vuex);
 
-
+const router = new VueRouter({
+    router,
+    mode: 'history'
+})
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -120,4 +127,7 @@ const app = new Vue({
     router,
     vuetify: Vuetify,
     el: "#app",
+    components: {
+        LMap, LTileLayer, LMarker, MainApp
+    }
 });
