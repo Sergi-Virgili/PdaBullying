@@ -1,38 +1,40 @@
 <template>
-    <v-app>
-        <v-card fluid>
-            <v-list dense>
-                <v-list-item>
-                    <v-checkbox
-                        color="grey"
-                        v-model="selected"
-                        label="Type1"
-                        value="Type1"
-                    ></v-checkbox>
-                </v-list-item>
-                <v-list-item>
-                    <v-checkbox
-                        color="grey"
-                        v-model="selected"
-                        label="Type2"
-                        value="Type2"
-                    ></v-checkbox>
-                </v-list-item>
-            </v-list>
-        </v-card>
-    </v-app>
+  <v-app>
+    <v-list dense>
+      <v-list-item v-for="item in items" :key="item.id">
+        <v-checkbox color="grey" height="1px"></v-checkbox>
+        <span>{{item.name}}</span>
+      </v-list-item>
+    </v-list>
+  </v-app>
 </template>
 
 <script>
 export default {
-    data() {
-        return {};
+  data() {
+    return {
+      items: []
+    };
+  },
+  created() {
+    this.fetchItem();
+  },
+  methods: {
+    fetchItem() {
+      axios.get("/api/types/").then(response => {
+        this.items = response.data.data;
+        console.log(response);
+      });
     }
+  }
 };
 </script>
 
 <style>
 h1 {
-    background-color: black;
+  background-color: black;
+}
+.types {
+  height: 15px;
 }
 </style>
