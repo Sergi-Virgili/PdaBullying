@@ -105,6 +105,10 @@ Vue.component(
     "toolsbar-component",
     require("./components/toolsbar-component.vue").default
 );
+Vue.component(
+    "refugeModal-component",
+    require("./components/refugeModal-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

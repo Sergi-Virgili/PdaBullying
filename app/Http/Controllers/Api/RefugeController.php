@@ -52,9 +52,10 @@ class RefugeController extends Controller
     }
 
 
-    public function show(Resource $resource)
+    public function show($refugeId)
     {
-
+        $refuge = Refuge::find($refugeId);
+        return response()->json($refuge, 201);
     }
 
 

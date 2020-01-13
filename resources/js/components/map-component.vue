@@ -138,7 +138,7 @@
         ></mapOptions-component>
         <mapSearch-component v-if="sider == 'mapSearch'" class="refugeSider"></mapSearch-component>
       </section> -->
-    
+      
     </div>
     
     <!-- <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component> -->
