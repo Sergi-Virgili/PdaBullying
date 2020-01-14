@@ -31,7 +31,7 @@
 </head>
 <body>
     <div id="app">
-        <app-container></app-container>
+        <app-container />
         {{-- <publicMap-component></publicMap-component> --}}
         {{-- <map-component></map-component> --}}
     </div>

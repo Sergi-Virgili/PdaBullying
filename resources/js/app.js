@@ -12,7 +12,10 @@ import "leaflet/dist/leaflet.css";
 import Vuetify from "../plugins/vuetify";
 import VueRouter from "vue-router"
 import { routes } from "./routes"
-import MainApp from "./components/MainApp.vue"
+// import MainApp from "./components/MainApp"
+
+import appContainer from "./components/appContainer"
+
 
 delete Icon.Default.prototype._getIconUrl;
 
@@ -36,7 +39,7 @@ Vue.use(VueRouter);
 //Vue.use(Vuex);
 
 const router = new VueRouter({
-    router,
+    routes,
     mode: 'history'
 })
 /**
@@ -50,18 +53,19 @@ const router = new VueRouter({
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+// Vue.component(
+//     "app-container",
+//     require("./components/appContainer.vue").default
+// );
 Vue.component(
-    "app-container",
-    require("./components/appContainer.vue").default
-);
-Vue.component(
-    "mapcomponent",
+    "MapComponent",
     require("./components/map-component.vue").default
 );
 Vue.component(
-    "pdaMap",
-    require("./views/pdaMap.vue").default
+    "MainApp",
+    require("./components/MainApp.vue").default
 );
+
 Vue.component(
     "map-component",
     require("./components/map-component.vue").default
@@ -128,6 +132,7 @@ const app = new Vue({
     vuetify: Vuetify,
     el: "#app",
     components: {
-        LMap, LTileLayer, LMarker, MainApp
+        
+         appContainer,
     }
 });

@@ -3,7 +3,7 @@
     <v-app id="app">
         <v-navigation-drawer v-model="drawer" app style="z-index:10000">
             <v-list dense>
-                <v-list-item link>
+                <v-list-item :to="{name:'home'}" link>
                     <v-list-item-action>
                         <v-icon>fa-home</v-icon>
                     </v-list-item-action>
@@ -11,7 +11,7 @@
                         <v-list-item-title>Home</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item :to="{name:'map'}" link>
+                <v-list-item  :to="{name:'map'}" >
                     
                     <v-list-item-action>
                         <v-icon>fa-map-marker-alt</v-icon>
@@ -22,7 +22,7 @@
                     </v-list-item-content>
                     
                 </v-list-item>
-                <v-list-item link>
+                <v-list-item :to="{name:'mymap'}" link>
                     <v-list-item-action>
                         <v-icon>mdi-home</v-icon>
                     </v-list-item-action>
@@ -30,7 +30,7 @@
                         <v-list-item-title>My Map</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link>
+                <v-list-item :to="{name:'mycode'}" link>
                     <v-list-item-action>
                         <v-icon>fa-code</v-icon>
                     </v-list-item-action>
@@ -55,7 +55,7 @@
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider></v-divider>
-                <v-list-item link>
+                <v-list-item :to="{name:'publish'}" link>
                     <v-list-item-action>
                         <v-icon>fa-bus</v-icon>
                     </v-list-item-action>
@@ -63,7 +63,7 @@
                         <v-list-item-title>Publish</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link>
+                <v-list-item :to="{name:'users'}" link>
                     <v-list-item-action>
                         <v-icon>fa-user</v-icon>
                     </v-list-item-action>
@@ -80,7 +80,7 @@
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider></v-divider>
-                <v-list-item link>
+                <v-list-item :to="{name:'profile'}" link>
                     <v-list-item-action>
                         <v-icon>fa-user-circle</v-icon>
                     </v-list-item-action>
@@ -120,8 +120,8 @@
             <v-container class="full-height" fluid>
                 <v-row align="center" justify="center">
                     <v-col class="text-center"> 
-                        <!-- <router-view></router-view> -->
-                        <map-component class="map"></map-component>
+                        <MainApp />
+                        <!-- <map-component class="map"></map-component> -->
                     
                       
                     </v-col>
@@ -142,10 +142,14 @@
 </template>
 
 <script>
-
+import MainApp from "./MainApp"
 
 export default {
-    
+    name:'app-container',
+    components: {
+        MainApp
+
+    },
     props: {
         source: String
     },
