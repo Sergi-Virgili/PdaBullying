@@ -108,7 +108,7 @@
         </v-btn>
         </template>
         <v-content>
-          <v-card>
+          <v-card> 
             <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
           </v-card>
         </v-content>
@@ -173,12 +173,12 @@ export default {
       myMapCenter: "",
       myMapZoom: "",
       icon: icon({
-        iconUrl: "img/icons8-marker-30.png",
+        iconUrl: "/img/icons8-marker-30.png",
         iconSize: [30, 30]
         //iconAnchor: [16, 37]
       }),
       icon2: icon({
-        iconUrl: "img/icons8-marker-16.png",
+        iconUrl: "/img/icons8-marker-16.png",
         iconSize: [30, 30]
         //iconAnchor: [16, 37]
       }),
@@ -191,6 +191,7 @@ export default {
     };
   },
   created() {
+    this.geo();
     this.fetchData();
     this.fetchMyMap();
   },
