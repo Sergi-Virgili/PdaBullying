@@ -22,7 +22,7 @@ class CreateRefugesTable extends Migration
             $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
-            $table->integer('postcode')->nullable();
+            $table->string('postcode')->nullable();
             $table->string('house_number')->nullable();
             $table->string('road')->nullable();
             $table->double('lat');

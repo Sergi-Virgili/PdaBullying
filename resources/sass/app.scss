@@ -1,16 +1,8 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Nunito");
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import "variables";
+@import 'variables';
 
 // Bootstrap
-@import "~bootstrap/scss/bootstrap";
-
-.iframeMap {
-    height: 500px;
-    width: 600px;
-    background-color: burlywood;
-    margin: 0 auto;
-}
+@import '~bootstrap/scss/bootstrap';

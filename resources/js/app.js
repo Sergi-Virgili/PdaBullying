@@ -5,9 +5,17 @@
  */
 
 require("./bootstrap");
+import Vue from "vue"
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import Vuetify from "../plugins/vuetify";
+import VueRouter from "vue-router"
+import { routes } from "./routes"
+// import MainApp from "./components/MainApp"
+
+import appContainer from "./components/appContainer"
+
 
 delete Icon.Default.prototype._getIconUrl;
 
@@ -25,8 +33,15 @@ Icon.Default.mergeOptions({
     iconUrl: require("leaflet/dist/images/marker-icon.png"),
     shadowUrl: require("leaflet/dist/images/marker-shadow.png")
 });
-window.Vue = require("vue");
 
+//window.Vue = require("vue");
+Vue.use(VueRouter);
+//Vue.use(Vuex);
+
+const router = new VueRouter({
+    routes,
+    mode: 'history'
+})
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -37,6 +52,19 @@ window.Vue = require("vue");
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
+// Vue.component(
+//     "app-container",
+//     require("./components/appContainer.vue").default
+// );
+Vue.component(
+    "MapComponent",
+    require("./components/map-component.vue").default
+);
+Vue.component(
+    "MainApp",
+    require("./components/MainApp.vue").default
+);
 
 Vue.component(
     "map-component",
@@ -91,6 +119,18 @@ Vue.component(
     "mapSearch-component",
     require("./components/mapSearch-component.vue").default
 );
+Vue.component(
+    "app-container-publish",
+    require("./components/appContainerPublish.vue").default
+);
+Vue.component(
+    "toolsbar-component",
+    require("./components/toolsbar-component.vue").default
+);
+Vue.component(
+    "refugeModal-component",
+    require("./components/refugeModal-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -99,5 +139,11 @@ Vue.component(
  */
 
 const app = new Vue({
-    el: "#app"
+    router,
+    vuetify: Vuetify,
+    el: "#app",
+    components: {
+        
+         appContainer,
+    }
 });

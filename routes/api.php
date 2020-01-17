@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Resource API Routes
 
 Route::namespace('Api')->group(function(){
+    
     //Refuges
     Route::post('/refuges','RefugeController@store');
     Route::get('/refuges','RefugeController@index');

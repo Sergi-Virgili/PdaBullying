@@ -12,6 +12,11 @@ class Refuge extends Model
        return $this->belongsToMany(Map::class);
     }
 
+    public function types() {
+        $this->belongsToMany(Type::class);
+    }
+
+
     public static function addGeoMarkerFields($refuges) {
         foreach ($refuges as $refuge){
             $refuge['geoMarker']= [$refuge['lat'],$refuge['lng']];

@@ -54,14 +54,14 @@ class RefugeController extends Controller
         $user = User::find(1);
         $map = $user->map;
         $map->refuges()->attach($refuge->id);
-
         return response()->json($refuge, 201);
     }
 
 
-    public function show(Resource $resource)
+    public function show($refugeId)
     {
-
+        $refuge = Refuge::find($refugeId);
+        return response()->json($refuge, 201);
     }
 
 
@@ -79,7 +79,7 @@ class RefugeController extends Controller
     }
 
     public function publish(Request $request) {
-       // return $request;
+     
         $refuge = Refuge::find($request->id);
         $refuge->is_Public = true;
         $refuge->update();
@@ -87,7 +87,7 @@ class RefugeController extends Controller
     }
 
     public function hidde(Request $request) {
-        // return $request;
+       
          $refuge = Refuge::find($request->id);
          $refuge->is_Public = false;
          $refuge->update();

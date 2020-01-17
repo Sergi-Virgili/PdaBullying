@@ -1,5 +1,5 @@
 const geoFindMe = {
-    msg: "hola",
+    msg: "",
     lat: "",
     lng: "",
     geoMarker: [],

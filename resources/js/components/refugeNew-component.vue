@@ -18,15 +18,16 @@
                 id="description"
                 v-model="description"
             ></textarea>
-            <div v-for="type in types" :key="type.index">
+            <div v-for="type in types" :key="type.id">
                 <div class="form-check">
                     <input
                         class="form-check-input"
                         type="checkbox"
-                        name="exampleRadios"
-                        id="exampleRadios1"
+                        :name="type.name"
+                        :id="type.id"
+                        :value="type.id"
                     />
-                    <label class="form-check-label" for="exampleRadios1">
+                    <label class="form-check-label" :for="type.name">
                         {{ type.name }}
                     </label>
                 </div>

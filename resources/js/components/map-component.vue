@@ -1,17 +1,35 @@
 <template>
-  <div>
+  
     <div class="map-wraper">
-      <div class="card">
-        <div class="card-header">
+      
+     
+        <v-navigation-drawer
+        style="z-index:2"
+        color = 'rgba(255, 255, 255, 1'
+        floating
+        permanent
+        absolute
+        :mini-variant="true"
+        :mini-variant-width="50"
+        
+      >
+        <toolsbar-component
+          @addRefugeMode="addRefugeMode"
+        >
+        </toolsbar-component>
+        </v-navigation-drawer>
+        <!-- TOOLS COMPONENT -->
+        <!-- <div class="card-header">
           <button class="btn btn-success" @click="fetchData">PDA mapa</button>
           <button class="btn btn-success" @click="OnClickMyMap">Mi mapa</button>
           <button class="btn btn-success" @click="newRefuge">+ Add Place</button>
           <button class="btn btn-success" @click="optionsMyMap">Map Options</button>
           <button class="btn btn-success" @click="geo">Geo</button>
           <button class="btn btn-success" @click="OpenSearcher">Buscar</button>
-        </div>
-        <div class="card-body">
+        </div> -->
+        <div class="">
           <l-map
+          style="z-index:1;"
             class="map"
             :noBlockingAnimations="animation"
             :zoom="zoom"
@@ -23,13 +41,16 @@
           >
             <l-tile-layer :url="url" />
             <div v-for="(refuge, index) in refuges" :key="index">
+              
               <l-marker
+                
                 class="marker"
                 v-if="refuge.is_Public"
                 :lat-lng="refuge.geoMarker"
                 :icon="icon"
                 @click="OnClickRefuge(index, refuge.geoMarker)"
               >
+              
                 <l-popup>
                   <div class="popUp">
                     <img :src="refuge.logoUrl" alt />
@@ -37,6 +58,7 @@
                   </div>
                 </l-popup>
               </l-marker>
+              
               <l-marker
                 class="marker"
                 v-if="!refuge.is_Public"
@@ -53,9 +75,47 @@
               </l-marker>
             </div>
           </l-map>
+          <v-navigation-drawer
+        v-model="drawerRight"
+        right
+        absolute
+        temporary
+        
+        
+        >
+        <refuge-component
+          v-if="sider == 'refuge'"
+          class="refugeSider"
+          :refugeSelected="refugeSelected"
+          @attachRefuge="attachRefuge"
+          @detachRefuge="detachRefuge"
+        ></refuge-component>
+        <refugeNew-component
+          v-if="sider == 'newRefuge'"
+          :newGeoMarker="newGeoMarker"
+          class="refugeSider"
+        ></refugeNew-component>
+        </v-navigation-drawer>
         </div>
-      </div>
-      <section class="sider" v-if="sider">
+        <v-bottom-sheet v-model="mode.list">
+         <template v-slot:activator="{ on }">
+        <v-btn
+          color="purple"
+          dark
+          v-on="on"
+        >
+          Lista
+        </v-btn>
+        </template>
+        <v-content>
+          <v-card>
+            <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
+          </v-card>
+        </v-content>
+       
+        </v-bottom-sheet>
+     
+      <!-- <section class="sider" v-if="sider">
         <refuge-component
           v-if="sider == 'refuge'"
           class="refugeSider"
@@ -77,10 +137,12 @@
           class="refugeSider"
         ></mapOptions-component>
         <mapSearch-component v-if="sider == 'mapSearch'" class="refugeSider"></mapSearch-component>
-      </section>
+      </section> -->
+      
     </div>
-    <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
-  </div>
+    
+    <!-- <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component> -->
+ 
 </template>
 
 <script>
@@ -90,6 +152,7 @@ import geoFindMe from "../services/geolocationService";
 import { LatLng, icon } from "leaflet";
 
 export default {
+  name: 'map-component',
   components: {
     LMap,
     LTileLayer,
@@ -117,7 +180,13 @@ export default {
         iconUrl: "img/icons8-marker-16.png",
         iconSize: [30, 30]
         //iconAnchor: [16, 37]
-      })
+      }),
+      drawerRight: false,
+      mode: {
+        list : false,
+        addRefuge: false
+      }
+      
     };
   },
   created() {
@@ -125,6 +194,11 @@ export default {
     this.fetchMyMap();
   },
   methods: {
+    addRefugeMode() {
+      //TODO CHANGE CURSOS IN MAP
+      this.mode.addRefuge = true
+      
+    },
     fetchMyMap() {
       axios.get("/api/maps/1").then(response => {
         this.myMapCenter = response.data.center;
@@ -156,20 +230,19 @@ export default {
 
     centerMap(geoMarker) {
       this.center = geoMarker;
-      //console.log(geoMarker);
+    
     },
     OnClickRefuge(index, geoMarker) {
       this.selectRefuge(index);
       this.centerMap(geoMarker);
+      this.drawerRight = true;
     },
     selectRefuge(index) {
       this.openSider("refuge");
       this.refugeSelected = this.refuges[index];
       console.log(this.refuges[index]);
     },
-    test(params) {
-      alert(params);
-    },
+    
     OnClickMyMap() {
       this.fetchMyRefuges();
     },
@@ -179,11 +252,16 @@ export default {
       });
     },
     OnClickPosition(event) {
+      if (!this.mode.addRefuge) {return null}
       this.openSider("newRefuge");
       this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
+      this.centerMap(this.newGeoMarker)
+      this.mode.addRefuge = false
+      this.drawerRight = true
       let refuge = {};
       refuge.geoMarker = this.newGeoMarker;
       this.refuges.push(refuge);
+      
     },
     openSider(sider) {
       this.sider = sider;
@@ -206,20 +284,24 @@ export default {
 </script>
 <style lang="scss" scoped>
 .map {
-  //width: 100%;
-  height: 400px;
+  width: 100%;
+  height: 100%;
   //background-color: grey;
+}
+.leaflet-container {
+  height: 100%;
 }
 .sider {
   //width: 40%;
-  height: 100%;
+  //height: 100%;
 }
 .map-wraper {
   //background-color: red;
-  width: 100%;
-  display: grid;
-  gap: 1em;
-  grid-template-columns: 2fr 1fr;
+ // width: 100%;
+  height: 100%;
+  //display: grid;
+ // gap: 1em;
+ // grid-template-columns: 2fr 1fr;
 }
 .popUp {
   display: flex;
