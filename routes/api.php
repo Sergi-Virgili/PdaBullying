@@ -20,7 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Resource API Routes
 
 Route::namespace('Api')->group(function(){
-    
+    //Auth
+    Route::post('/register','AuthController@register');
+    Route::post('/login','AuthController@login');
     //Refuges
     Route::post('/refuges','RefugeController@store');
     Route::get('/refuges','RefugeController@index');
@@ -35,7 +37,7 @@ Route::namespace('Api')->group(function(){
     Route::post('/types', 'Typecontroller@store');
     Route::delete('/types/{type}','Typecontroller@destroy');
     Route::put('/types/{type}','Typecontroller@update');
-    
+
     Route::patch('/refuges/publish','RefugeController@publish');
     Route::patch('/refuges/hidde','RefugeController@hidde');
 
