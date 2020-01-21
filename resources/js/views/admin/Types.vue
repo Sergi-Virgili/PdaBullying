@@ -1,13 +1,14 @@
 <template>
-  <h1>TYPES EDIT</h1>
+  <section>
+    <createtype-component></createtype-component>
+  </section>
 </template>
 
 <script>
 export default {
- name: 'Types'
-}
+  name: "Types"
+};
 </script>
 
 <style>
-
 </style>

@@ -1,88 +1,71 @@
 <template>
-  
-    <div class="map-wraper">
-      
-     
-        <v-navigation-drawer
-        style="z-index:2"
-        color = 'rgba(255, 255, 255, 1'
-        floating
-        permanent
-        absolute
-        :mini-variant="true"
-        :mini-variant-width="50"
-        
-      >
-        <toolsbar-component
-          @addRefugeMode="addRefugeMode"
-        >
-        </toolsbar-component>
-        </v-navigation-drawer>
-        <!-- TOOLS COMPONENT -->
-        <!-- <div class="card-header">
+  <div class="map-wraper">
+    <v-navigation-drawer
+      style="z-index:2"
+      color="rgba(255, 255, 255, 1"
+      floating
+      permanent
+      absolute
+      :mini-variant="true"
+      :mini-variant-width="50"
+    >
+      <toolsbar-component @addRefugeMode="addRefugeMode" @mapOptionsSave="updateMyMapProperties"></toolsbar-component>
+    </v-navigation-drawer>
+    <!-- TOOLS COMPONENT -->
+    <!-- <div class="card-header">
           <button class="btn btn-success" @click="fetchData">PDA mapa</button>
           <button class="btn btn-success" @click="OnClickMyMap">Mi mapa</button>
           <button class="btn btn-success" @click="newRefuge">+ Add Place</button>
           <button class="btn btn-success" @click="optionsMyMap">Map Options</button>
           <button class="btn btn-success" @click="geo">Geo</button>
           <button class="btn btn-success" @click="OpenSearcher">Buscar</button>
-        </div> -->
-        <div class="">
-          <l-map
-          style="z-index:1;"
-            class="map"
-            :noBlockingAnimations="animation"
-            :zoom="zoom"
-            :min-zoom="3"
-            :center="center"
-            @click="OnClickPosition"
-            @update:center="onMove"
-            @update:zoom="onZoom"
+    </div>-->
+    <div class>
+      <l-map
+        style="z-index:1;"
+        class="map"
+        :noBlockingAnimations="animation"
+        :zoom="zoom"
+        :min-zoom="3"
+        :center="center"
+        @click="OnClickPosition"
+        @update:center="onMove"
+        @update:zoom="onZoom"
+      >
+        <l-tile-layer :url="url" />
+        <div v-for="(refuge, index) in refuges" :key="index">
+          <l-marker
+            class="marker"
+            v-if="refuge.is_Public"
+            :lat-lng="refuge.geoMarker"
+            :icon="icon"
+            @click="OnClickRefuge(index, refuge.geoMarker)"
           >
-            <l-tile-layer :url="url" />
-            <div v-for="(refuge, index) in refuges" :key="index">
-              
-              <l-marker
-                
-                class="marker"
-                v-if="refuge.is_Public"
-                :lat-lng="refuge.geoMarker"
-                :icon="icon"
-                @click="OnClickRefuge(index, refuge.geoMarker)"
-              >
-              
-                <l-popup>
-                  <div class="popUp">
-                    <img :src="refuge.logoUrl" alt />
-                    <div>{{ refuge.name }}</div>
-                  </div>
-                </l-popup>
-              </l-marker>
-              
-              <l-marker
-                class="marker"
-                v-if="!refuge.is_Public"
-                :lat-lng="refuge.geoMarker"
-                :icon="icon2"
-                @click="OnClickRefuge(index, refuge.geoMarker)"
-              >
-                <l-popup>
-                  <div class="popUp">
-                    <img :src="refuge.logoUrl" alt />
-                    <div>{{ refuge.name }}</div>
-                  </div>
-                </l-popup>
-              </l-marker>
-            </div>
-          </l-map>
-          <v-navigation-drawer
-        v-model="drawerRight"
-        right
-        absolute
-        temporary
-        
-        
-        >
+            <l-popup>
+              <div class="popUp">
+                <img :src="refuge.logoUrl" alt />
+                <div>{{ refuge.name }}</div>
+              </div>
+            </l-popup>
+          </l-marker>
+
+          <l-marker
+            class="marker"
+            v-if="!refuge.is_Public"
+            :lat-lng="refuge.geoMarker"
+            :icon="icon2"
+            @click="OnClickRefuge(index, refuge.geoMarker)"
+          >
+            <l-popup>
+              <div class="popUp">
+                <img :src="refuge.logoUrl" alt />
+                <div>{{ refuge.name }}</div>
+              </div>
+            </l-popup>
+          </l-marker>
+        </div>
+      </l-map>
+      <v-navigation-drawer v-model="drawerRight" right absolute temporary>
         <refuge-component
           v-if="sider == 'refuge'"
           class="refugeSider"
@@ -95,27 +78,20 @@
           :newGeoMarker="newGeoMarker"
           class="refugeSider"
         ></refugeNew-component>
-        </v-navigation-drawer>
-        </div>
-        <v-bottom-sheet v-model="mode.list">
-         <template v-slot:activator="{ on }">
-        <v-btn
-          color="purple"
-          dark
-          v-on="on"
-        >
-          Lista
-        </v-btn>
-        </template>
-        <v-content>
-          <v-card>
-            <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
-          </v-card>
-        </v-content>
-       
-        </v-bottom-sheet>
-     
-      <!-- <section class="sider" v-if="sider">
+      </v-navigation-drawer>
+    </div>
+    <v-bottom-sheet v-model="mode.list">
+      <template v-slot:activator="{ on }">
+        <v-btn color="purple" dark v-on="on">Lista</v-btn>
+      </template>
+      <v-content>
+        <v-card>
+          <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
+        </v-card>
+      </v-content>
+    </v-bottom-sheet>
+
+    <!-- <section class="sider" v-if="sider">
         <refuge-component
           v-if="sider == 'refuge'"
           class="refugeSider"
@@ -137,12 +113,10 @@
           class="refugeSider"
         ></mapOptions-component>
         <mapSearch-component v-if="sider == 'mapSearch'" class="refugeSider"></mapSearch-component>
-      </section> -->
-      
-    </div>
-    
-    <!-- <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component> -->
- 
+    </section>-->
+  </div>
+
+  <!-- <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component> -->
 </template>
 
 <script>
@@ -152,7 +126,7 @@ import geoFindMe from "../services/geolocationService";
 import { LatLng, icon } from "leaflet";
 
 export default {
-  name: 'map-component',
+  name: "map-component",
   components: {
     LMap,
     LTileLayer,
@@ -183,10 +157,9 @@ export default {
       }),
       drawerRight: false,
       mode: {
-        list : false,
+        list: false,
         addRefuge: false
       }
-      
     };
   },
   created() {
@@ -196,8 +169,19 @@ export default {
   methods: {
     addRefugeMode() {
       //TODO CHANGE CURSOS IN MAP
-      this.mode.addRefuge = true
-      
+      console.log("add");
+      //this.mode.addRefuge = true;
+    },
+    updateMyMapProperties() {
+      //TODO FAKET MAP ID
+      alert();
+      let data = {
+        zoom: this.newZoom,
+        center: this.newCenter
+      };
+      axios.patch("/api/maps/1", data).then(response => {
+        console.log(response);
+      });
     },
     fetchMyMap() {
       axios.get("/api/maps/1").then(response => {
@@ -230,7 +214,6 @@ export default {
 
     centerMap(geoMarker) {
       this.center = geoMarker;
-    
     },
     OnClickRefuge(index, geoMarker) {
       this.selectRefuge(index);
@@ -242,7 +225,7 @@ export default {
       this.refugeSelected = this.refuges[index];
       console.log(this.refuges[index]);
     },
-    
+
     OnClickMyMap() {
       this.fetchMyRefuges();
     },
@@ -252,16 +235,17 @@ export default {
       });
     },
     OnClickPosition(event) {
-      if (!this.mode.addRefuge) {return null}
+      if (!this.mode.addRefuge) {
+        return null;
+      }
       this.openSider("newRefuge");
       this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
-      this.centerMap(this.newGeoMarker)
-      this.mode.addRefuge = false
-      this.drawerRight = true
+      this.centerMap(this.newGeoMarker);
+      this.mode.addRefuge = false;
+      this.drawerRight = true;
       let refuge = {};
       refuge.geoMarker = this.newGeoMarker;
       this.refuges.push(refuge);
-      
     },
     openSider(sider) {
       this.sider = sider;
@@ -297,11 +281,11 @@ export default {
 }
 .map-wraper {
   //background-color: red;
- // width: 100%;
+  // width: 100%;
   height: 100%;
   //display: grid;
- // gap: 1em;
- // grid-template-columns: 2fr 1fr;
+  // gap: 1em;
+  // grid-template-columns: 2fr 1fr;
 }
 .popUp {
   display: flex;
