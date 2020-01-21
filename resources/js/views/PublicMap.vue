@@ -9,7 +9,11 @@
       :mini-variant="true"
       :mini-variant-width="50"
     >
-      <toolsbar-component @addRefugeMode="addRefugeMode" @mapOptionsSave="updateMyMapProperties"></toolsbar-component>
+      <toolsbar-component
+        @addRefugeMode="addRefugeMode"
+        @mapOptionsSave="updateMyMapProperties"
+        @geo="geo"
+      ></toolsbar-component>
     </v-navigation-drawer>
     <!-- TOOLS COMPONENT -->
     <!-- <div class="card-header">
@@ -163,7 +167,7 @@ export default {
     };
   },
   created() {
-    this.geo();
+    //this.geo();
     this.fetchData();
     this.fetchMyMap();
   },
@@ -174,7 +178,7 @@ export default {
     },
     updateMyMapProperties() {
       //TODO FAKET MAP ID
-      alert();
+      alert("El zoom y posición de tu mapa han sido modificados");
       let data = {
         zoom: this.zoom,
         center: this.center
@@ -183,10 +187,11 @@ export default {
         console.log(response);
       });
     },
+
     fetchMyMap() {
       axios.get("/api/maps/1").then(response => {
-        this.myMapCenter = response.data.center;
-        this.myMapZoom = response.data.zoom;
+        this.center = response.data.center;
+        this.zoom = response.data.zoom;
       });
     },
     OpenSearcher() {
@@ -215,11 +220,13 @@ export default {
     centerMap(geoMarker) {
       this.center = geoMarker;
     },
+
     OnClickRefuge(index, geoMarker) {
       this.selectRefuge(index);
       this.centerMap(geoMarker);
       this.drawerRight = true;
     },
+
     selectRefuge(index) {
       this.openSider("refuge");
       this.refugeSelected = this.refuges[index];
@@ -229,7 +236,9 @@ export default {
     OnClickMyMap() {
       this.fetchMyRefuges();
     },
+
     fetchMyRefuges() {
+      // TODO map user is faked
       axios.get("/api/maps/1").then(response => {
         this.refuges = response.data.refuges;
       });
@@ -243,26 +252,27 @@ export default {
       this.centerMap(this.newGeoMarker);
       this.mode.addRefuge = false;
       this.drawerRight = true;
+
       let refuge = {};
       refuge.geoMarker = this.newGeoMarker;
       this.refuges.push(refuge);
     },
     openSider(sider) {
       this.sider = sider;
-      console.log(sider);
     },
+
     newRefuge() {
       this.openSider("newRefuge");
     },
-    attachRefuge(event) {
-      alert(event);
-    },
+    // attachRefuge(event) {
+    //   alert(event);
+    // },
     detachRefuge() {
       this.fetchMyRefuges();
-    },
-    optionsMyMap() {
-      this.sider = "mapOptions";
     }
+    // optionsMyMap() {
+    //   this.sider = "mapOptions";
+    // }
   }
 };
 </script>

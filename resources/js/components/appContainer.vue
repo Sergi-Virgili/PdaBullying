@@ -17,7 +17,7 @@
             </v-list-item-action>
 
             <v-list-item-content>
-              <v-list-item-title>Public Map</v-list-item-title>
+              <v-list-item-title>Mapa PDA</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'mymap'}" link>
@@ -25,7 +25,7 @@
               <v-icon>mdi-home</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>My Map</v-list-item-title>
+              <v-list-item-title>Mi Map</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'mycode'}" link>
@@ -33,23 +33,16 @@
               <v-icon>fa-code</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>My Code</v-list-item-title>
+              <v-list-item-title>Mi Iframe</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item link>
-            <v-list-item-action>
-              <v-icon>fa-image</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>My Images</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+
           <v-list-item link>
             <v-list-item-action>
               <v-icon>fa-comment</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Contact</v-list-item-title>
+              <v-list-item-title>Contacto</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>
@@ -58,7 +51,7 @@
               <v-icon>fa-bus</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Publish</v-list-item-title>
+              <v-list-item-title>Publicar</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'users'}" link>
@@ -66,7 +59,7 @@
               <v-icon>fa-user</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Users</v-list-item-title>
+              <v-list-item-title>Usuarios</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'types'}" link>
@@ -74,7 +67,7 @@
               <v-icon>fa-map-signs</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Types</v-list-item-title>
+              <v-list-item-title>Tipos</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>
@@ -91,7 +84,7 @@
               <v-icon>fa-sign-out-alt</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Log Out</v-list-item-title>
+              <v-list-item-title>Logout</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
