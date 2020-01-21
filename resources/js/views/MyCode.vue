@@ -1,14 +1,18 @@
 <template>
-  <h1>MyCode</h1>
+  <section>
+    <h2>Tu propio Mapa en un Iframe</h2>
+    <iframe-component class="map"></iframe-component>
+  </section>
 </template>
 
 <script>
 export default {
-    name: 'MyCode'
-
-}
+  name: "MyCode"
+};
 </script>
 
 <style>
-
+.map {
+  height: 100px;
+}
 </style>
