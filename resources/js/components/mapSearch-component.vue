@@ -5,7 +5,7 @@
       <div class="form-group">
         <input class="form-control" type="text" placeholder="buscar" />
 
-        <div class="form-check" v-for="type in types">
+        <div class="form-check" v-for="(type, index) in types" :key="index">
           <input class="form-check-input" type="checkbox" value id="defaultCheck1" />
           <label class="form-check-label" for="defaultCheck1">tipo</label>
         </div>

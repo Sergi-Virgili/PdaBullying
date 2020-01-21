@@ -12,7 +12,7 @@ class RefugeControllerTest extends TestCase
     // EMPTY TABLE
     use RefreshDatabase;
     /**
-     * @test
+     *
      */
     public function can_create_refuge()
     {

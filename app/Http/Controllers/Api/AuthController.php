@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use auth;
 use App\User;
 use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
+use Laravel\Passport\ClientRepository;
+
 
 class AuthController extends Controller
 {
@@ -15,6 +19,8 @@ class AuthController extends Controller
             'email' => 'email|required|unique:users',
             'password' => 'required|confirmed'
         ]);
+
+        $validateData['password'] = bcrypt($request->password);
 
         $user = User::create($validateData);
 
@@ -32,6 +38,20 @@ class AuthController extends Controller
             'email' => 'email|required',
             'password' => 'required'
         ]);
+
+        if(!auth()->attempt($loginData)){
+
+            return response()->json(['message' => 'Error de autenticación']);
+
+
+        };
+
+        $accesToken = auth()->user()->createToken('authToken')->accessToken;
+        return response()->json(['user' => auth()->user(), 'access_token' => $accesToken]);
+
+
+
+
 
     }
 }

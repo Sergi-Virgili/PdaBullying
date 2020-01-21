@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Refuge extends Model
 {
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'created_at'];
 
     public function maps() {
        return $this->belongsToMany(Map::class);
