@@ -17,7 +17,7 @@
             </v-list-item-action>
 
             <v-list-item-content>
-              <v-list-item-title>Mapa PDA</v-list-item-title>
+              <v-list-item-title>PDA Mapa</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'mymap'}" link>
@@ -25,7 +25,7 @@
               <v-icon>mdi-home</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Mi Map</v-list-item-title>
+              <v-list-item-title>Mi Mapa</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{name:'mycode'}" link>
@@ -79,12 +79,20 @@
               <v-list-item-title>Profile</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item link @click="logout">
+          <v-list-item :to="{name:'login'}" link>
             <v-list-item-action>
               <v-icon>fa-sign-out-alt</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="{name:'register'}" link>
+            <v-list-item-action>
+              <v-icon>fa-sign-in-alt</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Register</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -134,17 +142,15 @@ export default {
     source: String
   },
   data: () => ({
-    drawer: null,
+    drawer: false,
     dialog: false
   }),
-  methods: {
-    logout() {
-      axios.post("/logout").then(response => {
-        window.location.href = "login";
-      });
-    }
-  }
+  methods: {}
 };
 </script>
-<style scoped>
+<style>
+a,
+a:hover {
+  text-decoration: none;
+}
 </style>

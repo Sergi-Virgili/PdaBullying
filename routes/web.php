@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('iframe');
-});
+// Route::get('/', function () {
+//     return view('iframe');
+// });
 
-Auth::routes();
+//Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/map/{map}', 'HomeController@iframe')->name('iframe');

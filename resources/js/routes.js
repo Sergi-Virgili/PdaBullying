@@ -7,6 +7,8 @@ import Publish from "./views/admin/Publish";
 import Users from "./views/admin/Users";
 import Types from "./views/admin/Types";
 import Profile from "./views/Profile";
+import Login from "./views/Login";
+import Register from "./views/Register";
 
 export const routes = [
     {
@@ -59,5 +61,15 @@ export const routes = [
                 name: "profile"
             }
         ]
+    },
+    {
+        path: "/login",
+        component: Login,
+        name: "login"
+    },
+    {
+        path: "/register",
+        component: Register,
+        name: "register"
     }
 ];
