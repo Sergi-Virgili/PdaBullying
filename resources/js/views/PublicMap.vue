@@ -90,7 +90,7 @@
             <i style="color:orange" class="fas fa-angle-down fa-2x"></i>
           </v-btn>
         </template>
-        <v-content class='button_list'>
+        <v-content class='button_list' style="z-index:20000000">
           <v-card class='button_list'>
             <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
           </v-card>
