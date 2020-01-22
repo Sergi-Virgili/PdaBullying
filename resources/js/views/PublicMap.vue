@@ -84,16 +84,18 @@
         ></refugeNew-component>
       </v-navigation-drawer>
     </div>
-    <v-bottom-sheet v-model="mode.list">
-      <template v-slot:activator="{ on }">
-        <v-btn color="purple" dark v-on="on">Lista</v-btn>
-      </template>
-      <v-content>
-        <v-card>
-          <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
-        </v-card>
-      </v-content>
-    </v-bottom-sheet>
+    <v-bottom-sheet v-model="mode.list" class="button_list">
+        <template v-slot:activator="{ on }">
+          <v-btn width="100%" v-on="on">
+            <i style="color:orange" class="fas fa-angle-down fa-2x"></i>
+          </v-btn>
+        </template>
+        <v-content class='button_list'>
+          <v-card class='button_list'>
+            <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
+          </v-card>
+        </v-content>
+      </v-bottom-sheet>
 
     <!-- <section class="sider" v-if="sider">
         <refuge-component
@@ -302,5 +304,8 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.button_list {
+  width: 100%;
 }
 </style>
