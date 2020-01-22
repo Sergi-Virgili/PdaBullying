@@ -15,6 +15,10 @@ class RefugesSeeder extends Seeder
             'name'=> 'Salut i educació emocional',
             'logoUrl' => 'https://pdabullying.com/uploads/2019/08/Logo-SEER-gestora_thu.png',
             'description'=> 'Prevenció, detecció i actuació davant l’assetjament entre iguals',
+            'city'=>'Barcelona',
+            'road'=>'Carretera Alfonso XIII',
+            'house_number'=>'38',
+            'email'=>'qwerty@gmail.com',
             'lat'=> 41.3876768,
             'lng'=> 2.1692590,
             'is_Public' =>true

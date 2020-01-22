@@ -61,7 +61,18 @@ class RefugeController extends Controller
 
     public function update(Request $request, Resource $resource)
     {
+        $refuge = Refuge::findOrfail($id);
 
+        $refuge->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'email'=>$request->email,
+            'city'=>$request->city,
+            'house_number'=>$request->house_number,
+            'road'=>$request->road,
+        ]);
+        $refuge->save();
+        return response()->json(new RefugeResource($refuge));
     }
 
 

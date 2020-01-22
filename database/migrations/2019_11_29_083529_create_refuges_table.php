@@ -18,6 +18,7 @@ class CreateRefugesTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('logoUrl')->nullable();
+            $table->string('email')->nullable();
             $table->string('link')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
