@@ -131,6 +131,10 @@ Vue.component(
     "refugeModal-component",
     require("./components/refugeModal-component.vue").default
 );
+Vue.component(
+    "newRefugeModal-component",
+    require("./components/newRefugeModal-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

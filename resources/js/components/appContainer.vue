@@ -124,7 +124,8 @@
         <template v-slot:activator="{ on }">
           <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
         </template>
-        <refugeModal-component></refugeModal-component>
+        <!-- <refugeModal-component></refugeModal-component> -->
+        <newRefugeModal-component></newRefugeModal-component>
       </v-dialog>
     </v-app>
   </div>
