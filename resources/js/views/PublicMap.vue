@@ -249,11 +249,13 @@ export default {
       if (!this.mode.addRefuge) {
         return null;
       }
-      this.openSider("newRefuge");
+      
+      this.$emit('dialog');
+      //this.openSider("newRefuge");
       this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
       this.centerMap(this.newGeoMarker);
       this.mode.addRefuge = false;
-      this.drawerRight = true;
+      //this.drawerRight = true;
 
       let refuge = {};
       refuge.geoMarker = this.newGeoMarker;

@@ -113,7 +113,10 @@
         <v-container class="full-height" fluid>
           <v-row align="center" justify="center">
             <v-col class="text-center">
-              <MainApp />
+              <!-- <MainApp /> -->
+              <router-view
+                @dialog="openDialog"></router-view>
+
               <!-- <map-component class="map"></map-component> -->
             </v-col>
           </v-row>
@@ -146,7 +149,11 @@ export default {
     drawer: false,
     dialog: false
   }),
-  methods: {}
+  methods: {
+    openDialog() {
+      alert()
+    }
+  }
 };
 </script>
 <style>
