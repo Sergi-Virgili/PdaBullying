@@ -1,44 +1,53 @@
 <template>
-
+<v-flex height="100%">
 <v-card >
-    <v-card-title class="pb-0">
+    <v-card-title class="">
       <img :src="refugeSelected.logoUrl" />
+       <p class="title" align="left">{{ refugeSelected.name }}</p>
     </v-card-title>
+    <v-divider></v-divider>
     <v-card-text>
       <v-form>
         
-        <h4 COLOR="orange">{{ refugeSelected.name }}</h4>
+       
         
-        
-          
-     
+        <v-list>
+            <v-list-item>
+            <v-list-item-action>
+            <v-icon>mdi-email-outline</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+            <v-list-item-title>email2email</v-list-item-title>
+            </v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+            <v-list-item-action>
+            <v-icon>mdi-phone-outline</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+            <v-list-item-title>655 55 45 45</v-list-item-title>
+            </v-list-item-content>
+            </v-list-item>
+        </v-list>
+
         <v-text-field disabled label="Email" prepend-icon="mdi-email-outline" />
         <v-text-field label="Teléfono" prepend-icon="mdi-phone-outline" />
-        <v-text-field label="Web" prepend-icon="mdi-map-web-outline" />
-       
+        <i>mdi-map-web-outline</i><p>asdfa</p>
 
-    
-        <!-- <v-text-field
-          :type="showPassword ? 'text' : 'password'"
-          label="Confirma Password"
-          prepend-icon="mdi-lock-outline"
-          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="showPassword = !showPassword"
-        /> -->
       </v-form>
     </v-card-text>
     <v-divider></v-divider>
-    <v-card-actions>
+    <v-card-actions >
       <v-btn class="rounded" 
         @click="editMode = !editMode"
         v-if="!editMode" 
         tile 
         outlined 
         color="success">
-        <span>Edit</span>
+        <span>Ver</span>
       </v-btn>
       <v-btn class="rounded" 
-        @click="OnClickDetachRefuge"
+        @click="OnClickAttachRefuge"
        
         tile 
         outlined 
@@ -46,6 +55,7 @@
         <span>Import</span>
       </v-btn>
       <v-btn class="rounded" 
+        @click="OnClickDetachRefuge"
         
         
         tile 
@@ -62,6 +72,7 @@
       
     </v-card-actions>
   </v-card>
+  </v-flex>
     <!-- <div class="card">
         <div class="card-header">
             <img v-if="refugeSelected" :src="refugeSelected.logoUrl" />
@@ -98,4 +109,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+    .title {
+        color: orange
+    }
+</style>>
