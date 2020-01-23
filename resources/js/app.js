@@ -135,6 +135,10 @@ Vue.component(
     "newRefugeModal-component",
     require("./components/newRefugeModal-component.vue").default
 );
+Vue.component(
+    "typeBox-component",
+    require("./components/typeBox-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

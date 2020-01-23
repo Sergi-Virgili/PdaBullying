@@ -24,7 +24,8 @@
           <button class="btn btn-success" @click="geo">Geo</button>
           <button class="btn btn-success" @click="OpenSearcher">Buscar</button>
     </div>-->
-    <div class>
+    <div>
+      <!-- <typeBox-component class="typeBox"/> -->
       <l-map
         style="z-index:1;"
         class="map"
@@ -48,7 +49,12 @@
             <l-popup>
               <div class="popUp">
                 <img :src="refuge.logoUrl" alt />
-                <div>{{ refuge.name }}</div>
+                <h2>{{ refuge.name }}</h2>
+                <div class="email">
+                <v-icon small color="teal darken-2">mdi-email</v-icon>
+                <h3>{{ refuge.email }}</h3>
+                </div>
+                <h3>{{ refuge.phone }}</h3>
               </div>
             </l-popup>
           </l-marker>
@@ -312,6 +318,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.typeBox {
+  position: relative;
+}
 .map {
   width: 100%;
   height: 100%;
@@ -346,9 +355,16 @@ export default {
 
 
 .popUp h3{
+<<<<<<< HEAD
   color:black;
   font-size: 15px;
   display: inline-block;
+=======
+  font-size: 13px;
+  font-weight: bold;
+  color: black;
+ 
+>>>>>>> cd94b61a67d86bc837eef5948e69b53330c26a81
 }
 
 .button_list {
