@@ -68,7 +68,11 @@
                 <v-icon small color="teal darken-2">mdi-email</v-icon>
                 <h3>{{ refuge.email }}</h3>
                 </div>
+                <div class="phone">
+                <v-icon small color="teal darken-2">fa-phone</v-icon>
                 <h3>{{ refuge.phone }}</h3>
+                </div>
+                <v-btn x-small color="teal darken-2" dark>Ver</v-btn>
               </div>
             </l-popup>
           </l-marker>
@@ -310,20 +314,19 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-content: center;
 }
 
 .popUp h2{
-  font-size: 14px;
+  font-size: 16px;
 }
 
-.email{
-  display: inline-block;
-}
+
 
 .popUp h3{
-  font-size: 13px;
-  font-weight: bold;
- 
+  color:black;
+  font-size: 15px;
+  display: inline-block;
 }
 
 .button_list {
