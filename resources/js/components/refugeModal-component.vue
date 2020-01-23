@@ -19,11 +19,16 @@
         <p v-if="!editMode">{{ refugeSelected.description }}</p>
           
      
-        <v-text-field disabled label="Email" prepend-icon="mdi-email-outline" />
-        <v-text-field label="Teléfono" prepend-icon="mdi-phone-outline" />
-        <v-text-field label="Calle" prepend-icon="mdi-map-marker-outline" />
-        <v-text-field label="Numero" prepend-icon="mdi-smartphone-outline" />
-        <v-text-field label="Ciudad" prepend-icon="mdi-smartphone-outline" />
+        <v-text-field v-if="!editMode" disabled label="Email" prepend-icon="mdi-email-outline" />
+        <v-text-field v-if="editMode" label="Email" prepend-icon="mdi-email-outline" />
+        <v-text-field v-if="!editMode" disabled label="Teléfono" prepend-icon="mdi-phone-outline" />
+        <v-text-field v-if="editMode" label="Teléfono" prepend-icon="mdi-phone-outline" />
+        <v-text-field v-if="!editMode" disabled label="Calle" prepend-icon="mdi-map-marker-outline" />
+        <v-text-field v-if="editMode" label="Calle" prepend-icon="mdi-map-marker-outline" />
+        <v-text-field v-if="!editMode" disabled label="Numero" prepend-icon="mdi-home-map-marker" />
+        <v-text-field v-if="editMode" label="Numero" prepend-icon="mdi-home-map-marker" />
+        <v-text-field v-if="!editMode" disabled label="Ciudad" prepend-icon="mdi-map-outline" />
+        <v-text-field v-if="editMode" label="Ciudad" prepend-icon="mdi-map-outline" />
 
     
         <!-- <v-text-field
