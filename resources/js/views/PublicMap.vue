@@ -63,7 +63,12 @@
             <l-popup>
               <div class="popUp">
                 <img :src="refuge.logoUrl" alt />
-                <div>{{ refuge.name }}</div>
+                <h2>{{ refuge.name }}</h2>
+                <div class="email">
+                <v-icon small color="teal darken-2">mdi-email</v-icon>
+                <h3>{{ refuge.email }}</h3>
+                </div>
+                <h3>{{ refuge.phone }}</h3>
               </div>
             </l-popup>
           </l-marker>
@@ -305,8 +310,22 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
+
+.popUp h2{
+  font-size: 14px;
+}
+
+.email{
+  display: inline-block;
+}
+
+.popUp h3{
+  font-size: 13px;
+  font-weight: bold;
+ 
+}
+
 .button_list {
   width: 100%;
 }
