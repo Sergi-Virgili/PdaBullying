@@ -60,9 +60,17 @@
             :icon="icon2"
             @click="OnClickRefuge(index, refuge.geoMarker)"
           >
+          <v-col class="text-center">
+              <!-- <MainApp /> -->
+              <router-view
+                @dialog="openDialog"></router-view>
+
+              <!-- <map-component class="map"></map-component> -->
+            </v-col>
+             
             <l-popup>
               <div class="popUp">
-                <img :src="refuge.logoUrl" alt />
+                <img :src="refuge.logoUrl" alt/>
                 <h2>{{ refuge.name }}</h2>
                 <div class="email">
                 <v-icon small color="teal darken-2">mdi-email</v-icon>
@@ -72,7 +80,14 @@
                 <v-icon small color="teal darken-2">fa-phone</v-icon>
                 <h3>{{ refuge.phone }}</h3>
                 </div>
-                <v-btn x-small color="teal darken-2" dark>Ver</v-btn>
+                <v-dialog v-model="dialog" width="600px" style="z-index:1000000">
+                 <template v-slot:activator="{ on }">
+                <v-btn x-small color="teal darken-2" dark v-on="on">Ver</v-btn>
+               </template>
+               <refugeModal-component></refugeModal-component>
+               <!-- <newRefugeModal-component></newRefugeModal-component> -->
+               </v-dialog>
+                
               </div>
             </l-popup>
           </l-marker>
@@ -131,6 +146,7 @@
     </section>-->
   </div>
 
+
   <!-- <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component> -->
 </template>
 
@@ -149,6 +165,9 @@ export default {
     LPopup
   },
   data() {
+     () => ({
+      dialog: false
+     })
     return {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       center: [41.3876768, 2.169259],
@@ -183,6 +202,9 @@ export default {
     this.fetchMyMap();
   },
   methods: {
+    openDialog() {
+      alert()
+    },
     addRefugeMode() {
       //TODO CHANGE CURSOS IN MAP
       this.mode.addRefuge = true;
