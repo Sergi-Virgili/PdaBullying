@@ -13,12 +13,22 @@
         <l-marker
           v-if="refuge.is_Public"
           :lat-lng="refuge.geoMarker"
+          :icon="icon"
           @click="OnClickRefuge(index, refuge.geoMarker)"
         >
           <l-popup>
             <div class="popUp">
-              <img :src="refuge.logoUrl" alt />
-              <div>{{ refuge.name }}</div>
+              <l-popup>
+              <div class="popUp">
+                <img :src="refuge.logoUrl" alt />
+                <h2>{{ refuge.name }}</h2>
+                <div class="email">
+                <v-icon small color="teal darken-2">mdi-email</v-icon>
+                <h3>{{ refuge.email }}</h3>
+                </div>
+                <h3>{{ refuge.phone }}</h3>
+              </div>
+            </l-popup>
             </div>
           </l-popup>
         </l-marker>
@@ -29,7 +39,7 @@
 
 <script>
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
-
+import { LatLng, icon } from "leaflet";
 export default {
   props: {
     refuges: Array,
@@ -57,7 +67,12 @@ export default {
       // tcenter: [0,0],
       // tzoom: 13,
       animation: true,
-      isLoaded:true
+      isLoaded:true,
+      icon: icon({
+        iconUrl: "/img/icons8-marker-30.png",
+        iconSize: [30, 30]
+        //iconAnchor: [16, 37]
+      }),
     };
   },
   methods: {
@@ -87,5 +102,28 @@ export default {
 <style>
 .map {
   min-height: 500px;
+}
+.popUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.popUp h2{
+  font-size: 14px;
+}
+
+.email{
+  display: inline-block;
+}
+
+.popUp h3{
+  font-size: 13px;
+  font-weight: bold;
+ 
+}
+
+.button_list {
+  width: 100%;
 }
 </style>
