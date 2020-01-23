@@ -7,10 +7,7 @@
     </v-card-title>
     <v-divider></v-divider>
     <v-card-text>
-      <v-form>
-        
-       
-        
+      
         <v-list>
             <v-list-item>
             <v-list-item-action>
@@ -30,11 +27,9 @@
             </v-list-item>
         </v-list>
 
-        <v-text-field disabled label="Email" prepend-icon="mdi-email-outline" />
-        <v-text-field label="Teléfono" prepend-icon="mdi-phone-outline" />
-        <i>mdi-map-web-outline</i><p>asdfa</p>
+       
 
-      </v-form>
+      
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions >
