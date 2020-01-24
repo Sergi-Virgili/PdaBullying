@@ -51,8 +51,8 @@
                 <img :src="refuge.logoUrl" alt />
                 <h2>{{ refuge.name }}</h2>
                 <div class="email">
-                <v-icon small color="teal darken-2">mdi-email</v-icon>
-                <h3>{{ refuge.email }}</h3>
+                  <v-icon small color="teal darken-2">mdi-email</v-icon>
+                  <h3>{{ refuge.email }}</h3>
                 </div>
                 <h3>{{ refuge.phone }}</h3>
               </div>
@@ -66,34 +66,32 @@
             :icon="icon2"
             @click="OnClickRefuge(index, refuge.geoMarker)"
           >
-          <v-col class="text-center">
+            <v-col class="text-center">
               <!-- <MainApp /> -->
-              <router-view
-                @dialog="openDialog"></router-view>
+              <router-view @dialog="openDialog"></router-view>
 
               <!-- <map-component class="map"></map-component> -->
             </v-col>
-             
+
             <l-popup>
               <div class="popUp">
-                <img :src="refuge.logoUrl" alt/>
+                <img :src="refuge.logoUrl" alt />
                 <h2>{{ refuge.name }}</h2>
                 <div class="email">
-                <v-icon small color="teal darken-2">mdi-email</v-icon>
-                <h3>{{ refuge.email }}</h3>
+                  <v-icon small color="teal darken-2">mdi-email</v-icon>
+                  <h3>{{ refuge.email }}</h3>
                 </div>
                 <div class="phone">
-                <v-icon small color="teal darken-2">fa-phone</v-icon>
-                <h3>{{ refuge.phone }}</h3>
+                  <v-icon small color="teal darken-2">fa-phone</v-icon>
+                  <h3>{{ refuge.phone }}</h3>
                 </div>
                 <v-dialog v-model="dialog" width="600px" style="z-index:1000000">
-                 <template v-slot:activator="{ on }">
-                <v-btn x-small color="teal darken-2" dark v-on="on">Ver</v-btn>
-               </template>
-               <refugeModal-component></refugeModal-component>
-               <!-- <newRefugeModal-component></newRefugeModal-component> -->
-               </v-dialog>
-                
+                  <template v-slot:activator="{ on }">
+                    <v-btn x-small color="teal darken-2" dark v-on="on">Ver</v-btn>
+                  </template>
+                  <refugeModal-component></refugeModal-component>
+                  <!-- <newRefugeModal-component></newRefugeModal-component> -->
+                </v-dialog>
               </div>
             </l-popup>
           </l-marker>
@@ -110,22 +108,23 @@
         <refugeNew-component
           v-if="sider == 'newRefuge'"
           :newGeoMarker="newGeoMarker"
+          @closeSider="drawerRight = false"
           class="refugeSider"
         ></refugeNew-component>
       </v-navigation-drawer>
     </div>
     <v-bottom-sheet v-model="mode.list" class="button_list">
-        <template v-slot:activator="{ on }">
-          <v-btn width="100%" v-on="on">
-            <i style="color:orange" class="fas fa-angle-down fa-2x"></i>
-          </v-btn>
-        </template>
-        <v-content class='button_list' style="z-index:20000000">
-          <v-card class='button_list'>
-            <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
-          </v-card>
-        </v-content>
-      </v-bottom-sheet>
+      <template v-slot:activator="{ on }">
+        <v-btn width="100%" v-on="on">
+          <i style="color:orange" class="fas fa-angle-down fa-2x"></i>
+        </v-btn>
+      </template>
+      <v-content class="button_list" style="z-index:20000000">
+        <v-card class="button_list">
+          <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
+        </v-card>
+      </v-content>
+    </v-bottom-sheet>
 
     <!-- <section class="sider" v-if="sider">
         <refuge-component
@@ -152,7 +151,6 @@
     </section>-->
   </div>
 
-
   <!-- <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component> -->
 </template>
 
@@ -171,9 +169,9 @@ export default {
     LPopup
   },
   data() {
-     () => ({
+    () => ({
       dialog: false
-     })
+    });
     return {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       center: [41.3876768, 2.169259],
@@ -209,7 +207,7 @@ export default {
   },
   methods: {
     openDialog() {
-      alert()
+      alert();
     },
     addRefugeMode() {
       //TODO CHANGE CURSOS IN MAP
@@ -286,13 +284,13 @@ export default {
       if (!this.mode.addRefuge) {
         return null;
       }
-      
-      this.$emit('dialog');
-      //this.openSider("newRefuge");
+
+      //this.$emit("dialog");
+      this.openSider("newRefuge");
       this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
       this.centerMap(this.newGeoMarker);
       this.mode.addRefuge = false;
-      //this.drawerRight = true;
+      this.drawerRight = true;
 
       let refuge = {};
       refuge.geoMarker = this.newGeoMarker;
@@ -348,23 +346,14 @@ export default {
   align-content: center;
 }
 
-.popUp h2{
+.popUp h2 {
   font-size: 16px;
 }
 
-
-
-.popUp h3{
-<<<<<<< HEAD
-  color:black;
-  font-size: 15px;
-  display: inline-block;
-=======
+.popUp h3 {
   font-size: 13px;
   font-weight: bold;
   color: black;
- 
->>>>>>> cd94b61a67d86bc837eef5948e69b53330c26a81
 }
 
 .button_list {
