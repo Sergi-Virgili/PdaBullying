@@ -10,7 +10,7 @@ use App\User;
 
 
 
-class UserTest extends TestCase
+class AuthTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -44,6 +44,15 @@ class UserTest extends TestCase
         ->assertJsonStructure(['user', 'access_token']);
     }
 
+    /**
+     * @test
+     */
+    // public function not_auth_users_restricts() {
+
+    //     $this->artisan('passport:install');
+
+
+    // }
      /**
      * @test
      */
@@ -55,14 +64,21 @@ class UserTest extends TestCase
 
         $response = $this->json('POST', '/api/register', [
 
-            'name' => 'name',
-            'email' =>  'email2@email.com',
+            'name' => $name = 'name',
+            'email' =>  $email ='email2@email.com',
             'password' => 'secret',
             'password_confirmation' => 'secret',
 
             ]);
 
-            $response->assertStatus(200)
+            $this->assertDatabaseHas('users', [
+                'name' => $name,
+                'email' => $email,
+
+            ]);
+
+            $response->assertStatus(201)
+
             ->assertJsonStructure(['user', 'access_token']);
     }
 }
