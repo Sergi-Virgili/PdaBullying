@@ -69,7 +69,7 @@
         <span>Remove</span>
       </v-btn>
       <v-btn class="rounded" 
-        
+        @click="OnClickDelete()"
         v-if="!editMode" tile outlined 
         color="error">
         <span>Delete</span>
@@ -84,7 +84,8 @@
         <span>Cancel</span>
       </v-btn>
       <v-btn class="rounded" 
-        v-if="editMode" tile outlined 
+        v-if="editMode" tile outlined
+        @click="OnClickUpdate()" 
         color="success">
         <span>Ok</span>
       </v-btn>
@@ -112,6 +113,13 @@ export default {
       this.editMode = true
       
     },
+    OnClickDelete(){
+      axios.delete(`/api/refuges/${this.refuge.id}`).then(()=> {
+        this.editMode = false
+        this.$emit("delete")
+      })
+      
+    },
     OnClickUpdate() {
       const params = {
         name: this.refugeSelected.name,
@@ -120,11 +128,11 @@ export default {
         hpuse_number: this.refugeSelected.house_number,
         city: this.refugeSelected.city,
         email: this.refugeSelected.email,
+        phone: this.refugeSelected.phone,
       };
-      
-      axios.put(`/api/refuges/${this.refuge.id}`, params).then((response) => {
+      console.log(params)
+      axios.put(`/api/refuges/${this.refugeSelected.id}`, params).then((response) => {
       this.editMode = false;
-     
       const refuge = response.data;
       this.$emit('update', refuge);
       });

@@ -67,14 +67,30 @@ class RefugeController extends Controller
 
     public function update(Request $request, Resource $resource)
     {
+        $refuge = Refuge::find($id);
+        $refuge->update([
+            'name' => $request->name,
+            'house_number' => $request->house_number,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'house_number' => $request->house_number,
+            'city' => $request->city,
+            'road' => $request->road,
+        ]);
+        
 
+        $refuge->save();
+
+        return response();
     }
 
 
     public function destroy($refugeId)
     {
-        $refuge = Refuge::find($refugeId);
+        $refuge = Refuge::findOrfail($refugeId);
         $refuge->delete();
+
+        return response();
 
     }
 

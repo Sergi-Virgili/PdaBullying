@@ -79,12 +79,13 @@
                 </div>
                 <v-dialog v-model="dialog" width="600px" style="z-index:1000000">
                   <template v-slot:activator="{ on }">
-                    <v-btn x-small color="teal darken-2" dark @click="openDialogRefuge">Ver</v-btn>
+                    <v-btn x-small color="teal darken-2" width="100%" v-on="on" dark @click="openDialogRefuge">Ver</v-btn>
                   </template>
                   <refugeModal-component
                       v-if="sider == 'refuge'"
                      :refugeSelected="refugeSelected"
-                      
+                      @update="updateRefuge(index, ...arguments)"
+                      @delete="deleteRefuge"
                     ></refugeModal-component>
                     <newRefugeModal-component
                     v-if="sider == 'newRefuge'"
@@ -255,6 +256,10 @@ export default {
      // this.drawerRight = true;
     },
 
+    updateRefuge(index, refuge){
+      this.refugeSelected[index] = refuge
+    },
+
     selectRefuge(index) {
       //this.openSider("refuge");
       this.refugeSelected = this.refuges[index];
@@ -345,6 +350,7 @@ export default {
   font-size: 13px;
   font-weight: bold;
   color: black;
+  display: inline-block;
 }
 
 .button_list {

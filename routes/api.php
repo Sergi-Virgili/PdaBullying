@@ -26,8 +26,9 @@ Route::namespace('Api')->group(function(){
     //Refuges
     Route::post('/refuges','RefugeController@store');
     Route::get('/refuges','RefugeController@index');
+    Route::put('/refuges/{refuge}', 'RefugeController@update');
     Route::get('/refuges/{resource}','RefugeController@show');
-    Route::delete('/refuges/{resource}','RefugeController@destroy');
+    Route::delete('/refuges/{refuge}','RefugeController@destroy');
     //Users
     Route::post('/users', 'UserController@store');
     Route::put('/users/{id}', 'UserController@update');
