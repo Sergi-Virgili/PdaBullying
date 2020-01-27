@@ -1,7 +1,7 @@
 <template>
-    <div class="card">
-        <div class="card-header">Nova Localització</div>
-        <div class="card-body">
+    <v-card>
+        <h4>Nova Localització</h4>
+        <form action="">
             <label for="name">Nom</label>
             <input
                 class="form-control"
@@ -10,14 +10,46 @@
                 id="name"
                 v-model="name"
             />
-            <label for="description">Description</label>
-            <textarea
+            <label for="description">Descripció</label>
+            <input
                 class="form-control"
                 type="text"
-                name="description"
+                name="descripció"
                 id="description"
                 v-model="description"
-            ></textarea>
+            />
+            <label for="email">Email</label>
+            <input
+                class="form-control"
+                type="text"
+                name="email"
+                id="email"
+                v-model="email"
+            />
+            <label for="telefono">Telefono</label>
+            <input
+                class="form-control"
+                type="text"
+                name="phone"
+                id="phone"
+                v-model="phone"
+            />
+            <label for="comunitat">Comunitat Autónoma</label>
+            <input
+                class="form-control"
+                type="text"
+                name="state"
+                id="state"
+                v-model="state"
+            />
+            <label for="country">País</label>
+            <input
+                class="form-control"
+                type="text"
+                name="country"
+                id="country"
+                v-model="pais"
+            />
             <div v-for="type in types" :key="type.id">
                 <div class="form-check">
                     <input
@@ -32,7 +64,7 @@
                     </label>
                 </div>
             </div>
-            <p>Dirección</p>
+
             <label for="street">Carrer</label>
             <input
                 class="form-control"
@@ -65,12 +97,12 @@
                 id="postcode"
                 :value="refuge.postcode"
             />
-            <div>
-                <p>geoposition: {{ lat }} {{ lng }}</p>
-            </div>
-            <button class="btn btn-success" @click="saveNewRefuge">OK</button>
-        </div>
-    </div>
+            <label for="geoposition">
+                <p>Geoposició: {{ lat }} {{ lng }}</p></label
+            >
+        </form>
+        <button class="btn btn-success" @click="saveNewRefuge">OK</button>
+    </v-card>
 </template>
 
 <script>
@@ -126,12 +158,15 @@ export default {
                 description: this.description,
                 lat: this.lat,
                 lng: this.lng,
+                email: this.refuge.email,
+                phone: this.refuge.phone,
                 road: this.refuge.road,
                 city: this.refuge.city,
                 postcode: this.refuge.postcode,
                 house_number: this.refuge.house_number,
                 country: this.refuge.country,
-                state: this.refuge.state
+                state: this.refuge.state,
+                type: this.refuge.type
             };
 
             axios
@@ -142,4 +177,23 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+h4 {
+    color: orange;
+    padding: 2%;
+    text-align: center;
+}
+form {
+    margin-left: 3%;
+    margin-right: 3%;
+    color: grey;
+}
+.btn.btn.btn-success {
+    margin-left: 2%;
+
+    color: white;
+}
+.v-card {
+    height: 100%;
+}
+</style>
