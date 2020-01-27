@@ -15,17 +15,9 @@
         @geo="geo"
       ></toolsbar-component>
     </v-navigation-drawer>
-    <!-- TOOLS COMPONENT -->
-    <!-- <div class="card-header">
-          <button class="btn btn-success" @click="fetchData">PDA mapa</button>
-          <button class="btn btn-success" @click="OnClickMyMap">Mi mapa</button>
-          <button class="btn btn-success" @click="newRefuge">+ Add Place</button>
-          <button class="btn btn-success" @click="optionsMyMap">Map Options</button>
-          <button class="btn btn-success" @click="geo">Geo</button>
-          <button class="btn btn-success" @click="OpenSearcher">Buscar</button>
-    </div>-->
+    
     <div>
-      <!-- <typeBox-component class="typeBox"/> -->
+      
       <l-map
         style="z-index:1;"
         class="map"
@@ -68,7 +60,7 @@
           >
             <v-col class="text-center">
               <!-- <MainApp /> -->
-              <router-view @dialog="openDialog"></router-view>
+              <!-- <router-view @dialog="openDialog"></router-view> -->
 
               <!-- <map-component class="map"></map-component> -->
             </v-col>
@@ -87,14 +79,20 @@
                 </div>
                 <v-dialog v-model="dialog" width="600px" style="z-index:1000000">
                   <template v-slot:activator="{ on }">
-                    <v-btn x-small color="teal darken-2" dark v-on="on">Ver</v-btn>
+                    <v-btn x-small color="teal darken-2" dark @click="openDialogRefuge">Ver</v-btn>
                   </template>
                   <refugeModal-component
+                      v-if="sider == 'refuge'"
                      :refugeSelected="refugeSelected"
-                      @attachRefuge="attachRefuge"
-                      @detachRefuge="detachRefuge"
+                      
                     ></refugeModal-component>
-                  <!-- <newRefugeModal-component></newRefugeModal-component> -->
+                    <newRefugeModal-component
+                    v-if="sider == 'newRefuge'"
+                    :newGeoMarker="newGeoMarker"
+                    
+                    class="refugeSider"
+                    ></newRefugeModal-component>
+             
                 </v-dialog>
               </div>
             </l-popup>
@@ -102,19 +100,8 @@
         </div>
       </l-map>
       <v-navigation-drawer v-model="drawerRight" right absolute temporary>
-        <refuge-component
-          v-if="sider == 'refuge'"
-          class="refugeSider"
-          :refugeSelected="refugeSelected"
-          @attachRefuge="attachRefuge"
-          @detachRefuge="detachRefuge"
-        ></refuge-component>
-        <refugeNew-component
-          v-if="sider == 'newRefuge'"
-          :newGeoMarker="newGeoMarker"
-          @closeSider="drawerRight = false"
-          class="refugeSider"
-        ></refugeNew-component>
+        
+        
       </v-navigation-drawer>
     </div>
     <v-bottom-sheet v-model="mode.list" class="button_list">
@@ -125,7 +112,7 @@
       </template>
       <v-content class="button_list" style="z-index:20000000">
         <v-card class="button_list">
-          <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component>
+          <refugeList-component :refuges="refuges"></refugeList-component>
         </v-card>
       </v-content>
     </v-bottom-sheet>
@@ -173,9 +160,7 @@ export default {
     LPopup
   },
   data() {
-    () => ({
-      dialog: false
-    });
+    
     return {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       center: [41.3876768, 2.169259],
@@ -201,7 +186,8 @@ export default {
       mode: {
         list: false,
         addRefuge: false
-      }
+      },
+      dialog: false
     };
   },
   created() {
@@ -210,8 +196,9 @@ export default {
     this.fetchMyMap();
   },
   methods: {
-    openDialog() {
-      alert();
+    openDialogRefuge() {
+      this.dialog = true;
+      this.openSider('refuge');
     },
     addRefugeMode() {
       //TODO CHANGE CURSOS IN MAP
@@ -269,7 +256,7 @@ export default {
     },
 
     selectRefuge(index) {
-      this.openSider("refuge");
+      //this.openSider("refuge");
       this.refugeSelected = this.refuges[index];
       console.log(this.refuges[index]);
     },
@@ -288,17 +275,17 @@ export default {
       if (!this.mode.addRefuge) {
         return null;
       }
-
-      //this.$emit("dialog");
-      this.openSider("newRefuge");
-      this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
-      this.centerMap(this.newGeoMarker);
       this.mode.addRefuge = false;
-      this.drawerRight = true;
+      this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
+      //let refuge = {};
+      //refuge.geoMarker = this.newGeoMarker;
+      //this.refuges.push(refuge);
+      this.sider = 'newRefuge';
+      this.dialog = true;
+      //this.centerMap(this.newGeoMarker);
+      //this.drawerRight = true;
 
-      let refuge = {};
-      refuge.geoMarker = this.newGeoMarker;
-      this.refuges.push(refuge);
+      
     },
     openSider(sider) {
       this.sider = sider;

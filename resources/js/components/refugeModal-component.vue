@@ -6,7 +6,7 @@
     <v-card-text>
       <v-form>
         <v-text-field label="Título" v-if="editMode" v-model="refugeSelected.name"/>
-        <v-text v-if="!editMode">{{ refugeSelected.name }}</v-text>
+        <p v-if="!editMode">{{ refugeSelected.name }}</p>
         
         
         <v-textarea
@@ -55,7 +55,8 @@
         v-if="!editMode" 
         tile 
         outlined 
-        color="success">
+        color="success"
+        @click="attachRefuge">
         <span>Import</span>
       </v-btn>
       <v-btn class="rounded" 
@@ -63,7 +64,8 @@
         v-if="!editMode" 
         tile 
         outlined 
-        color="success">
+        color="success"
+        @click="detachRefuge">>
         <span>Remove</span>
       </v-btn>
       <v-btn class="rounded" 
@@ -100,18 +102,15 @@ export default {
       
     };
   },
-  created() {
-    this.fetchData();
-  },
+  
   methods: {
-    fetchData() {
-      axios.get('/api/refuges/'.refuge.id).then(response => {
-        this.refugeSelected = response.data;
-      });
+    attachRefuge() {
+      axios.get(`/api/maps/attach/${this.refugeSelected.id}`).then(response => console.log('attached'));
+      //this.$emit("attachRefuge", this.refugeSelected.id);
     },
     OnClickEdit(){
       this.editMode = true
-      this.$emit("edit")
+      
     },
     OnClickUpdate() {
       const params = {
@@ -122,19 +121,16 @@ export default {
         city: this.refugeSelected.city,
         email: this.refugeSelected.email,
       };
-      console.log(params)
+      
       axios.put(`/api/refuges/${this.refuge.id}`, params).then((response) => {
       this.editMode = false;
-      console.log(params);
+     
       const refuge = response.data;
       this.$emit('update', refuge);
       });
     },
-    OnClickAttachRefuge() {
-      axios.get(`/api/maps/attach/${this.refugeSelected.id}`);
-      //this.$emit("attachRefuge", this.refugeSelected.id);
-    },
-    OnClickDetachRefuge() {
+    
+    detachRefuge() {
       axios.get(`/api/maps/detach/${this.refugeSelected.id}`).then(response => {
         this.$emit("detachRefuge", this.refugeSelected.id);
       });

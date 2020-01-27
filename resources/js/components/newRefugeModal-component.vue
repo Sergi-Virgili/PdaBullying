@@ -7,7 +7,7 @@
                 class="form-control"
                 type="text"
                 name="name"
-                id="name"
+               
                 v-model="name"
             />
             <label for="description">Description</label>
@@ -15,7 +15,7 @@
                 class="form-control"
                 type="text"
                 name="description"
-                id="description"
+                
                 v-model="description"
             ></textarea>
             <div v-for="type in types" :key="type.id">
@@ -38,7 +38,7 @@
                 class="form-control"
                 type="text"
                 name="street"
-                id="street"
+               
                 :value="refuge.road"
             />
             <label for="number">Número</label>
@@ -46,7 +46,7 @@
                 class="form-control"
                 type="text"
                 name="number"
-                id="number"
+                
                 :value="refuge.house_number"
             />
             <label for="city">Ciutat</label>
@@ -54,7 +54,7 @@
                 class="form-control"
                 type="text"
                 name="city"
-                id="city"
+              
                 :value="refuge.city"
             />
             <label for="postcode">Codi Postal</label>
@@ -62,7 +62,7 @@
                 class="form-control"
                 type="text"
                 name="postcode"
-                id="postcode"
+                
                 :value="refuge.postcode"
             />
             <div>
@@ -115,10 +115,10 @@ export default {
                 });
         },
         fetchTypeData() {
-            axios.get("/api/types").then(response => {
-                this.types = response.data.data;
-                console.log(response.data.data);
-            });
+            // axios.get("/api/types").then(response => {
+            //     this.types = response.data.data;
+            //     console.log(response.data.data);
+            // });
         },
         saveNewRefuge() {
             let formData = {

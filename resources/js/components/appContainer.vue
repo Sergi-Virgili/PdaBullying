@@ -115,7 +115,7 @@
             <v-col class="text-center">
               <!-- <MainApp /> -->
               <router-view
-                @dialog="openDialog"></router-view>
+               ></router-view>
 
               <!-- <map-component class="map"></map-component> -->
             </v-col>
@@ -123,13 +123,7 @@
         </v-container>
       </v-content>
 
-      <v-dialog v-model="dialog" width="600px" style="z-index:1000000">
-        <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
-        </template>
-        <refugeModal-component></refugeModal-component>
-        <!-- <newRefugeModal-component></newRefugeModal-component> -->
-      </v-dialog>
+      
     </v-app>
   </div>
 </template>
