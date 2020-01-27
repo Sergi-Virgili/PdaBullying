@@ -1,4 +1,4 @@
-import { getlocalUser } from "../apis/Auth"
+import { getlocalUser } from "../apis/Auth";
 
 const user = getlocalUser();
 
@@ -7,8 +7,7 @@ export default {
         currentUser: user,
         isLoggedIn: !!user,
         loading: false,
-        auth_error: null,
-
+        auth_error: null
     },
     getters: {
         isLoading(state) {
@@ -22,36 +21,36 @@ export default {
         },
         authError(state) {
             return state.auth_error;
-        },
+        }
     },
     mutations: {
         login(state) {
             state.loading = true;
             state.auth_error = null;
         },
-        login_success(state, payload) {
+        loginSuccess(state, payload) {
             state.auth_error = null;
             state.isLoading = true;
             state.loading = false;
-            state.currentUser = Object.assign({}, payload.user, {token: payload.access_token})
-            
-            localStorage.setItem('user', JSON.stringify(state.currentUser))
-        },
-        login_failed(state, payload) {
+            state.currentUser = Object.assign({}, payload.user, {
+                token: payload.access_token
+            });
 
+            localStorage.setItem("user", JSON.stringify(state.currentUser));
+        },
+        loginFailed(state, payload) {
             state.loading = false;
             state.auth_error = payload.error;
         },
         logout(state) {
-            localStorage.removeItem('user');
+            localStorage.removeItem("user");
             state.isLoggedIn = false;
             state.currentUser = null;
         }
-
     },
     actions: {
         login(context) {
-            context.commit('login')
+            context.commit("login");
         }
     }
-}
+};

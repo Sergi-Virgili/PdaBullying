@@ -37,7 +37,30 @@ const router = new VueRouter({
     mode: "history"
 });
 
+router.beforeEach((to, from, next) => {
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+    const currentUser = store.state.currentUser;
+    const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin);
 
+    if (requiresAdmin && !currentUserAdmin) {
+        next("login");
+    }
+    if (to.path == "/login" && currentUserAdmin) {
+        next("/dashboard");
+    }
+    if (requiresAdmin && currentUserAdmin) {
+        next();
+    }
+    if (requiresAuth && !currentUser) {
+        next("login");
+    }
+    if (to.path == "/login" && currentUser) {
+        next("/dashboard");
+    }
+    if (requiresAuth && currentUser) {
+        next();
+    }
+});
 
 /**
  * The following block of code may be used to automatically register your

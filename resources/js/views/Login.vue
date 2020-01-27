@@ -56,13 +56,13 @@ export default {
       login(this.form)
         .then(res => {
 
-          this.$store.commit('login_success', res);
+          this.$store.commit('loginSuccess', res);
           this.$router.push({path: '/dashboard'})
 
         })
         
         .catch((error) => {
-          this.$store.commit('login_failed', {error})
+          this.$store.commit('loginFailed', {error})
         })
     }
   }

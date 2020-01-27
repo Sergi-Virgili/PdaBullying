@@ -14,6 +14,9 @@ export const routes = [
     {
         path: "/dashboard",
         component: MainApp,
+        meta: {
+            requiresAuth: true
+        },
         children: [
             {
                 path: "",
@@ -43,17 +46,26 @@ export const routes = [
             {
                 path: "publish",
                 component: Publish,
-                name: "publish"
+                name: "publish",
+                meta: {
+                    requiresAdmin: true
+                }
             },
             {
                 path: "users",
                 component: Users,
-                name: "users"
+                name: "users",
+                meta: {
+                    requiresAdmin: true
+                }
             },
             {
                 path: "types",
                 component: Types,
-                name: "types"
+                name: "types",
+                meta: {
+                    requiresAdmin: true
+                }
             },
             {
                 path: "profile",
