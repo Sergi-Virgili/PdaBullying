@@ -89,7 +89,11 @@
                   <template v-slot:activator="{ on }">
                     <v-btn x-small color="teal darken-2" dark v-on="on">Ver</v-btn>
                   </template>
-                  <refugeModal-component></refugeModal-component>
+                  <refugeModal-component
+                     :refugeSelected="refugeSelected"
+                      @attachRefuge="attachRefuge"
+                      @detachRefuge="detachRefuge"
+                    ></refugeModal-component>
                   <!-- <newRefugeModal-component></newRefugeModal-component> -->
                 </v-dialog>
               </div>
@@ -261,7 +265,7 @@ export default {
     OnClickRefuge(index, geoMarker) {
       this.selectRefuge(index);
       this.centerMap(geoMarker);
-      this.drawerRight = true;
+     // this.drawerRight = true;
     },
 
     selectRefuge(index) {

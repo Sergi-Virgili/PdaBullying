@@ -19,7 +19,7 @@
         <p v-if="!editMode">{{ refugeSelected.description }}</p>
           
      
-        <v-text-field v-if="!editMode" disabled label="Email" prepend-icon="mdi-email-outline" />
+        <v-text-field v-if="!editMode" disabled label="Email" prepend-icon="mdi-email-outline" v-model="refugeSelected.email" />
         <v-text-field v-if="editMode" label="Email" prepend-icon="mdi-email-outline" />
         <v-text-field v-if="!editMode" disabled label="Teléfono" prepend-icon="mdi-phone-outline" />
         <v-text-field v-if="editMode" label="Teléfono" prepend-icon="mdi-phone-outline" />
@@ -92,10 +92,10 @@
 
 <script>
 export default {
-  // props: ["refuge"],
+   props: ["refugeSelected"],
   data() {
     return {
-      refugeSelected: {},
+      //refugeSelected: {},
       editMode: false,
       
     };
@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     fetchData() {
-      axios.get('/api/refuges/1').then(response => {
+      axios.get('/api/refuges/'.refuge.id).then(response => {
         this.refugeSelected = response.data;
       });
     },
