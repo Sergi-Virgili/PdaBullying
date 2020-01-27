@@ -32,29 +32,53 @@ class RefugeController extends Controller
 
         //DEVOLVER URL
         //
+        $userId = auth()->user()->id;
 
-        //TODO USER ID SAVE
-        $refuge = Refuge::create([
 
-            'name'=> $request->name,
-            'description'=> $request->description,
-            'lat' => $request->lat,
-            'lng' => $request->lng,
-            'house_number' => $request->house_number,
-            'road' => $request->road,
-            'city' => $request->city,
-            'state' => $request->state,
-            'country' => $request->country,
-            'postcode' => $request->postcode,
-            //'img_url' => 
+        $data = request()->validate([
 
+            'name'=> '',
+            'description'=> '',
+            'lat' => '',
+            'lng' => '',
         ]);
+        //TODO USER ID SAVE
+
+        $refuge = request()->user()->refuges()->create($data);
+
+        // [
+        //     'user_id' => $userId,
+        //     'name'=> $request->name,
+        //     'description'=> $request->description,
+        //     'lat' => $request->lat,
+        //     'lng' => $request->lng,
+        //     'house_number' => $request->house_number,
+        //     'road' => $request->road,
+        //     'city' => $request->city,
+        //     'state' => $request->state,
+        //     'country' => $request->country,
+        //     'postcode' => $request->postcode,
+        //     //'img_url' =>
+
+        // ]
 
         // TODO REFACTORING AND USER ID
-        $user = User::find(1);
-        $map = $user->map;
-        $map->refuges()->attach($refuge->id);
-        return response()->json($refuge, 201);
+        // $user = User::find(1);
+        // $map = $user->map;
+        // $map->refuges()->attach($refuge->id);
+        return response()->json([
+            'data' => [
+            'type' => 'refuges',
+            'id' => $refuge->id,
+            'attributes' => [
+                'user_id' => $refuge->user_id,
+                'name' => $refuge->name,
+                'description' => $refuge->description,
+                'lat' => $refuge->lat,
+                'lng' => $refuge->lng
+            ],
+            'links' => url('/refuges/'.$refuge->id)
+        ]] , 201);
     }
 
 
@@ -79,7 +103,7 @@ class RefugeController extends Controller
     }
 
     public function publish(Request $request) {
-     
+
         $refuge = Refuge::find($request->id);
         $refuge->is_Public = true;
         $refuge->update();
@@ -87,7 +111,7 @@ class RefugeController extends Controller
     }
 
     public function hidde(Request $request) {
-       
+
          $refuge = Refuge::find($request->id);
          $refuge->is_Public = false;
          $refuge->update();

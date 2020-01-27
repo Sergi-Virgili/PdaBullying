@@ -51,7 +51,8 @@ class User extends Authenticatable
 
     public function refuges() {
 
-        return $this->map->refuges;
+        return $this->hasMany(Refuge::class);
+       // return $this->map->refuges;
 
     }
 

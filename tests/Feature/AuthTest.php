@@ -28,7 +28,7 @@ class AuthTest extends TestCase
      */
     public function expect_login_returns_token() {
 
-        $this->withoutExceptionHandling();
+
         $this->artisan('passport:install');
         $user = User::create([
             'name' => 'name',
