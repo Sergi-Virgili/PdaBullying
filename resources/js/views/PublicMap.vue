@@ -303,9 +303,7 @@ export default {
     newRefuge() {
       this.openSider("newRefuge");
     },
-    // attachRefuge(event) {
-    //   alert(event);
-    // },
+
     detachRefuge() {
       this.fetchMyRefuges();
     }

@@ -33,6 +33,7 @@ class RefugeController extends Controller
         //DEVOLVER URL
         //
         $userId = auth()->user()->id;
+        $user = auth()->user();
 
 
         $data = request()->validate([
@@ -42,7 +43,7 @@ class RefugeController extends Controller
             'lat' => '',
             'lng' => '',
         ]);
-        //TODO USER ID SAVE
+
 
         $refuge = request()->user()->refuges()->create($data);
 
@@ -62,10 +63,11 @@ class RefugeController extends Controller
 
         // ]
 
-        // TODO REFACTORING AND USER ID
-        // $user = User::find(1);
-        // $map = $user->map;
-        // $map->refuges()->attach($refuge->id);
+
+
+        $map = $user->map;
+        $map->refuges()->attach($refuge->id);
+
         return response()->json([
             'data' => [
             'type' => 'refuges',
