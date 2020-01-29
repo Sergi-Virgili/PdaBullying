@@ -25,12 +25,13 @@
         <a href>Registrate</a>
       </span>
     </v-card-actions>
+    <v-alert v-if="authError">{{authError}}</v-alert>
   </v-card>
 </template>
 
 <script>
 import { AUTH_REQUEST } from "../store/modules/auth";
-import {login} from "../apis/Auth";
+import { login } from "../apis/Auth";
 
 export default {
   data() {
@@ -44,26 +45,22 @@ export default {
   },
 
   methods: {
-    // login: function() {
-    //   const { email, password } = this;
-    //   this.$store.dispatch(AUTH_REQUEST, { email, password }).then(() => {
-    //     this.$router.push("/");
-    //   });
-    // },
     authenticate() {
-      // login({email: this.email, password : this.password}).then(res => console.log(res))
-      this.$store.dispatch('login')
+      this.$store.dispatch("login");
       login(this.form)
         .then(res => {
-
-          this.$store.commit('loginSuccess', res);
-          this.$router.push({path: '/dashboard'})
-
+          this.$store.commit("loginSuccess", res);
+          this.$router.push({ path: "/dashboard" });
         })
-        
-        .catch((error) => {
-          this.$store.commit('loginFailed', {error})
-        })
+
+        .catch(error => {
+          this.$store.commit("loginFailed", { error });
+        });
+    }
+  },
+  computed: {
+    authError() {
+      return this.$store.getters.authError;
     }
   }
 };

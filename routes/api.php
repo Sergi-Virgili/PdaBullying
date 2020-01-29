@@ -24,7 +24,7 @@ Route::namespace('Api')->group(function(){
     Route::post('/register','AuthController@register');
     Route::post('/login','AuthController@login');
     //Refuges
-    Route::post('/refuges','RefugeController@store');
+    Route::post('/refuges','RefugeController@store')->middleware('auth:api');
     Route::get('/refuges','RefugeController@index');
     Route::get('/refuges/{resource}','RefugeController@show');
     Route::delete('/refuges/{resource}','RefugeController@destroy');

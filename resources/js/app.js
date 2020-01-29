@@ -16,6 +16,7 @@ import Vuex from "vuex";
 // import MainApp from "./components/MainApp"
 import StoreData from "./store";
 import appContainer from "./components/appContainer";
+import axios from "axios";
 
 // this part resolve an issue where the markers would not appear
 delete Icon.Default.prototype._getIconUrl;
@@ -37,30 +38,43 @@ const router = new VueRouter({
     mode: "history"
 });
 
-router.beforeEach((to, from, next) => {
-    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-    const currentUser = store.state.currentUser;
-    const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin);
+// TODO Close FrontEnd Routes
 
-    if (requiresAdmin && !currentUserAdmin) {
-        next("login");
-    }
-    if (to.path == "/login" && currentUserAdmin) {
-        next("/dashboard");
-    }
-    if (requiresAdmin && currentUserAdmin) {
-        next();
-    }
-    if (requiresAuth && !currentUser) {
-        next("login");
-    }
-    if (to.path == "/login" && currentUser) {
-        next("/dashboard");
-    }
-    if (requiresAuth && currentUser) {
-        next();
+// router.beforeEach((to, from, next) => {
+//     const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+//     const currentUser = store.state.currentUser;
+//     const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin);
+
+//     if (requiresAdmin && !currentUserAdmin) {
+//         next("login");
+//     }
+//     if (to.path == "/login" && currentUserAdmin) {
+//         next("/dashboard");
+//     }
+//     if (requiresAdmin && currentUserAdmin) {
+//         next();
+//     }
+//     if (requiresAuth && !currentUser) {
+//         next("/login");
+//     }
+//     if (to.path == "/login" && currentUser) {
+//         next("/dashboard");
+//     }
+//     if (requiresAuth && currentUser) {
+//         next();
+//     }
+// });
+
+axios.interceptors.response.use(null, errors => {
+    if (error.response.status == 401) {
+        store.commit("logout");
+        router.push("login");
     }
 });
+if (store.state.currentUser) {
+    axios.defaults.headers.common["Authorization"] =
+        "Bearer " + store.state.currentUser.token;
+}
 
 /**
  * The following block of code may be used to automatically register your

@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         if(!auth()->attempt($loginData)){
 
-            return response()->json(['message' => 'Error de autenticación']);
+            return response()->json(['message' => 'Error de autenticación'], 401);
 
 
         };

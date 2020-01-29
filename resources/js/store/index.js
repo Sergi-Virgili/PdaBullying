@@ -14,7 +14,7 @@ export default {
             return state.loading;
         },
         isLoggedIn(state) {
-            return state.isLoading;
+            return state.isLoggedIn;
         },
         currentUser(state) {
             return state.currentUser;
@@ -30,10 +30,10 @@ export default {
         },
         loginSuccess(state, payload) {
             state.auth_error = null;
-            state.isLoading = true;
+            state.isLoggedIn = true;
             state.loading = false;
-            state.currentUser = Object.assign({}, payload.user, {
-                token: payload.access_token
+            state.currentUser = Object.assign({}, payload.data.user, {
+                token: payload.data.access_token
             });
 
             localStorage.setItem("user", JSON.stringify(state.currentUser));
