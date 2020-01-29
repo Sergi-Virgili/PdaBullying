@@ -65,7 +65,7 @@ class RefugeController extends Controller
     }
 
 
-    public function update(Request $request, Resource $resource)
+    public function update(Request $request, int $id)
     {
         $refuge = Refuge::find($id);
         $refuge->update([
@@ -81,7 +81,7 @@ class RefugeController extends Controller
 
         $refuge->save();
 
-        return response();
+        return response()->json($refuge);
     }
 
 

@@ -20,15 +20,15 @@
           
      
         <v-text-field v-if="!editMode" disabled label="Email" prepend-icon="mdi-email-outline" v-model="refugeSelected.email" />
-        <v-text-field v-if="editMode" label="Email" prepend-icon="mdi-email-outline" />
-        <v-text-field v-if="!editMode" disabled label="Teléfono" prepend-icon="mdi-phone-outline" />
-        <v-text-field v-if="editMode" label="Teléfono" prepend-icon="mdi-phone-outline" />
-        <v-text-field v-if="!editMode" disabled label="Calle" prepend-icon="mdi-map-marker-outline" />
-        <v-text-field v-if="editMode" label="Calle" prepend-icon="mdi-map-marker-outline" />
-        <v-text-field v-if="!editMode" disabled label="Numero" prepend-icon="mdi-home-map-marker" />
-        <v-text-field v-if="editMode" label="Numero" prepend-icon="mdi-home-map-marker" />
-        <v-text-field v-if="!editMode" disabled label="Ciudad" prepend-icon="mdi-map-outline" />
-        <v-text-field v-if="editMode" label="Ciudad" prepend-icon="mdi-map-outline" />
+        <v-text-field v-if="editMode" label="Email" prepend-icon="mdi-email-outline" v-model="refugeSelected.email" />
+        <v-text-field v-if="!editMode" disabled label="Teléfono" prepend-icon="mdi-phone-outline" v-model="refugeSelected.phone"/>
+        <v-text-field v-if="editMode" label="Teléfono" prepend-icon="mdi-phone-outline" v-model="refugeSelected.phone"/>
+        <v-text-field v-if="!editMode" disabled label="Calle" prepend-icon="mdi-map-marker-outline" v-model="refugeSelected.road"/>
+        <v-text-field v-if="editMode" label="Calle" prepend-icon="mdi-map-marker-outline" v-model="refugeSelected.road"/>
+        <v-text-field v-if="!editMode" disabled label="Numero" prepend-icon="mdi-home-map-marker" v-model="refugeSelected.house_number"/>
+        <v-text-field v-if="editMode" label="Numero" prepend-icon="mdi-home-map-marker" v-model="refugeSelected.house_number"/>
+        <v-text-field v-if="!editMode" disabled label="Ciudad" prepend-icon="mdi-map-outline" v-model="refugeSelected.city"/>
+        <v-text-field v-if="editMode" label="Ciudad" prepend-icon="mdi-map-outline" v-model="refugeSelected.city"/>
 
     
         <!-- <v-text-field
@@ -134,6 +134,7 @@ export default {
       axios.put(`/api/refuges/${this.refugeSelected.id}`, params).then((response) => {
       this.editMode = false;
       const refuge = response.data;
+      console.log(response.data)
       this.$emit('update', refuge);
       });
     },
