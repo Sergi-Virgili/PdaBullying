@@ -1,6 +1,5 @@
 <template>
   <section class="publishTable row">
-    
     <table class="table table-hover col-md-6">
       <thead>
         <tr>
@@ -20,17 +19,38 @@
           <td>{{refuge.name}}</td>
           <td>{{refuge.created_at}}</td>
           <td>
-            <button
-              class="btn btn-success"
+            <v-btn
+              class="rounded"
+              tile
+              outlined
+              color="success"
               v-if="!refuge.is_Public"
               @click="onClickPublish(index)"
-            >Publicar</button>
-            <button
-              class="btn btn-primary"
+              x-small
+            >Publicar</v-btn>
+            <v-btn
+              class="rounded"
+              tile
+              outlined
+              color="blue"
               v-if="refuge.is_Public"
               @click="onClickHidde(index)"
-            >Ocultar</button>
-            <button class="btn btn-danger" @click="onClickDelete(index)">Delete</button>
+              x-small
+            >Ocultar</v-btn>
+
+            <v-btn
+              class="rounded"
+              tile
+              outlined
+              color="grey"
+              dark
+              @click="openDialogRefuge"
+              x-small
+            >Ver</v-btn>
+
+            <v-btn class="ma-2" outlined fab color="grey" @click="onClickDelete(index)" x-small>
+              <v-icon>fa-trash</v-icon>
+            </v-btn>
           </td>
         </tr>
       </tbody>
@@ -41,7 +61,7 @@
 
 <script>
 export default {
-    name: 'Publish',
+  name: "Publish",
   data() {
     return {
       refuges: []
