@@ -125,7 +125,7 @@
           <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
         </template>
         <!-- <refugeModal-component></refugeModal-component> -->
-        <newRefugeModal-component></newRefugeModal-component>
+        <refugeNew-component></refugeNew-component>
       </v-dialog>
     </v-app>
   </div>
