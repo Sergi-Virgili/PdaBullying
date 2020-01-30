@@ -49,22 +49,13 @@ class DeleteRefugesTest extends TestCase
         // $this->assertCount(0, Refuge::all());
 
     }
-    public function admin_can_delete_all_refuges() {
+    // public function admin_can_delete_all_refuges() {
 
-        // $this->actingAs($user = factory(User::class)->create(),'api');
-        // $refuge = factory(Refuge::class)->create();
 
-        // $response = $this->json('delete', '/api/refuges/'.$refuge->id);
-        // $this->assertCount(0, Refuge::all());
 
-    }
-    public function all_attaches_map_deleted_when_refuge_is_deleted() {
+    // }
+    // public function all_attaches_map_deleted_when_refuge_is_deleted() {
 
-        // $this->actingAs($user = factory(User::class)->create(),'api');
-        // $refuge = factory(Refuge::class)->create();
 
-        // $response = $this->json('delete', '/api/refuges/'.$refuge->id);
-        // $this->assertCount(0, Refuge::all());
-
-    }
+    // }
 }

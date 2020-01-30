@@ -14,9 +14,9 @@ class Admin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next,  $guard = null)
     {
-        if (!Auth::user()->is_Admin) {
+        if (!Auth::user()->is_admin) {
             abort(403, 'Unauthorized action.');
         }
         return $next($request);

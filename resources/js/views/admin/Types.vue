@@ -1,14 +1,15 @@
 <template>
-  <section>
-    <createtype-component></createtype-component>
-  </section>
+    <section>
+        <section class="container">
+            <crudtype-component></crudtype-component>
+        </section>
+    </section>
 </template>
 
 <script>
 export default {
-  name: "Types"
+    name: "Types"
 };
 </script>
 
-<style>
-</style>
+<style lang="scss" scoped></style>

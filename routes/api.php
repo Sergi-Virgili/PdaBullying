@@ -32,12 +32,15 @@ Route::namespace('Api')->group(function(){
     //Users
     Route::post('/users', 'UserController@store');
     Route::put('/users/{id}', 'UserController@update');
-    //Type
+    //TYPES ROUTES
 
     Route::get('/types','Typecontroller@index');
-    Route::post('/types', 'Typecontroller@store');
-    Route::delete('/types/{type}','Typecontroller@destroy');
-    Route::put('/types/{type}','Typecontroller@update');
+
+    Route::group(['middleware' => ['auth:api', 'admin']], function(){
+        Route::post('/types', 'Typecontroller@store');
+        Route::delete('/types/{type}','Typecontroller@destroy');
+        Route::put('/types/{type}','Typecontroller@update');
+    });
 
     Route::patch('/refuges/publish','RefugeController@publish');
     Route::patch('/refuges/hidde','RefugeController@hidde');
@@ -47,4 +50,14 @@ Route::namespace('Api')->group(function(){
     Route::get('/maps/attach/{refugeId}','MapController@attachRefuge')->middleware('auth:api');
     Route::get('/maps/detach/{refugeId}','MapController@detachRefuge')->middleware('auth:api');
     Route::patch('/maps/{mapId}', 'MapController@updateProperties');
+
+    //USERS ROUTES
+    Route::put('/users/{type}','Typecontroller@update');
+
+    //ADMIN USERS ROUTES
+    Route::group(['middleware' => ['auth:api', 'admin']], function(){
+        Route::get('/users','Usercontroller@index');
+
+        Route::delete('/users/{type}','Usercontroller@destroy');
+    });
 });
