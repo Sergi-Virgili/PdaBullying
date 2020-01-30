@@ -17,7 +17,7 @@ class CreateRefugesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('description');
-            $table->string('logoUrl')->nullable();
+            $table->string('logoUrl')->nullable()->default('/img/flower.png');
             $table->string('web')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();

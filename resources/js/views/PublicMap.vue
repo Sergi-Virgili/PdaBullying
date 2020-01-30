@@ -39,7 +39,12 @@
                     >
                         <l-popup>
                             <div class="popUp">
-                                <img :src="refuge.logoUrl" alt />
+                                <v-img
+                                    :src="refuge.logoUrl"
+                                    height="100px"
+                                    contain
+                                    alt
+                                />
                                 <h2>{{ refuge.name }}</h2>
                                 <div class="email">
                                     <v-icon small color="teal darken-2"
@@ -98,7 +103,12 @@
 
                         <l-popup>
                             <div class="popUp">
-                                <img :src="refuge.logoUrl" alt />
+                                <v-img
+                                    height="100px"
+                                    contain
+                                    :src="refuge.logoUrl"
+                                    alt
+                                />
                                 <h2>{{ refuge.name }}</h2>
                                 <div class="email">
                                     <v-icon small color="teal darken-2"
