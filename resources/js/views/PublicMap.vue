@@ -50,7 +50,7 @@
                   <v-icon small color="teal darken-2">fa-phone</v-icon>
                   <h3>{{ refuge.phone }}</h3>
                 </div>
-                <v-dialog v-model="dialog" width="600px" style="z-index:1000000">
+                <v-dialog v-model="dialog" width="600px" style="z-index:10000">
                   <template v-slot:activator="{ on }">
                     <v-btn x-small color="teal darken-2" width="100%" v-on="on" dark @click="openDialogRefuge">Ver</v-btn>
                   </template>
@@ -98,12 +98,7 @@
                       @update="updateRefuge(index, ...arguments)"
                      
                     ></refugeModal-component>
-                    <refugeNew-component
-                    v-if="sider == 'newRefuge'"
-                    :newGeoMarker="newGeoMarker"
                     
-                    class="refugeSider"
-                    ></refugeNew-component>
              
                 </v-dialog>
               </div>
@@ -111,10 +106,15 @@
           </l-marker>
         </div>
       </l-map>
-      <!-- <v-navigation-drawer v-model="drawerRight" right absolute temporary>
+      <v-navigation-drawer v-model="drawerRight" right absolute temporary>
+        <refugeNew-component
+                    v-if="sider == 'newRefuge'"
+                    :newGeoMarker="newGeoMarker"
+                    
+                    class="refugeSider"
+                    ></refugeNew-component>
         
-        
-      </v-navigation-drawer> -->
+      </v-navigation-drawer>
     </div>
     <v-bottom-sheet v-model="mode.list" class="button_list">
       <template v-slot:activator="{ on }">
@@ -122,7 +122,7 @@
           <i style="color:orange" class="fas fa-angle-down fa-2x"></i>
         </v-btn>
       </template>
-      <v-content class="button_list" style="z-index:20000000">
+      <v-content class="button_list" style="z-index:200000">
         <v-card class="button_list">
           <refugeList-component :refuges="refuges"></refugeList-component>
         </v-card>
@@ -297,9 +297,9 @@ export default {
       refuge.geoMarker = this.newGeoMarker;
       this.refuges.push(refuge);
       this.sider = 'newRefuge';
-      this.dialog = true;
+      //this.dialog = true;
       this.centerMap(this.newGeoMarker);
-      //this.drawerRight = true;
+      this.drawerRight = true;
 
       
     },
