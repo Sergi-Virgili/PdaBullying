@@ -18,24 +18,24 @@
           <label class="form-check-label" :for="type.name">{{ type.name }}</label>
         </div>
       </div>
-      <v-text-field label="Email" prepend-icon="mdi-email-outline" :value="refuge.mail" />
-      <v-text-field label="Teléfono" prepend-icon="mdi-phone-outline" :value="refuge.phone" />
+      <v-text-field label="Email" prepend-icon="mdi-email-outline" v-model="refuge.email" />
+      <v-text-field label="Teléfono" prepend-icon="mdi-phone-outline" v-model="refuge.phone" />
       <v-text-field
         label="Comunitat Autónoma"
         prepend-icon="mdi-map-marker-outline"
         :value="refuge.state"
       />
-      <v-text-field label="País" prepend-icon="mdi-map-marker-outline" :value="refuge.country" />
+      <v-text-field label="País" prepend-icon="mdi-map-marker-outline" v-model="refuge.country" />
       
 
-      <v-text-field label="Carrer" prepend-icon="mdi-map-marker-outline" :value="refuge.road" />
+      <v-text-field label="Carrer" prepend-icon="mdi-map-marker-outline" v-model="refuge.road" />
       <v-text-field
         label="Nombre del Carrer"
         prepend-icon="mdi-map-marker-outline"
         :value="refuge.house_number"
       />
-      <v-text-field label="Ciutat" prepend-icon="mdi-map-marker-outline" :value="refuge.city" />
-      <v-text-field label="CP" prepend-icon="mdi-map-marker-outline" :value="refuge.postcode" />
+      <v-text-field label="Ciutat" prepend-icon="mdi-map-marker-outline" v-model="refuge.city" />
+      <v-text-field label="CP" prepend-icon="mdi-map-marker-outline" v-model="refuge.postcode" />
       <!-- <label for="geoposition">
         <p>Geoposició: {{ lat }} {{ lng }}</p>
       </label> -->
@@ -62,6 +62,8 @@ export default {
         country: "",
         name: "",
         description: "",
+        email: "",
+        phone: "",
       },
       
       types: []

@@ -38,6 +38,14 @@ class RefugeController extends Controller
             'description'=> '',
             'lat' => '',
             'lng' => '',
+            'house_number' => '',
+            'road' => '',
+            'city' => '',
+            'state' => '',
+            'country' => '',
+            'postcode' => '',
+            'phone' => '',
+            'email' => '',
         ]);
 
 
