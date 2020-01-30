@@ -5,7 +5,7 @@
         <v-list dense>
           <v-list-item :to="{name:'home'}" link>
             <v-list-item-action>
-              <v-icon>mdi-home</v-icon>
+              <v-icon color="orange darken-3">mdi-home</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Home</v-list-item-title>
@@ -13,7 +13,7 @@
           </v-list-item>
           <v-list-item :to="{name:'map'}">
             <v-list-item-action>
-              <v-icon>mdi-map-marker-outline</v-icon>
+              <v-icon color="orange darken-3">mdi-map-marker-outline</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
@@ -22,7 +22,7 @@
           </v-list-item>
           <v-list-item :to="{name:'mymap'}" link>
             <v-list-item-action>
-              <v-icon>mdi-map-marker</v-icon>
+              <v-icon color="orange darken-3">mdi-map-marker</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Mi Mapa</v-list-item-title>
@@ -30,7 +30,7 @@
           </v-list-item>
           <v-list-item :to="{name:'mycode'}" link>
             <v-list-item-action>
-              <v-icon>mdi-code-outline</v-icon>
+              <v-icon color="orange darken-3">mdi-code-tags</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Mi Iframe</v-list-item-title>
@@ -39,7 +39,7 @@
 
           <v-list-item link>
             <v-list-item-action>
-              <v-icon>mdi-comment-outline</v-icon>
+              <v-icon color="orange darken-3">mdi-comment-outline</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Contacto</v-list-item-title>
@@ -48,7 +48,7 @@
           <v-divider></v-divider>
           <v-list-item :to="{name:'publish'}" link>
             <v-list-item-action>
-              <v-icon>mdi-bus</v-icon>
+              <v-icon color="orange darken-3">mdi-bus</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Publicar</v-list-item-title>
@@ -56,7 +56,7 @@
           </v-list-item>
           <v-list-item :to="{name:'users'}" link>
             <v-list-item-action>
-              <v-icon>mdi-person</v-icon>
+              <v-icon color="orange darken-3">mdi-human-greeting</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Usuarios</v-list-item-title>
@@ -64,7 +64,7 @@
           </v-list-item>
           <v-list-item :to="{name:'types'}" link>
             <v-list-item-action>
-              <v-icon>mdi-signs</v-icon>
+              <v-icon color="orange darken-3">mdi-folder</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Tipos</v-list-item-title>
@@ -73,7 +73,7 @@
           <v-divider></v-divider>
           <v-list-item :to="{name:'profile'}" link>
             <v-list-item-action>
-              <v-icon>mdi-user</v-icon>
+              <v-icon color="orange darken-3">mdi-account</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Profile</v-list-item-title>
@@ -81,7 +81,7 @@
           </v-list-item>
           <v-list-item :to="{name:'login'}" link>
             <v-list-item-action>
-              <v-icon>fa-sign-out-alt</v-icon>
+              <v-icon color="orange darken-3">fa-sign-out-alt</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Logout</v-list-item-title>
@@ -89,7 +89,7 @@
           </v-list-item>
           <v-list-item :to="{name:'register'}" link>
             <v-list-item-action>
-              <v-icon>fa-sign-in-alt</v-icon>
+              <v-icon color="orange darken-3">fa-sign-in-alt</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Register</v-list-item-title>
