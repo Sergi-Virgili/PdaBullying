@@ -14,13 +14,13 @@ class MapController extends Controller
 {
     public function show($userId) {
 
-        //TODO USER ID IS FAKED!!!!
-        $user = User::find($userId);
 
-        $refuges = $user->refuges();
+        $user = User::find($userId);
+        $map = $user->map;
+        $refuges = $map->refuges;
         $refuges = Refuge::addGeoMarkerFields($refuges);
         $center = [$user->map->lat , $user->map->lng];
-        $zoom = $user->map->zoom;
+        $zoom = $map->zoom;
         return response()->json([
             'center' => $center,
             'zoom' => $zoom,
@@ -29,22 +29,22 @@ class MapController extends Controller
     }
     public function attachRefuge($refugeId) {
 
-        //TODO TOKEN AUTH !!
-        $user = User::find(1);
+        $userId = auth()->user()->id;
+        $user = User::find($userId);
         $map = $user->map;
         $map->refuges()->attach($refugeId);
 
-        return $user->refuges();
-        $refuge = Refuge::find($refugeId);
-        $msg = 'La Ubicación se ha añadido a su mapa';
-        return $msg;
+        return $map->refuges;
+
     }
 
     public function detachRefuge($refugeId) {
-        $user = User::find(1);
+
+        $userId = auth()->user()->id;
+        $user = User::find($userId);
         $map = $user->map;
         $map->refuges()->detach($refugeId);
-        return $user->refuges();
+        return $map->refuges;
     }
 
     public function updateProperties(Request $request, $mapId ) {

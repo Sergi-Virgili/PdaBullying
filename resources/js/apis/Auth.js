@@ -1,7 +1,16 @@
 import Api from "./Api";
 
-export default {
-    login(data) {
-        return Api.post("login", data);
-    }
+export function login(credentials) {
+        return Api.post("login", credentials);
 };
+
+export function getlocalUser() {
+    
+    const userStr = localStorage.getItem('user')
+
+    if(!userStr) {
+        return null;
+    }
+ 
+    return JSON.parse(userStr);
+}

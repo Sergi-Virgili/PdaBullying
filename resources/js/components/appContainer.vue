@@ -79,22 +79,35 @@
               <v-list-item-title>Profile</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="{name:'login'}" link>
-            <v-list-item-action>
-              <v-icon>fa-sign-out-alt</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Logout</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item :to="{name:'register'}" link>
-            <v-list-item-action>
-              <v-icon>fa-sign-in-alt</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Register</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+          <template v-if="currentUser">
+            <v-list-item @click.prevent="logout" link>
+              <v-list-item-action>
+                <v-icon>fa-sign-out-alt</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Logout</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+          <template v-if="!currentUser">
+            <v-list-item :to="{name:'login'}" link>
+              <v-list-item-action>
+                <v-icon>fa-sign-out-alt</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Login</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item :to="{name:'register'}" link>
+              <v-list-item-action>
+                <v-icon>fa-sign-in-alt</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Register</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
         </v-list>
       </v-navigation-drawer>
 
@@ -114,8 +127,7 @@
           <v-row align="center" justify="center">
             <v-col class="text-center">
               <!-- <MainApp /> -->
-              <router-view
-               ></router-view>
+              <router-view></router-view>
 
               <!-- <map-component class="map"></map-component> -->
             </v-col>
@@ -144,8 +156,14 @@ export default {
     dialog: false
   }),
   methods: {
-    openDialog() {
-      alert()
+    logout() {
+      this.$store.commit("logout");
+      this.$router.push("/login");
+    }
+  },
+  computed: {
+    currentUser() {
+      return this.$store.getters.currentUser;
     }
   }
 };

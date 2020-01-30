@@ -5,25 +5,18 @@
  */
 
 require("./bootstrap");
-import Vue from "vue"
+import Vue from "vue";
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Vuetify from "../plugins/vuetify";
-import VueRouter from "vue-router"
-import { routes } from "./routes"
+import VueRouter from "vue-router";
+import { routes } from "./routes";
+import Vuex from "vuex";
 // import MainApp from "./components/MainApp"
-
-import appContainer from "./components/appContainer"
-
-
-delete Icon.Default.prototype._getIconUrl;
-
-Icon.Default.mergeOptions({
-    iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-    iconUrl: require("leaflet/dist/images/marker-icon.png"),
-    shadowUrl: require("leaflet/dist/images/marker-shadow.png")
-});
+import StoreData from "./store";
+import appContainer from "./components/appContainer";
+import axios from "axios";
 
 // this part resolve an issue where the markers would not appear
 delete Icon.Default.prototype._getIconUrl;
@@ -36,12 +29,53 @@ Icon.Default.mergeOptions({
 
 //window.Vue = require("vue");
 Vue.use(VueRouter);
-//Vue.use(Vuex);
+Vue.use(Vuex);
+
+const store = new Vuex.Store(StoreData);
 
 const router = new VueRouter({
     routes,
-    mode: 'history'
-})
+    mode: "history"
+});
+
+// TODO Close FrontEnd Routes
+
+// router.beforeEach((to, from, next) => {
+//     const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+//     const currentUser = store.state.currentUser;
+//     const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin);
+
+//     if (requiresAdmin && !currentUserAdmin) {
+//         next("login");
+//     }
+//     if (to.path == "/login" && currentUserAdmin) {
+//         next("/dashboard");
+//     }
+//     if (requiresAdmin && currentUserAdmin) {
+//         next();
+//     }
+//     if (requiresAuth && !currentUser) {
+//         next("/login");
+//     }
+//     if (to.path == "/login" && currentUser) {
+//         next("/dashboard");
+//     }
+//     if (requiresAuth && currentUser) {
+//         next();
+//     }
+// });
+
+axios.interceptors.response.use(null, errors => {
+    if (error.response.status == 401) {
+        store.commit("logout");
+        router.push("login");
+    }
+});
+if (store.state.currentUser) {
+    axios.defaults.headers.common["Authorization"] =
+        "Bearer " + store.state.currentUser.token;
+}
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -61,10 +95,7 @@ Vue.component(
     "MapComponent",
     require("./components/map-component.vue").default
 );
-Vue.component(
-    "MainApp",
-    require("./components/MainApp.vue").default
-);
+Vue.component("MainApp", require("./components/MainApp.vue").default);
 
 Vue.component(
     "map-component",
@@ -148,10 +179,10 @@ Vue.component(
 
 const app = new Vue({
     router,
+    store,
     vuetify: Vuetify,
     el: "#app",
     components: {
-        
-         appContainer,
+        appContainer
     }
 });
