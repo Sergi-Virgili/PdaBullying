@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { AUTH_REQUEST } from "../store/modules/auth";
+
 import { login } from "../apis/Auth";
 
 export default {

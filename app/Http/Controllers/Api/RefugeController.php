@@ -27,11 +27,7 @@ class RefugeController extends Controller
 
     public function store(Request $request)
     {
-        //NEW IMAGE ( base64 - save - cambias nombre - aleatorio /.jpg )
-        //SAVE IMAGE storage
-
-        //DEVOLVER URL
-        //
+    
         $userId = auth()->user()->id;
         $user = auth()->user();
 
@@ -96,6 +92,7 @@ class RefugeController extends Controller
         $refuge = Refuge::find($id);
         $refuge->update([
             'name' => $request->name,
+            'description' => $request->description,
             'house_number' => $request->house_number,
             'email' => $request->email,
             'phone' => $request->phone,

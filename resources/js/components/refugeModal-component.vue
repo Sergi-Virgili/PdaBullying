@@ -65,7 +65,7 @@
         tile 
         outlined 
         color="success"
-        @click="detachRefuge">>
+        @click="detachRefuge">
         <span>Remove</span>
       </v-btn>
       <v-btn class="rounded" 
@@ -116,7 +116,7 @@ export default {
     OnClickDelete(){
       axios.delete(`/api/refuges/${this.refuge.id}`).then(()=> {
         this.editMode = false
-        this.$emit("delete")
+        // this.$emit("delete")
       })
       
     },

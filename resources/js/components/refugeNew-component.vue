@@ -1,17 +1,9 @@
 <template>
-  <div class="card">
-    <div class="card-header">Nova Localització</div>
-    <div class="card-body">
-      <label for="name">Nom</label>
-      <input class="form-control" type="text" name="name" id="name" v-model="name" />
-      <label for="description">Description</label>
-      <textarea
-        class="form-control"
-        type="text"
-        name="description"
-        id="description"
-        v-model="description"
-      ></textarea>
+  <v-card>
+    <h4>Nueva Recurso</h4>
+    <form action>
+      <v-text-field label="Name" v-model="refuge.name"/>
+      <v-text-field label="Descripción" v-model="refuge.description"/>
       <div v-for="type in types" :key="type.id">
         <div class="form-check">
           <input
@@ -24,33 +16,30 @@
           <label class="form-check-label" :for="type.name">{{ type.name }}</label>
         </div>
       </div>
-      <p>Dirección</p>
-      <label for="street">Carrer</label>
-      <input class="form-control" type="text" name="street" id="street" :value="refuge.road" />
-      <label for="number">Número</label>
-      <input
-        class="form-control"
-        type="text"
-        name="number"
-        id="number"
+      <v-text-field label="Email" prepend-icon="mdi-email-outline" :value="refuge.mail" />
+      <v-text-field label="Teléfono" prepend-icon="mdi-phone-outline" :value="refuge.phone" />
+      <v-text-field
+        label="Comunitat Autónoma"
+        prepend-icon="mdi-map-marker-outline"
+        :value="refuge.state"
+      />
+      <v-text-field label="País" prepend-icon="mdi-map-marker-outline" :value="refuge.country" />
+      
+
+      <v-text-field label="Carrer" prepend-icon="mdi-map-marker-outline" :value="refuge.road" />
+      <v-text-field
+        label="Nombre del Carrer"
+        prepend-icon="mdi-map-marker-outline"
         :value="refuge.house_number"
       />
-      <label for="city">Ciutat</label>
-      <input class="form-control" type="text" name="city" id="city" :value="refuge.city" />
-      <label for="postcode">Codi Postal</label>
-      <input
-        class="form-control"
-        type="text"
-        name="postcode"
-        id="postcode"
-        :value="refuge.postcode"
-      />
-      <div>
-        <p>geoposition: {{ lat }} {{ lng }}</p>
-      </div>
-      <button class="btn btn-success" @click="saveNewRefuge">OK</button>
-    </div>
-  </div>
+      <v-text-field label="Ciutat" prepend-icon="mdi-map-marker-outline" :value="refuge.city" />
+      <v-text-field label="CP" prepend-icon="mdi-map-marker-outline" :value="refuge.postcode" />
+      <!-- <label for="geoposition">
+        <p>Geoposició: {{ lat }} {{ lng }}</p>
+      </label> -->
+    </form>
+    <button class="btn btn-success" @click="saveNewRefuge">OK</button>
+  </v-card>
 </template>
 
 <script>
@@ -67,17 +56,17 @@ export default {
         country: "",
         postcode: "",
         state: "",
-        country: ""
+        country: "",
+        name: "",
+        description: "",
       },
-      name: "",
-      description: "",
+      
       types: []
     };
   },
   mounted() {
     this.lat = this.newGeoMarker[0];
     this.lng = this.newGeoMarker[1];
-
     this.fetchLocationData();
     this.fetchTypeData();
   },
@@ -102,8 +91,8 @@ export default {
     },
     saveNewRefuge() {
       let formData = {
-        name: this.name,
-        description: this.description,
+        name: this.refuge.name,
+        description: this.refuge.description,
         lat: this.lat,
         lng: this.lng,
         road: this.refuge.road,
@@ -111,15 +100,34 @@ export default {
         postcode: this.refuge.postcode,
         house_number: this.refuge.house_number,
         country: this.refuge.country,
-        state: this.refuge.state
+        state: this.refuge.state,
+        email: this.refuge.email,
+        phone: this.refuge.phone
       };
-
       axios
         .post("/api/refuges/", formData)
-        .then(response => this.$emit("closeSider"));
+        .then(response => console.log(response));
     }
   }
 };
 </script>
 
-<style></style>
+<style>
+h4 {
+  color: orange;
+  padding: 2%;
+  text-align: center;
+}
+form {
+  margin-left: 3%;
+  margin-right: 3%;
+  color: grey;
+}
+.btn.btn.btn-success {
+  margin-left: 2%;
+  color: white;
+}
+.v-card {
+  height: 100%;
+}
+</style>

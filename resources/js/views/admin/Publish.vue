@@ -13,7 +13,7 @@
         <tr
           v-for="(refuge, index) in refuges"
           :key="index"
-          v-bind:class="{'table-danger':!refuge.is_Public}"
+          
         >
           <th scope="row">{{refuge.id}}</th>
           <td>{{refuge.name}}</td>
@@ -48,7 +48,7 @@
               x-small
             >Ver</v-btn>
 
-            <v-btn class="ma-2" outlined fab color="grey" @click="onClickDelete(index)" x-small>
+            <v-btn class="ma-2" outlined fab color="grey" @click="onClickDelete()" x-small>
               <v-icon>fa-trash</v-icon>
             </v-btn>
           </td>
@@ -98,6 +98,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>

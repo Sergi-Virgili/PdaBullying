@@ -46,7 +46,28 @@
                   <v-icon small color="teal darken-2">mdi-email</v-icon>
                   <h3>{{ refuge.email }}</h3>
                 </div>
-                <h3>{{ refuge.phone }}</h3>
+                <div class="phone">
+                  <v-icon small color="teal darken-2">fa-phone</v-icon>
+                  <h3>{{ refuge.phone }}</h3>
+                </div>
+                <v-dialog v-model="dialog" width="600px" style="z-index:1000000">
+                  <template v-slot:activator="{ on }">
+                    <v-btn x-small color="teal darken-2" width="100%" v-on="on" dark @click="openDialogRefuge">Ver</v-btn>
+                  </template>
+                  <refugeModal-component
+                      v-if="sider == 'refuge'"
+                     :refugeSelected="refugeSelected"
+                      @update="updateRefuge(index, ...arguments)"
+                     
+                    ></refugeModal-component>
+                    <newRefugeModal-component
+                    v-if="sider == 'newRefuge'"
+                    :newGeoMarker="newGeoMarker"
+                    
+                    class="refugeSider"
+                    ></newRefugeModal-component>
+             
+                </v-dialog>
               </div>
             </l-popup>
           </l-marker>
@@ -85,14 +106,14 @@
                       v-if="sider == 'refuge'"
                      :refugeSelected="refugeSelected"
                       @update="updateRefuge(index, ...arguments)"
-                      @delete="deleteRefuge"
+                     
                     ></refugeModal-component>
-                    <newRefugeModal-component
+                    <refugeNew-component
                     v-if="sider == 'newRefuge'"
                     :newGeoMarker="newGeoMarker"
                     
                     class="refugeSider"
-                    ></newRefugeModal-component>
+                    ></refugeNew-component>
              
                 </v-dialog>
               </div>
@@ -116,7 +137,7 @@
           <refugeList-component :refuges="refuges"></refugeList-component>
         </v-card>
       </v-content>
-    </v-bottom-sheet>
+    </v-bottom-sheet> 
 
     <!-- <section class="sider" v-if="sider">
         <refuge-component
@@ -282,13 +303,13 @@ export default {
       }
       this.mode.addRefuge = false;
       this.newGeoMarker = [event.latlng.lat, event.latlng.lng];
-      //let refuge = {};
-      //refuge.geoMarker = this.newGeoMarker;
-      //this.refuges.push(refuge);
+      let refuge = {};
+      refuge.geoMarker = this.newGeoMarker;
+      this.refuges.push(refuge);
       this.sider = 'newRefuge';
       this.dialog = true;
-      //this.centerMap(this.newGeoMarker);
-      //this.drawerRight = true;
+      this.centerMap(this.newGeoMarker);
+      this.drawerRight = true;
 
       
     },
