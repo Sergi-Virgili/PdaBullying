@@ -1,6 +1,6 @@
 <template>
   <section class="refugeList" v-if="refuges">
-      ¡<i style="color:orange" class="fas fa-angle-down fa-2x"></i>
+      <i style="color:orange" class="fas fa-angle-down fa-2x"></i>
       <h2>Lista de Activos</h2>
     
       <v-expansion-panels accordion>

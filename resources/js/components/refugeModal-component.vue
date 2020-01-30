@@ -1,4 +1,6 @@
 <template>
+<div>
+  
     <v-card >
     <v-card-title class="pb-0">
       <img :src="refugeSelected.logoUrl" />
@@ -91,6 +93,7 @@
       </v-btn>
     </v-card-actions>
   </v-card>
+</div>
 </template>
 
 <script>

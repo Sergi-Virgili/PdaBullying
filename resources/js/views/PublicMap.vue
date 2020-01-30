@@ -54,18 +54,8 @@
                   <template v-slot:activator="{ on }">
                     <v-btn x-small color="teal darken-2" width="100%" v-on="on" dark @click="openDialogRefuge">Ver</v-btn>
                   </template>
-                  <refugeModal-component
-                      v-if="sider == 'refuge'"
-                     :refugeSelected="refugeSelected"
-                      @update="updateRefuge(index, ...arguments)"
-                     
-                    ></refugeModal-component>
-                    <newRefugeModal-component
-                    v-if="sider == 'newRefuge'"
-                    :newGeoMarker="newGeoMarker"
+                  
                     
-                    class="refugeSider"
-                    ></newRefugeModal-component>
              
                 </v-dialog>
               </div>
@@ -98,7 +88,7 @@
                   <v-icon small color="teal darken-2">fa-phone</v-icon>
                   <h3>{{ refuge.phone }}</h3>
                 </div>
-                <v-dialog v-model="dialog" width="600px" style="z-index:1000000">
+                <v-dialog v-model="dialog" width="600px" >
                   <template v-slot:activator="{ on }">
                     <v-btn x-small color="teal darken-2" width="100%" v-on="on" dark @click="openDialogRefuge">Ver</v-btn>
                   </template>
@@ -121,10 +111,10 @@
           </l-marker>
         </div>
       </l-map>
-      <v-navigation-drawer v-model="drawerRight" right absolute temporary>
+      <!-- <v-navigation-drawer v-model="drawerRight" right absolute temporary>
         
         
-      </v-navigation-drawer>
+      </v-navigation-drawer> -->
     </div>
     <v-bottom-sheet v-model="mode.list" class="button_list">
       <template v-slot:activator="{ on }">
@@ -219,8 +209,8 @@ export default {
   },
   methods: {
     openDialogRefuge() {
-      this.dialog = true;
       this.openSider('refuge');
+      this.dialog = true;
     },
     addRefugeMode() {
       //TODO CHANGE CURSOS IN MAP
@@ -309,7 +299,7 @@ export default {
       this.sider = 'newRefuge';
       this.dialog = true;
       this.centerMap(this.newGeoMarker);
-      this.drawerRight = true;
+      //this.drawerRight = true;
 
       
     },

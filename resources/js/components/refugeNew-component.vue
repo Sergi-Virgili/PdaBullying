@@ -1,7 +1,9 @@
 <template>
+<div>
+  
   <v-card>
-    <h4>Nueva Recurso</h4>
-    <form action>
+    <h4>Nuevo Recurso</h4>
+    <v-form action>
       <v-text-field label="Name" v-model="refuge.name"/>
       <v-text-field label="Descripción" v-model="refuge.description"/>
       <div v-for="type in types" :key="type.id">
@@ -37,9 +39,10 @@
       <!-- <label for="geoposition">
         <p>Geoposició: {{ lat }} {{ lng }}</p>
       </label> -->
-    </form>
+    </v-form>
     <button class="btn btn-success" @click="saveNewRefuge">OK</button>
   </v-card>
+</div>
 </template>
 
 <script>
