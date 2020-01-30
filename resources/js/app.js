@@ -113,10 +113,7 @@ Vue.component(
     "refugeNew-component",
     require("./components/refugeNew-component.vue").default
 );
-Vue.component(
-    "publish-component",
-    require("./components/publish-component.vue").default
-);
+
 Vue.component(
     "publicMap-component",
     require("./components/publicMap-component.vue").default

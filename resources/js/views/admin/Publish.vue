@@ -3,7 +3,6 @@
     <table class="table table-hover col-md-6">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Recurso</th>
           <th scope="col">Fecha</th>
           <th scope="col">Acción</th>
@@ -15,42 +14,70 @@
           :key="index"
           
         >
-          <th scope="row">{{refuge.id}}</th>
           <td>{{refuge.name}}</td>
           <td>{{refuge.created_at}}</td>
           <td>
+       
+          <v-tooltip top v-if="!refuge.is_Public">
+          <template v-slot:activator="{ on }" >
             <v-btn
-              class="rounded"
-              tile
-              outlined
+             v-on="on"
+              class="ma-2"
+              fab
               color="success"
-              v-if="!refuge.is_Public"
+              dark
               @click="onClickPublish(index)"
               x-small
-            >Publicar</v-btn>
+            >
+            <v-icon>mdi-publish</v-icon>
+          </v-btn>
+          </template>
+          <span>Publicar</span>
+          </v-tooltip>
+           
+           <v-tooltip top v-if="refuge.is_Public">
+          <template v-slot:activator="{ on }" >
             <v-btn
-              class="rounded"
-              tile
-              outlined
-              color="blue"
-              v-if="refuge.is_Public"
+              class="ma-2"
+              fab
+              v-on="on"
+              color="blue darken-2"
+              dark
               @click="onClickHidde(index)"
               x-small
-            >Ocultar</v-btn>
+            >
+            <v-icon>mdi-eye-off</v-icon>
+            </v-btn>
+            </template>
+          <span>Ocultar</span>
+          </v-tooltip>
+            
 
+             <v-tooltip top>
+          <template v-slot:activator="{ on }">
             <v-btn
-              class="rounded"
-              tile
-              outlined
-              color="grey"
+              class="ma-2"
+              v-on="on"
+              fab
+              color="orange darken-2"
               dark
               @click="openDialogRefuge"
               x-small
-            >Ver</v-btn>
-
-            <v-btn class="ma-2" outlined fab color="grey" @click="onClickDelete()" x-small>
-              <v-icon>fa-trash</v-icon>
+            >
+            <v-icon>mdi-information</v-icon>
             </v-btn>
+            </template>
+          <span>Información</span>
+          </v-tooltip>
+
+          <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn class="ma-2" v-on="on" fab color="red" dark @click="onClickDelete(index)" x-small>
+              <v-icon>mdi-trash-can-outline</v-icon>
+            </v-btn>
+            </template>
+          <span>Eliminar</span>
+          </v-tooltip>
           </td>
         </tr>
       </tbody>

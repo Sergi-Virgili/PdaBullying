@@ -5,7 +5,7 @@
         <v-list dense>
           <v-list-item :to="{name:'home'}" link>
             <v-list-item-action>
-              <v-icon color="orange darken-3">mdi-home</v-icon>
+              <v-icon color="#d5832e">mdi-home</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Home</v-list-item-title>
@@ -13,16 +13,17 @@
           </v-list-item>
           <v-list-item :to="{name:'map'}">
             <v-list-item-action>
-              <v-icon color="orange darken-3">mdi-map-marker-outline</v-icon>
+              <v-icon color="#d5832e">mdi-map-marker-outline</v-icon>
             </v-list-item-action>
 
             <v-list-item-content>
               <v-list-item-title>PDA Mapa</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <template v-if="currentUser">
           <v-list-item :to="{name:'mymap'}" link>
             <v-list-item-action>
-              <v-icon color="orange darken-3">mdi-map-marker</v-icon>
+              <v-icon color="#d5832e">mdi-map-marker</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Mi Mapa</v-list-item-title>
@@ -30,7 +31,7 @@
           </v-list-item>
           <v-list-item :to="{name:'mycode'}" link>
             <v-list-item-action>
-              <v-icon color="orange darken-3">mdi-code-tags</v-icon>
+              <v-icon color="#d5832e">mdi-code-tags</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Mi Iframe</v-list-item-title>
@@ -39,7 +40,7 @@
 
           <v-list-item link>
             <v-list-item-action>
-              <v-icon color="orange darken-3">mdi-comment-outline</v-icon>
+              <v-icon color="#d5832e">mdi-comment-outline</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Contacto</v-list-item-title>
@@ -48,7 +49,7 @@
           <v-divider></v-divider>
           <v-list-item :to="{name:'publish'}" link>
             <v-list-item-action>
-              <v-icon color="orange darken-3">mdi-bus</v-icon>
+              <v-icon color="#d5832e">mdi-publish</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Publicar</v-list-item-title>
@@ -56,7 +57,7 @@
           </v-list-item>
           <v-list-item :to="{name:'users'}" link>
             <v-list-item-action>
-              <v-icon color="orange darken-3">mdi-human-greeting</v-icon>
+              <v-icon color="#d5832e">mdi-human-greeting</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Usuarios</v-list-item-title>
@@ -64,25 +65,25 @@
           </v-list-item>
           <v-list-item :to="{name:'types'}" link>
             <v-list-item-action>
-              <v-icon color="orange darken-3">mdi-folder</v-icon>
+              <v-icon color="#d5832e">mdi-folder</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Tipos</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>
+          
           <v-list-item :to="{name:'profile'}" link>
             <v-list-item-action>
-              <v-icon color="orange darken-3">mdi-account</v-icon>
+              <v-icon color="#d5832e">mdi-account</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Profile</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <template v-if="currentUser">
             <v-list-item @click.prevent="logout" link>
               <v-list-item-action>
-                <v-icon>fa-sign-out-alt</v-icon>
+                <v-icon color="#d5832e">fa-sign-out-alt</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>Logout</v-list-item-title>
@@ -92,7 +93,7 @@
           <template v-if="!currentUser">
             <v-list-item :to="{name:'login'}" link>
               <v-list-item-action>
-                <v-icon>fa-sign-out-alt</v-icon>
+                <v-icon color="#d5832e">fa-sign-out-alt</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>Login</v-list-item-title>
@@ -101,7 +102,7 @@
 
             <v-list-item :to="{name:'register'}" link>
               <v-list-item-action>
-                <v-icon>fa-sign-in-alt</v-icon>
+                <v-icon color="#d5832e">fa-sign-in-alt</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>Register</v-list-item-title>

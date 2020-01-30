@@ -3,7 +3,7 @@
     <v-list-item v-for="(item, index) in items" :key="index">
       <v-tooltip right>
         <template v-slot:activator="{ on }">
-          <v-icon color="orange" v-on="on" @click="eventEmit(item.script)">{{ item.icon}}</v-icon>
+          <v-icon color="#d5832e" v-on="on" @click="eventEmit(item.script)">{{ item.icon}}</v-icon>
         </template>
         <span>{{ item.title}}</span>
       </v-tooltip>
