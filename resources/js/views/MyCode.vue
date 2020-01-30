@@ -6,7 +6,13 @@
       <v-card>
         <v-card-text>
           <cite>
-            &lt;iframe&gt;
+            &lt;iframe src="http://127.0.0.1:8000/map/1"
+      frameborder="0"
+      height="500"
+      width="800"&gt;
+            
+      
+    
             &lt;/iframe&gt;
             </cite>
           <v-divider></v-divider>

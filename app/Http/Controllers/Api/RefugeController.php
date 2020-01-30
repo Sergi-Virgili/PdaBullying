@@ -121,7 +121,7 @@ class RefugeController extends Controller
         $refuge = Refuge::findOrfail($refugeId);
         $refuge->delete();
 
-        return response();
+        return response()->json('recurso eliminado');
 
     }
 

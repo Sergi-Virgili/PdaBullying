@@ -110,7 +110,7 @@
         <refugeNew-component
                     v-if="sider == 'newRefuge'"
                     :newGeoMarker="newGeoMarker"
-                    
+                    @close = 'drawerRight=false'
                     class="refugeSider"
                     ></refugeNew-component>
         
@@ -122,7 +122,7 @@
           <i style="color:orange" class="fas fa-angle-down fa-2x"></i>
         </v-btn>
       </template>
-      <v-content class="button_list" style="z-index:200000">
+      <v-content class="button_list" style="z-index:20000000">
         <v-card class="button_list">
           <refugeList-component :refuges="refuges"></refugeList-component>
         </v-card>

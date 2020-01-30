@@ -111,7 +111,22 @@ export default {
       };
       axios
         .post("/api/refuges/", formData)
-        .then(response => console.log(response));
+        .then(response => {this.refuge = {
+          road: "",
+          house_number: "",
+          city: "",
+          country: "",
+          postcode: "",
+          state: "",
+          country: "",
+          name: "",
+          description: "",
+          email: "",
+          phone: "",
+        };
+        this.$emit('close');
+      }
+      );
     }
   }
 };

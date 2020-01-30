@@ -14,6 +14,15 @@
           :key="index"
           
         >
+        <v-dialog v-model="dialog" width="600px" style='z-index:100000001' >
+                  
+                  <refugeModal-component
+                      
+                     :refugeSelected="refuge"
+                      @update="updateRefuge(index, ...arguments)"
+                     
+                    ></refugeModal-component>
+    </v-dialog>
           <td>{{refuge.name}}</td>
           <td>{{refuge.created_at}}</td>
           <td>
@@ -82,7 +91,8 @@
         </tr>
       </tbody>
     </table>
-    <publicMap-component class="col-md-6" :refuges="refuges"></publicMap-component>
+    
+    <publicMap-component style= "z-index: 1" class="col-md-6" :refuges="refuges"></publicMap-component>
   </section>
 </template>
 
@@ -91,7 +101,8 @@ export default {
   name: "Publish",
   data() {
     return {
-      refuges: []
+      refuges: [],
+      dialog:false
     };
   },
   created() {
@@ -117,10 +128,13 @@ export default {
       });
     },
     onClickDelete(index) {
-      alert("Estas seguro que quieres eliminar DEFINITIVAMENTE ");
+      
       axios.delete(`/api/refuges/${this.refuges[index].id}`).then(response => {
         this.refuges.splice(index, 1);
       });
+    },
+    openDialogRefuge() {
+      this.dialog = true
     }
   }
 };
