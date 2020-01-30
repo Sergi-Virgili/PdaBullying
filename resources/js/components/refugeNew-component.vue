@@ -33,7 +33,7 @@
         :value="refuge.house_number"
       />
       <v-text-field label="Ciutat" prepend-icon="mdi-map-marker-outline" :value="refuge.city" />
-      <v-text-field label="Email" prepend-icon="mdi-email-outline" :value="refuge.mail" />
+      <v-text-field label="Email" prepend-icon="mdi-email-outline" :value="refuge.email" />
       <label for="geoposition">
         <p>Geoposició: {{ lat }} {{ lng }}</p>
       </label>
@@ -100,7 +100,9 @@ export default {
         postcode: this.refuge.postcode,
         house_number: this.refuge.house_number,
         country: this.refuge.country,
-        state: this.refuge.state
+        state: this.refuge.state,
+        email: this.refuge.email,
+        phone: this.refuge.phone
       };
 
       axios
