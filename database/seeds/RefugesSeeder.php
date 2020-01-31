@@ -44,6 +44,6 @@ class RefugesSeeder extends Seeder
         ]);
 
 
-        //
+
     }
 }

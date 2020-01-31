@@ -14,22 +14,6 @@ class UserController extends Controller
         return User::all();
     }
 
-    // public function store(Request $request) {
-
-    // $user = User::create([
-    //     'name' => $request->name,
-    //     'surName'=> $request->surName,
-    //     'email'=>$request->email,
-    //     'password'=>$request->password,
-    //     'entity'=>$request->entity,
-    //     'street'=>$request->street,
-    //     'number'=>$request->number,
-    //     'city'=>$request->city,
-    //     'CP'=>$request->CP,
-    // ]);
-    // return response()->json($user, 201);
-
-    // }
 
     public function delete() {
 

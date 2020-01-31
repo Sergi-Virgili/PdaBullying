@@ -94,12 +94,7 @@
                         :icon="icon2"
                         @click="OnClickRefuge(index, refuge.geoMarker)"
                     >
-                        <v-col class="text-center">
-                            <!-- <MainApp /> -->
-                            <!-- <router-view @dialog="openDialog"></router-view> -->
-
-                            <!-- <map-component class="map"></map-component> -->
-                        </v-col>
+                        <v-col class="text-center"> </v-col>
 
                         <l-popup>
                             <div class="popUp">
@@ -175,33 +170,7 @@
                 </v-card>
             </v-content>
         </v-bottom-sheet>
-
-        <!-- <section class="sider" v-if="sider">
-        <refuge-component
-          v-if="sider == 'refuge'"
-          class="refugeSider"
-          :refugeSelected="refugeSelected"
-          @attachRefuge="attachRefuge"
-          @detachRefuge="detachRefuge"
-        ></refuge-component>
-        <refugeNew-component
-          v-if="sider == 'newRefuge'"
-          :newGeoMarker="newGeoMarker"
-          class="refugeSider"
-        ></refugeNew-component>
-        <mapOptions-component
-          :newCenter="center"
-          :myMapCenter="myMapCenter"
-          :myMapZoom="myMapZoom"
-          :newZoom="zoom"
-          v-if="sider == 'mapOptions'"
-          class="refugeSider"
-        ></mapOptions-component>
-        <mapSearch-component v-if="sider == 'mapSearch'" class="refugeSider"></mapSearch-component>
-    </section>-->
     </div>
-
-    <!-- <refugeList-component :refuges="refuges" @selectRefuge="test(index)"></refugeList-component> -->
 </template>
 
 <script>
@@ -294,8 +263,6 @@ export default {
             geoFindMe.findMe().then(res => {
                 this.centerMap(res);
             });
-
-            // this.centerMap(geoFindMe.geoMarker);
         },
         fetchData() {
             axios.get("/api/refuges").then(response => {
@@ -358,9 +325,6 @@ export default {
         detachRefuge() {
             this.fetchMyRefuges();
         }
-        // optionsMyMap() {
-        //   this.sider = "mapOptions";
-        // }
     }
 };
 </script>
@@ -371,22 +335,13 @@ export default {
 .map {
     width: 100%;
     height: 100%;
-    //background-color: grey;
 }
 .leaflet-container {
     height: 100%;
 }
-.sider {
-    //width: 40%;
-    //height: 100%;
-}
+
 .map-wraper {
-    //background-color: red;
-    // width: 100%;
     height: 100%;
-    //display: grid;
-    // gap: 1em;
-    // grid-template-columns: 2fr 1fr;
 }
 .popUp {
     display: flex;
