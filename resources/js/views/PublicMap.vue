@@ -13,6 +13,7 @@
                 @addRefugeMode="addRefugeMode"
                 @mapOptionsSave="updateMyMapProperties"
                 @geo="geo"
+                @openFilter="openFilter"
             ></toolsbar-component>
         </v-navigation-drawer>
 
@@ -154,7 +155,13 @@
                     @close="drawerRight = false"
                     class="refugeSider"
                 ></refugeNew-component>
+                <filter-component
+                    v-if="sider == 'filter'"
+                    @close="drawerRight = false"
+                ></filter-component>
             </v-navigation-drawer>
+
+            
         </div>
         <v-bottom-sheet v-model="mode.list" class="button_list">
             <template v-slot:activator="{ on }">
@@ -212,7 +219,7 @@ export default {
             drawerRight: false,
             mode: {
                 list: false,
-                addRefuge: false
+                addRefuge: false,
             },
             dialog: false,
             dialog1: false
@@ -230,6 +237,15 @@ export default {
         addRefugeMode() {
             //TODO CHANGE CURSOS IN MAP
             this.mode.addRefuge = true;
+        },
+        openFilter() {
+            //TODO CHANGE CURSOS IN MAP
+            this.sider = "filter";
+            this.drawerRight = true;
+        },
+        filter(){
+
+            this.openSider("filter");
         },
         updateMyMapProperties() {
             //TODO FAKET MAP ID
@@ -314,10 +330,10 @@ export default {
             this.centerMap(this.newGeoMarker);
             this.drawerRight = true;
         },
+        
         openSider(sider) {
             this.sider = sider;
         },
-
         newRefuge() {
             this.openSider("newRefuge");
         },

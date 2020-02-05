@@ -26,8 +26,13 @@ export default {
           icon: "fas fa-cog",
           script: "mapOptionsSave"
         },
-        { title: "Localízame", icon: "far fa-compass", script: "geo" }
+        { title: "Localízame", icon: "far fa-compass", script: "geo" },
         // { title: "Search", icon: "fas fa-search" }
+        {
+          title: "Filtra los activos segun el tipo de recurso",
+          icon: "mdi-filter-variant",
+          script: "openFilter"
+        },
       ]
     };
   },

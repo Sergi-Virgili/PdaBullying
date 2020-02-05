@@ -167,6 +167,10 @@ Vue.component(
     "typeBox-component",
     require("./components/typeBox-component.vue").default
 );
+Vue.component(
+    "filter-component",
+    require("./components/filter-component.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
