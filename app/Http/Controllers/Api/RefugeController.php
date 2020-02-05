@@ -18,8 +18,20 @@ class RefugeController extends Controller
 
         $refuges = Refuge::addGeoMarkerFields($refuges);
 
+        $refugesList = Refuge::paginate(5);
+
+        $response = [
+            'pagination' => [
+                'total' => $refugesList->total(),
+                'per_page' => $refugesList->perPage(),
+                'current_page' => $refugesList->currentPage(),
+            ],
+            'data' => $refugesList
+        ];
+
         return response()->json([
             'refuge'=>$refuges,
+            'response'=>$response,
             'msg' => 'All resource fugeces in the sistem'
             ]);
     }

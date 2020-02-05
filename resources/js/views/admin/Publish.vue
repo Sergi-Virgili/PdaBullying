@@ -9,7 +9,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(refuge, index) in refuges" :key="index">
+                <tr v-for="(refuge, index) in refugesList.data.data" :key="index">
                     <v-dialog v-model="dialog" width="600px" style="z-index:10">
                         <refugeModal-component
                             :refugeSelected="refuge"
@@ -88,6 +88,18 @@
                         </v-tooltip>
                     </td>
                 </tr>
+                <v-pagination
+                    v-model="refugesList.pagination.current_page"
+                    :circle="circle"
+                    :disabled="disabled"
+                    :length="length"
+                    :next-icon="nextIcon"
+                    :prev-icon="prevIcon"
+                    :page="refugesList.pagination.current_page"
+                    :total-visible="totalVisible"
+                    @input="changePage()"
+                    >
+                </v-pagination>
             </tbody>
         </table>
 
@@ -99,22 +111,41 @@
     </section>
 </template>
 
+// TODO: refactor and clean the code
+
 <script>
 export default {
     name: "Publish",
     data() {
         return {
             refuges: [],
-            dialog: false
+            refugesList: [],
+            dialog: false,
+            circle: true,
+            disabled: false,
+            length: "",
+            nextIcon: 'mdi-chevron-right',
+            prevIcon: 'mdi-chevron-left',
+            totalVisible: 3,   
         };
     },
     created() {
         this.fetchData();
+        this.getPaginatedItems(this.refugesList.pagination.current_page);
+        this.PaginationLength(refuges);
     },
     methods: {
         fetchData() {
             axios.get("/api/refuges").then(response => {
                 this.refuges = response.data.refuge;
+                this.refugesList = response.data.response;
+                console.log(this.refugesList);
+            });
+        },
+        getPaginatedItems(page) {
+            axios.get(`/api/refuges?page=${page}`).then(response => {
+                this.refuges = response.data.refuge;
+                this.refugesList = response.data.response;
             });
         },
         onClickPublish(index) {
@@ -135,10 +166,23 @@ export default {
                 .delete(`/api/refuges/${this.refuges[index].id}`)
                 .then(response => {
                     this.refuges.splice(index, 1);
+                    this.refugesList.splice(index, 1);
                 });
         },
         openDialogRefuge() {
             this.dialog = true;
+        },
+        changePage() {
+            this.refugesList.pagination.current_page;
+            this.getPaginatedItems(this.refugesList.pagination.current_page);
+            console.log(this.refugesList.pagination.current_page);
+        },
+        PaginationLength(refuges) {
+            length = refuges.length / 5
+            if (isInteger(length)){
+                return length + 1;
+            }
+            this.refugesList.pagination.total = length;
         }
     }
 };
