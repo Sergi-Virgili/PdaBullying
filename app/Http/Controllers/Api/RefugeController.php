@@ -20,18 +20,17 @@ class RefugeController extends Controller
 
         $refugesList = Refuge::paginate(5);
 
-        $response = [
-            'pagination' => [
-                'total' => $refugesList->total(),
-                'per_page' => $refugesList->perPage(),
-                'current_page' => $refugesList->currentPage(),
-            ],
-            'data' => $refugesList
+        $pagination = [
+            'total' => $refugesList->total(),
+            'per_page' => $refugesList->perPage(),
+            'current_page' => $refugesList->currentPage(),
+            'length' => Refuge::length($refuges, $refugesList->perPage()),
         ];
-
+            
         return response()->json([
             'refuge'=>$refuges,
-            'response'=>$response,
+            'refugesList'=>$refugesList,
+            'pagination' =>$pagination,
             'msg' => 'All resource fugeces in the sistem'
             ]);
     }
