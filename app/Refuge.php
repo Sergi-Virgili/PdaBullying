@@ -23,4 +23,14 @@ class Refuge extends Model
         }
         return $refuges;
     }
+
+    public static function length($refuges, $perPage) {
+        $total = count($refuges) / $perPage;
+        if (!is_int($total)){
+            $total = (int) $total;
+            $length = $total + 1;
+            return $length;
+        }
+        return $total;
+    }
 }

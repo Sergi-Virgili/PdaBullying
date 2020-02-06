@@ -26,6 +26,7 @@ Route::namespace('Api')->group(function(){
     //Refuges
     Route::post('/refuges','RefugeController@store')->middleware('auth:api');
     Route::get('/refuges','RefugeController@index');
+    Route::get('/refugesPublish', 'RefugeController@indexPublish');
     Route::put('/refuges/{refuge}', 'RefugeController@update');
     Route::get('/refuges/{refuge}','RefugeController@show');
     Route::delete('/refuges/{refugeId}','RefugeController@destroy')->middleware('auth:api');
