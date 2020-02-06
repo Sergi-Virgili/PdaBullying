@@ -27,7 +27,7 @@ class RefugeController extends Controller
 
         $refuges = Refuge::all();
 
-        $refugesList = Refuge::paginate(1);
+        $refugesList = Refuge::paginate(5);
 
         $pagination = [
             'total' => $refugesList->total(),
