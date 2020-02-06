@@ -123,16 +123,17 @@ export default {
             dialog: false,
             circle: true,
             disabled: false,
-            length: "",
+            length: 0,
             nextIcon: 'mdi-chevron-right',
             prevIcon: 'mdi-chevron-left',
             totalVisible: 3,   
         };
     },
-    created() {
+    beforeMount() {
         this.fetchData();
+    },
+    created() {
         this.getPaginatedItems(this.refugesList.pagination.current_page);
-        this.PaginationLength(refuges);
     },
     methods: {
         fetchData() {
@@ -140,6 +141,8 @@ export default {
                 this.refuges = response.data.refuge;
                 this.refugesList = response.data.response;
                 console.log(this.refugesList);
+                this.paginationLength(this.refugesList.pagination.total);
+                console.log(length);
             });
         },
         getPaginatedItems(page) {
@@ -177,10 +180,11 @@ export default {
             this.getPaginatedItems(this.refugesList.pagination.current_page);
             console.log(this.refugesList.pagination.current_page);
         },
-        PaginationLength(refuges) {
-            length = refuges.length / 5
-            if (isInteger(length)){
-                return length + 1;
+        paginationLength(total) {
+            length = 11/5;
+            if (!Number.isInteger(length)){
+                length = Number.parseInt(length, 10);
+                return length = length + 1;
             }
             this.refugesList.pagination.total = length;
         }
