@@ -13,7 +13,7 @@ class CreateRefugesTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('refuges_types', function (Blueprint $table) {
+        Schema::create('refuge_type', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('refuge_id');
             $table->bigInteger('type_id');

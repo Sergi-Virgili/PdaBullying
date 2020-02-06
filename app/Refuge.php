@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Refuge;
 use Illuminate\Database\Eloquent\Model;
 
 class Refuge extends Model
@@ -13,7 +14,7 @@ class Refuge extends Model
     }
 
     public function types() {
-        $this->belongsToMany(Type::class);
+        return $this->belongsToMany(Type::class);
     }
 
 
