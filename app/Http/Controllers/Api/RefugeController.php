@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Type;
 use App\User;
 use App\Refuge;
 use Illuminate\Http\Request;
@@ -65,8 +66,9 @@ class RefugeController extends Controller
             'postcode' => '',
             'phone' => '',
             'email' => '',
-        ]);
+            
 
+        ]);
 
         $refuge = request()->user()->refuges()->create($data);
 
@@ -86,10 +88,27 @@ class RefugeController extends Controller
 
         // ]
 
+        $typesId = $request->types;
 
+        foreach($typesId as $typeId) {
+            $refuge->types()->attach($typeId);
+
+          //  $typeId = Type::find($typeId);
+        }
+        
+     
 
         $map = $user->map;
         $map->refuges()->attach($refuge->id);
+        $types = [];
+        foreach($refuge->types as $type) {
+            $typeResourse = [
+                'id' => $type->id,
+                'name' => $type->name
+            ];
+            array_push($types, $typeResourse);
+        }
+        
 
         return response()->json([
             'data' => [
@@ -100,7 +119,9 @@ class RefugeController extends Controller
                 'name' => $refuge->name,
                 'description' => $refuge->description,
                 'lat' => $refuge->lat,
-                'lng' => $refuge->lng
+                'lng' => $refuge->lng,
+                'types' => $types
+                
             ],
             'links' => url('/refuges/'.$refuge->id)
         ]] , 201);
