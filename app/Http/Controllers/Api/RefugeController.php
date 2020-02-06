@@ -15,10 +15,19 @@ class RefugeController extends Controller
     {
         $refuges = Refuge::all();
 
-
         $refuges = Refuge::addGeoMarkerFields($refuges);
+            
+        return response()->json([
+            'refuge'=>$refuges,
+            'msg' => 'All resource fugeces in the sistem'
+        ]);
+    }
 
-        $refugesList = Refuge::paginate(5);
+    public function indexPublish(){
+
+        $refuges = Refuge::all();
+
+        $refugesList = Refuge::paginate(1);
 
         $pagination = [
             'total' => $refugesList->total(),
@@ -28,11 +37,10 @@ class RefugeController extends Controller
         ];
             
         return response()->json([
-            'refuge'=>$refuges,
             'refugesList'=>$refugesList,
             'pagination' =>$pagination,
-            'msg' => 'All resource fugeces in the sistem'
-            ]);
+            'msg' => 'Pagination fugeces in the sistem'
+        ]);
     }
 
 

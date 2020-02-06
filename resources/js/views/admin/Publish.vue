@@ -1,6 +1,7 @@
 <template>
     <section class="publishTable row">
-        <table class="table table-hover col-md-6">
+        <section class="d-flex flex-wrap justify-center col-6">
+        <table class="table table-hover col-md-12">
             <thead>
                 <tr>
                     <th scope="col">Recurso</th>
@@ -88,21 +89,22 @@
                         </v-tooltip>
                     </td>
                 </tr>
-                <v-pagination
-                    v-model="pagination.current_page"
-                    :circle="circle"
-                    :disabled="disabled"
-                    :length="length"
-                    :next-icon="nextIcon"
-                    :prev-icon="prevIcon"
-                    :page="page"
-                    :total-visible="totalVisible"
-                    @input="changePage()"
-                    >
-                </v-pagination>
             </tbody>
         </table>
-
+        <v-pagination
+            v-model="pagination.current_page"
+            :circle="circle"
+            :disabled="disabled"
+            :length="length"
+            :next-icon="nextIcon"
+            :prev-icon="prevIcon"
+            :page="page"
+            :total-visible="totalVisible"
+            @input="changePage()"
+            class="mtauto"
+            >
+        </v-pagination>
+        </section>
         <publicMap-component
             style="z-index: 1"
             class="col-md-6"
@@ -128,30 +130,31 @@ export default {
             page: 1,
             nextIcon: 'mdi-chevron-right',
             prevIcon: 'mdi-chevron-left',
-            totalVisible: 3,   
+            totalVisible: 12,   
         };
     },
     beforeMount() {
         this.fetchData();
     },
     created() {
-        this.getPaginatedItems(this.pagination.current_page);
+        this.getPaginatedItems(page);
     },
     methods: {
         fetchData() {
             axios.get("/api/refuges").then(response => {
                 this.refuges = response.data.refuge;
+            });
+            axios.get("/api/refugesPublish").then(response =>{
                 this.refugesList = response.data.refugesList.data;
                 this.pagination = response.data.pagination;
                 this.length = this.pagination.length;
-                console.log(this.refugesList);
             });
         },
         getPaginatedItems(page) {
-            axios.get(`/api/refuges?page=${page}`).then(response => {
+            axios.get(`/api/refugesPublish?page=${page}`).then(response => {
                 this.refuges = response.data.refuge;
-                this.refugesList = response.data.response;
-                console.log(this.refugesList);
+                this.refugesList = response.data.refugesList.data;
+                this.page = this.pagination.current_page;
             });
         },
         onClickPublish(index) {
@@ -159,12 +162,14 @@ export default {
             axios.patch("/api/refuges/publish", data).then(response => {
                 console.log(response);
                 this.refuges[index].is_Public = 1;
+                this.refugesList[index].is_Public = 1;
             });
         },
         onClickHidde(index) {
             let data = { id: this.refuges[index].id };
             axios.patch("/api/refuges/hidde", data).then(response => {
                 this.refuges[index].is_Public = 0;
+                this.refugesList[index].is_Public = 0;
             });
         },
         onClickDelete(index) {
@@ -179,10 +184,13 @@ export default {
             this.dialog = true;
         },
         changePage() {
-            this.pagination.current_page;
             this.getPaginatedItems(this.pagination.current_page);
-            console.log(this.pagination.current_page);
         },
     }
 };
 </script>
+<style scoped>
+    .mtauto{
+        margin-top: auto;
+    }
+</style>
