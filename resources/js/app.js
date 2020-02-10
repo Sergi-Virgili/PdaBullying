@@ -91,6 +91,7 @@ if (store.state.currentUser) {
 //     "app-container",
 //     require("./components/appContainer.vue").default
 // );
+
 Vue.component(
     "MapComponent",
     require("./components/map-component.vue").default

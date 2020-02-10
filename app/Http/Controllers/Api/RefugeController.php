@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Type;
 use App\User;
+use Auth;
 use App\Refuge;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -137,8 +138,11 @@ class RefugeController extends Controller
 
     public function update(Request $request, int $id)
     {
+        $user = Auth::user();
         $refuge = Refuge::find($id);
-        $refuge->update([
+
+        if ($user->id == $refuge->user_id || $user->is_admin == true){
+            $refuge->update([
             'name' => $request->name,
             'description' => $request->description,
             'house_number' => $request->house_number,
@@ -147,37 +151,52 @@ class RefugeController extends Controller
             'house_number' => $request->house_number,
             'city' => $request->city,
             'road' => $request->road,
-        ]);
-        
+            ]);
+            
 
-        $refuge->save();
+            $refuge->save();
 
-        return response()->json($refuge);
+            return response()->json($refuge);
+        }
+        return response()->json(403);
     }
 
 
     public function destroy($refugeId)
     {
         $refuge = Refuge::findOrfail($refugeId);
-        $refuge->delete();
+        $user = Auth::user();
+        if ($user->id == $refuge->user_id || $user->is_admin == true){
+            $refuge->delete();
 
-        return response()->json('recurso eliminado');
-
+            return response()->json('recurso eliminado');
+        }
+        return response()->json(403);
     }
 
     public function publish(Request $request) {
 
         $refuge = Refuge::find($request->id);
-        $refuge->is_Public = true;
-        $refuge->update();
-        return response()->json("$refuge->name is published");
+        $user = Auth::user();
+        if ($user->is_admin == true){
+            $refuge->is_Public = true;
+            $refuge->update();
+
+            return response()->json("$refuge->name is published");
+        }
+        return response()->json(403);
     }
 
     public function hidde(Request $request) {
 
-         $refuge = Refuge::find($request->id);
-         $refuge->is_Public = false;
-         $refuge->update();
-         return response()->json("$refuge->name is hidden");
+        $refuge = Refuge::find($request->id);
+        $user = Auth::user();
+        if ($user->is_admin == true){
+            $refuge->is_Public = false;
+            $refuge->update();
+            return response()->json("$refuge->name is hidden");
+        }
+        return response()->json(403);
+         
      }
 }

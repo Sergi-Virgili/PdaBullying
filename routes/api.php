@@ -26,7 +26,6 @@ Route::namespace('Api')->group(function(){
     //Refuges
     Route::post('/refuges','RefugeController@store')->middleware('auth:api');
     Route::get('/refuges','RefugeController@index');
-    Route::get('/refugesPublish', 'RefugeController@indexPublish');
     Route::put('/refuges/{refuge}', 'RefugeController@update');
     Route::get('/refuges/{refuge}','RefugeController@show');
     Route::delete('/refuges/{refugeId}','RefugeController@destroy')->middleware('auth:api');
@@ -41,10 +40,10 @@ Route::namespace('Api')->group(function(){
         Route::post('/types', 'Typecontroller@store');
         Route::delete('/types/{type}','Typecontroller@destroy');
         Route::put('/types/{type}','Typecontroller@update');
+        Route::patch('/refuges/publish','RefugeController@publish');
+        Route::patch('/refuges/hidde','RefugeController@hidde');
+        Route::get('/refugesPublish', 'RefugeController@indexPublish');
     });
-
-    Route::patch('/refuges/publish','RefugeController@publish');
-    Route::patch('/refuges/hidde','RefugeController@hidde');
 
     //MAP ROUTES
     Route::get('/maps/{userId}','MapController@show');
