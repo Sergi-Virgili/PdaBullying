@@ -43,7 +43,18 @@ class RefugesSeeder extends Seeder
             'is_Public' =>true
         ]);
 
+        DB::table('refuges')->insert([
 
+            'name'=> "Concorci d'educació de Barcelona",
+
+            'description'=> 'Prevenció, detecció i actuació davant l’assetjament entre iguals. Prevenció, detecció i actuació davant l’assetjament entre iguals',
+            'email'=>'sitio4@gmail.com',
+            'phone'=>'626626626',
+            'lat'=> 41.4104479,
+            'lng'=> 2.1584852,
+            'is_Public' =>true,
+            'user_id' =>'2'
+        ]);
 
     }
 }
