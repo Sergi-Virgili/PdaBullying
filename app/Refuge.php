@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Refuge;
 use Illuminate\Database\Eloquent\Model;
 
 class Refuge extends Model
@@ -13,7 +14,7 @@ class Refuge extends Model
     }
 
     public function types() {
-        $this->belongsToMany(Type::class);
+        return $this->belongsToMany(Type::class);
     }
 
 
@@ -22,5 +23,15 @@ class Refuge extends Model
             $refuge['geoMarker']= [$refuge['lat'],$refuge['lng']];
         }
         return $refuges;
+    }
+
+    public static function length($refuges, $perPage) {
+        $total = count($refuges) / $perPage;
+        if (!is_int($total)){
+            $total = (int) $total;
+            $length = $total + 1;
+            return $length;
+        }
+        return $total;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Refuges;
 
+use App\Type;
 use App\User;
 use App\Refuge;
 use Faker\Factory;
@@ -20,22 +21,29 @@ class CreateRefugesTest extends TestCase
      */
     public function auth_user_can_create_a_refuge() {
 
-
+        $this->withoutExceptionHandling();
         $faker = Factory::create();
         $this->actingAs($user = factory(User::class)->create(), 'api');
+
+        $type = Factory(Type::class)->create([
+            'name' => 'typeName'
+        ]);
 
         $response = $this->json('post', '/api/refuges', [
 
                     'name' => $name = $faker->company,
                     'description' => $description = $faker->text,
                     'lat' => $lat = 41.3876768,
-                    'lng' => $lng = 2.1692590
+                    'lng' => $lng = 2.1692590,
+                    'types'=> [0]
 
         ]);
-
+        //TODO TEST DOMNT PASS TYPES ARRAY
         $refuge = Refuge::first();
 
         $this->assertCount(1, Refuge::all());
+        
+    
 
         $response->assertStatus(201)
             ->assertJson([
@@ -47,7 +55,12 @@ class CreateRefugesTest extends TestCase
                         'name' => $name,
                         'description' => $description,
                         'lat' => $lat = 41.3876768,
-                        'lng' => $lng = 2.1692590
+                        'lng' => $lng = 2.1692590,
+                        'types' => [
+                            'id' => 0,
+                            'name' => $type->name
+                        ]
+                        
                     ],
                     'links' => url('/refuges/'.$refuge->id)
                 ]
@@ -67,7 +80,8 @@ class CreateRefugesTest extends TestCase
                     'name' => $name = $faker->company,
                     'description' => $description = $faker->text,
                     'lat' => $lat = 41.3876768,
-                    'lng' => $lng = 2.1692590
+                    'lng' => $lng = 2.1692590,
+                    
 
         ]);
 

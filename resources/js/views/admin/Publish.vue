@@ -1,6 +1,7 @@
 <template>
     <section class="publishTable row">
-        <table class="table table-hover col-md-6">
+        <section class="d-flex flex-wrap justify-center col-6">
+        <table class="table table-hover col-md-12">
             <thead>
                 <tr>
                     <th scope="col">Recurso</th>
@@ -9,7 +10,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(refuge, index) in refuges" :key="index">
+                <tr v-for="(refuge, index) in refugesList" :key="index">
                     <v-dialog v-model="dialog" width="600px" style="z-index:10">
                         <refugeModal-component
                             :refugeSelected="refuge"
@@ -90,7 +91,20 @@
                 </tr>
             </tbody>
         </table>
-
+        <v-pagination
+            v-model="pagination.current_page"
+            :circle="circle"
+            :disabled="disabled"
+            :length="length"
+            :next-icon="nextIcon"
+            :prev-icon="prevIcon"
+            :page="page"
+            :total-visible="totalVisible"
+            @input="changePage()"
+            class="mtauto"
+            >
+        </v-pagination>
+        </section>
         <publicMap-component
             style="z-index: 1"
             class="col-md-6"
@@ -99,22 +113,48 @@
     </section>
 </template>
 
+// TODO: refactor and clean the code
+
 <script>
 export default {
     name: "Publish",
     data() {
         return {
             refuges: [],
-            dialog: false
+            refugesList: [],
+            pagination: [],
+            dialog: false,
+            circle: true,
+            disabled: false,
+            length: 0,
+            page: 1,
+            nextIcon: 'mdi-chevron-right',
+            prevIcon: 'mdi-chevron-left',
+            totalVisible: 12,   
         };
     },
-    created() {
+    beforeMount() {
         this.fetchData();
+    },
+    created() {
+        this.getPaginatedItems(page);
     },
     methods: {
         fetchData() {
             axios.get("/api/refuges").then(response => {
                 this.refuges = response.data.refuge;
+            });
+            axios.get("/api/refugesPublish").then(response =>{
+                this.refugesList = response.data.refugesList.data;
+                this.pagination = response.data.pagination;
+                this.length = this.pagination.length;
+            });
+        },
+        getPaginatedItems(page) {
+            axios.get(`/api/refugesPublish?page=${page}`).then(response => {
+                this.refuges = response.data.refuge;
+                this.refugesList = response.data.refugesList.data;
+                this.page = this.pagination.current_page;
             });
         },
         onClickPublish(index) {
@@ -122,12 +162,14 @@ export default {
             axios.patch("/api/refuges/publish", data).then(response => {
                 console.log(response);
                 this.refuges[index].is_Public = 1;
+                this.refugesList[index].is_Public = 1;
             });
         },
         onClickHidde(index) {
             let data = { id: this.refuges[index].id };
             axios.patch("/api/refuges/hidde", data).then(response => {
                 this.refuges[index].is_Public = 0;
+                this.refugesList[index].is_Public = 0;
             });
         },
         onClickDelete(index) {
@@ -135,11 +177,20 @@ export default {
                 .delete(`/api/refuges/${this.refuges[index].id}`)
                 .then(response => {
                     this.refuges.splice(index, 1);
+                    this.refugesList.splice(index, 1);
                 });
         },
         openDialogRefuge() {
             this.dialog = true;
-        }
+        },
+        changePage() {
+            this.getPaginatedItems(this.pagination.current_page);
+        },
     }
 };
 </script>
+<style scoped>
+    .mtauto{
+        margin-top: auto;
+    }
+</style>
