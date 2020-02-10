@@ -137,7 +137,7 @@ export default {
         this.fetchData();
     },
     created() {
-        this.getPaginatedItems(page);
+        this.getPaginatedItems(this.page);
     },
     methods: {
         fetchData() {
