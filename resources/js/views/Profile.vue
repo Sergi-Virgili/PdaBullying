@@ -4,7 +4,7 @@
       <v-flex xs12 md4>
         <material-card class="v-card-profile">
           <v-avatar slot="offset" class="mx-auto d-block" size="130">
-            <img src="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg" />
+            <img src="" />
           </v-avatar>
           <v-card-text class="text-xs-center">
             <h6 class="category text-gray font-weight-thin mb-3">CEO / CO-FOUNDER</h6>
@@ -25,13 +25,13 @@
                   <v-text-field label="Company (disabled)" disabled />
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field class="purple-input" label="User Name" />
+                  <v-text-field class="purple-input" label="User Name" v-model="currentUser.name" />
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field label="Email Address" class="purple-input" />
+                  <v-text-field label="Email Address" v-model="currentUser.email" class="purple-input" />
                 </v-flex>
                 <v-flex xs12 md6>
-                  <v-text-field label="First Name" class="purple-input" />
+                  <v-text-field label="First Name" v-model="currentUser.name" class="purple-input" />
                 </v-flex>
                 <v-flex xs12 md6>
                   <v-text-field label="Last Name" class="purple-input" />
