@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Type;
 use App\User;
+use Auth;
 use App\Refuge;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -138,21 +139,26 @@ class RefugeController extends Controller
     public function update(Request $request, int $id)
     {
         $refuge = Refuge::find($id);
-        $refuge->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'house_number' => $request->house_number,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'house_number' => $request->house_number,
-            'city' => $request->city,
-            'road' => $request->road,
-        ]);
-        
+        $user = Auth::user();
+        if ($user->can('update', $refuge){
+            $refuge->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'house_number' => $request->house_number,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'house_number' => $request->house_number,
+                'city' => $request->city,
+                'road' => $request->road,
+            ]);
+            
 
-        $refuge->save();
+            $refuge->save();
 
-        return response()->json($refuge);
+            return response()->json($refuge)->with('alert', 'Updated!');
+        }
+
+        return redirect()->back()->with('alert', 'Unauthorized!');
     }
 
 
