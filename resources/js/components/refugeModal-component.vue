@@ -1,9 +1,12 @@
 <template>
     <div>
-        <v-card>
+        
+        <v-card >
             <v-card-title class="pb-0">
                 <img :src="refugeSelected.logoUrl" />
             </v-card-title>
+            
+            
             <v-card-text>
                 <v-form>
                     <v-text-field
@@ -98,17 +101,8 @@
                 </v-form>
             </v-card-text>
             <v-divider></v-divider>
-            <v-card-actions>
-                <v-btn
-                    class="rounded"
-                    @click="editMode = !editMode"
-                    v-if="!editMode"
-                    tile
-                    outlined
-                    color="success"
-                >
-                    <span>Edit</span>
-                </v-btn>
+            <v-card-actions v-if="currentUser">
+                
                 <v-btn
                     class="rounded"
                     v-if="!editMode"
@@ -128,6 +122,17 @@
                     @click="detachRefuge"
                 >
                     <span>Remove</span>
+                </v-btn>
+                <template v-if="isEditable">
+                    <v-btn
+                    class="rounded"
+                    @click="editMode = !editMode"
+                    v-if="!editMode"
+                    tile
+                    outlined
+                    color="success"
+                >
+                    <span>Edit</span>
                 </v-btn>
                 <v-btn
                     class="rounded"
@@ -159,6 +164,7 @@
                 >
                     <span>Ok</span>
                 </v-btn>
+                </template>
             </v-card-actions>
         </v-card>
     </div>
@@ -173,8 +179,11 @@ export default {
             editMode: false
         };
     },
-
+    mounted: {
+        
+    },
     methods: {
+
         attachRefuge() {
             axios
                 .get(`/api/maps/attach/${this.refugeSelected.id}`)
@@ -200,7 +209,7 @@ export default {
                 email: this.refugeSelected.email,
                 phone: this.refugeSelected.phone
             };
-            console.log(params);
+           
             axios
                 .put(`/api/refuges/${this.refugeSelected.id}`, params)
                 .then(response => {
@@ -217,6 +226,17 @@ export default {
                 .then(response => {
                     this.$emit("detachRefuge", this.refugeSelected.id);
                 });
+        }
+    },
+    computed: {
+        currentUser() {
+            return this.$store.state.currentUser;
+        },
+        isEditable() {
+            if (this.currentUser.id === this.refugeSelected.user_id) {
+                return true;
+            }
+            return false
         }
     }
 };

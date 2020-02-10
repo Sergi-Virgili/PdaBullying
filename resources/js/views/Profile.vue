@@ -69,6 +69,15 @@
 
 <script>
 export default {
-  //
+
+
+  mounted() {
+    console.log('hola')
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.currentUser;
+    }
+  }
 };
 </script>

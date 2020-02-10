@@ -34,4 +34,8 @@ class Refuge extends Model
         }
         return $total;
     }
+
+    public static function addAuthorField() {
+        
+    }
 }
