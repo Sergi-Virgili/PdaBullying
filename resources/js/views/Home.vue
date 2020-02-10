@@ -60,22 +60,6 @@ export default {
     justify-items: center;
   }
 
-
-  header{
-    display: grid;
-    justify-items: left;
-  }
-  body{
-    display: grid;
-    justify-items: left;
-    margin-left: 1%;
-  }
-  h5{
-    font-weight: bolder;
-    font-size: 20px;
-    color: black;
-    margin-bottom: 20px;
-  }
   p{
     font-size: 16px;
     margin-top: 10px;
@@ -100,5 +84,20 @@ export default {
   }
   p{
     grid-row: 2/3;
+  }
+  header{
+    display: grid;
+    justify-items: left;
+  }
+  body{
+    display: grid;
+    justify-items: left;
+    margin-left: 1%;
+  }
+  h5{
+    font-weight: bolder;
+    font-size: 20px;
+    color: black;
+    margin-bottom: 20px;
   }
 </style>
