@@ -20,7 +20,6 @@
         </div>
       </div>
     </v-form>
-    <button class="btn btn-success">OK</button>
 </div>
 </template>
 
