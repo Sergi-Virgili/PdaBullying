@@ -89,7 +89,7 @@ class RefugeController extends Controller
         // ]
 
         $typesId = $request->types;
-
+        //dd($request->types);
         foreach($typesId as $typeId) {
             $refuge->types()->attach($typeId);
 

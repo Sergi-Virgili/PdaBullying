@@ -4,20 +4,21 @@
   <v-card>
     <h4>Nuevo Recurso</h4>
     <v-form action>
-      <v-text-field label="Name" v-model="refuge.name"/>
+      <v-text-field label="Name" required v-model="refuge.name"/>
       <v-text-field label="Descripción" v-model="refuge.description"/>
       <div v-for="type in types" :key="type.id">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            :name="type.name"
-            :id="type.id"
+        <div >
+          <v-checkbox
+            multiple
+            :label="type.name"
+           
             :value="type.id"
-          />
-          <label class="form-check-label" :for="type.name">{{ type.name }}</label>
+            v-model ="refuge.checkedTypes"
+          ></v-checkbox>
+         
         </div>
       </div>
+      <span>Checked names: {{ refuge.checkedTypes }}</span>
       <v-text-field label="Email" prepend-icon="mdi-email-outline" v-model="refuge.email" />
       <v-text-field label="Teléfono" prepend-icon="mdi-phone-outline" v-model="refuge.phone" />
       <v-text-field
@@ -36,9 +37,7 @@
       />
       <v-text-field label="Ciutat" prepend-icon="mdi-map-marker-outline" v-model="refuge.city" />
       <v-text-field label="CP" prepend-icon="mdi-map-marker-outline" v-model="refuge.postcode" />
-      <!-- <label for="geoposition">
-        <p>Geoposició: {{ lat }} {{ lng }}</p>
-      </label> -->
+      
     </v-form>
     <button class="btn btn-success" @click="saveNewRefuge">OK</button>
   </v-card>
@@ -64,6 +63,7 @@ export default {
         description: "",
         email: "",
         phone: "",
+        checkedTypes: []
       },
       
       types: []
@@ -82,7 +82,7 @@ export default {
           `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${this.lat}&lon=${this.lng}&zoom=18`
         )
         .then(response => {
-          console.log(response.data);
+         
           this.refuge = response.data.address;
           this.lat = response.data.lat;
           this.lng = response.data.lon;
@@ -91,7 +91,7 @@ export default {
     fetchTypeData() {
       axios.get("/api/types").then(response => {
         this.types = response.data.data;
-        console.log(response.data.data);
+        
       });
     },
     saveNewRefuge() {
@@ -107,22 +107,26 @@ export default {
         country: this.refuge.country,
         state: this.refuge.state,
         email: this.refuge.email,
-        phone: this.refuge.phone
+        phone: this.refuge.phone,
+        types: this.refuge.checkedTypes
       };
+      console.log(formData);
       axios
         .post("/api/refuges/", formData)
-        .then(response => {this.refuge = {
-          road: "",
-          house_number: "",
-          city: "",
-          country: "",
-          postcode: "",
-          state: "",
-          country: "",
-          name: "",
-          description: "",
-          email: "",
-          phone: "",
+        .then(response => {
+          
+          this.refuge = {
+            road: "",
+            house_number: "",
+            city: "",
+            country: "",
+            postcode: "",
+            state: "",
+            country: "",
+            name: "",
+            description: "",
+            email: "",
+            phone: "",
         };
         this.$emit('close');
       }
