@@ -6,6 +6,7 @@ export default {
     state: {
         currentUser: user,
         isLoggedIn: !!user,
+      
         loading: false,
         auth_error: null
     },
@@ -18,6 +19,9 @@ export default {
         },
         currentUser(state) {
             return state.currentUser;
+        },
+        isAdmin(state) {
+            return state.currentUser.is_admin;
         },
         authError(state) {
             return state.auth_error;
