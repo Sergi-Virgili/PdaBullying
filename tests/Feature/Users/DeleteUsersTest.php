@@ -19,18 +19,16 @@ class DeleteUsersTest extends TestCase
      * @test
      */
     public function admin_can_delete_a_user() {
+        $this->withoutExceptionHandling();
+        
 
         $user1 = factory(User::class)->create([
-            'name' => $name = 'name',
+            'name' => $name = 'Manuel',
         ]);
-
-
 
         $admin = factory(User::class)->create([
             'is_admin' => true
         ]);
-
-
 
         $this->actingAs($admin, 'api');
 
@@ -38,9 +36,14 @@ class DeleteUsersTest extends TestCase
             'name' => $name,
 
         ]);
+        
 
         $response = $this->json('delete', '/api/users/'.$user1->id);
-
+        
+        $this->assertDatabaseMissing('users', [
+            'name' => $name
+        ]);
+        $response->assertStatus(200);
 
 
 
@@ -50,14 +53,19 @@ class DeleteUsersTest extends TestCase
      */
     public function no_admin_user_cannot_delete_a_user() {
 
-        $user1 = factory(User::class)->create();
+        $user1 = factory(User::class)->create([
+            'name' => $name = 'Clara'
+        ]);
 
-
-        $this->actingAs($user = factory(User::class)->create(), 'api');
+        $this->actingAs($user = factory(User::class)->make(), 'api');
 
         $response = $this->json('delete', '/api/users/'.$user1->id);
 
+        $this->assertDatabaseHas('users', [
+            'name' => $name]);
+
         $response->assertStatus(403);
+            
 
     }
 

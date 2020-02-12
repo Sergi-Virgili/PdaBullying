@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 
 /*
@@ -33,6 +34,7 @@ Route::namespace('Api')->group(function(){
     //Users
     Route::post('/users', 'UserController@store');
     Route::put('/users/{id}', 'UserController@update');
+    Route::get('/users','UserController@update');
     //TYPES ROUTES
 
     Route::get('/types','Typecontroller@index');
@@ -59,6 +61,6 @@ Route::namespace('Api')->group(function(){
     Route::group(['middleware' => ['auth:api', 'admin']], function(){
         Route::get('/users','Usercontroller@index');
 
-        Route::delete('/users/{type}','Usercontroller@destroy');
+        Route::delete('/users/{User}','Usercontroller@destroy');
     });
 });
