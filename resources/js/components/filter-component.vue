@@ -6,16 +6,14 @@
 
       <div v-for="type in types" :key="type.id" id="typeList">
         <div class="form-check">
-          <v-col cols="12" sm="4" md="4">
+         
             <v-checkbox
-              class="checkbox"
-              :label="type.name"
-              color="orange"
-              :id="type.id"
+              :label="type.name" 
+              color="orange" 
               :value="type.id"
               hide-details
             ></v-checkbox>
-          </v-col>
+       
           
         </div>
       </div>
@@ -40,8 +38,7 @@ export default {
     fetchTypeData() {
       axios.get("/api/types").then(response => {
         this.types = response.data.data;
-        console.log(types);
-        console.log(response.data.data);
+       
       });
     },
   }

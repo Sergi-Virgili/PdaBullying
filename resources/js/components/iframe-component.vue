@@ -17,13 +17,23 @@ export default {
   created() {
     this.fetchMyRefuges();
   },
+  computed: {
+    currentUser() {
+      return this.$store.getters.currentUser
+    }
+  },
   methods: {
     fetchMyRefuges() {
-      axios.get("/api/maps/1").then(response => {
-        this.refuges = response.data.refuges;
-        this.center = response.data.center;
-        this.zoom = response.data.zoom;
-        this.loaded = true;
+      let link = ''
+      if (this.currentUser) {
+        link = `/api/maps/${this.currentUser.id}`
+      }
+        //TODO URL PROPS MAP ID
+        axios.get(link).then(response => {
+          this.refuges = response.data.refuges;
+          this.center = response.data.center;
+          this.zoom = response.data.zoom;
+          this.loaded = true;
       });
     }
   }

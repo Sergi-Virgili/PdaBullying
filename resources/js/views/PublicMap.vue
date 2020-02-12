@@ -230,6 +230,11 @@ export default {
         this.fetchData();
         this.fetchMyMap();
     },
+    computed: {
+        currentUser() {
+            return this.$store.getters.currentUser;
+        }
+    },
     methods: {
         openDialogRefuge() {
             this.openSider("refuge");
@@ -248,19 +253,20 @@ export default {
             this.openSider("filter");
         },
         updateMyMapProperties() {
-            //TODO FAKET MAP ID
-            alert("El zoom y posición de tu mapa han sido modificados");
-            let data = {
-                zoom: this.zoom,
-                center: this.center
-            };
-            axios.patch("/api/maps/1", data).then(response => {
-                console.log(response);
-            });
+            
+            if(confirm("Quiere modificar las propiedades del zoom y localización de tu mapa ?")) {
+                let data = {
+                    zoom: this.zoom,
+                    center: this.center
+                };
+                axios.patch("/api/maps/" + this.currentUser.id, data).then(response => {
+                    console.log(response);
+                });
+            }
         },
 
         fetchMyMap() {
-            axios.get("/api/maps/1").then(response => {
+            axios.get("/api/maps/" + this.currentUser.id).then(response => {
                 this.center = response.data.center;
                 this.zoom = response.data.zoom;
             });
@@ -293,7 +299,7 @@ export default {
         OnClickRefuge(index, geoMarker) {
             this.selectRefuge(index);
             this.centerMap(geoMarker);
-            // this.drawerRight = true;
+            
         },
 
         updateRefuge(index, refuge) {
@@ -311,8 +317,8 @@ export default {
         },
 
         fetchMyRefuges() {
-            // TODO map user is faked
-            axios.get("/api/maps/1").then(response => {
+            
+            axios.get("/api/maps/" + currentUser.id).then(response => {
                 this.refuges = response.data.refuges;
             });
         },

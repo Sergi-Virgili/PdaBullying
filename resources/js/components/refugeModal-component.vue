@@ -186,7 +186,7 @@ export default {
             axios
                 .get(`/api/maps/attach/${this.refugeSelected.id}`)
                 .then(response => console.log("attached"));
-            //this.$emit("attachRefuge", this.refugeSelected.id);
+         
         },
         OnClickEdit() {
             this.editMode = true;
@@ -194,7 +194,7 @@ export default {
         OnClickDelete() {
             axios.delete(`/api/refuges/${this.refuge.id}`).then(() => {
                 this.editMode = false;
-                // this.$emit("delete")
+                
             });
         },
         OnClickUpdate() {

@@ -176,7 +176,7 @@ export default {
     },
     updateMyMapProperties() {
       //TODO FAKET MAP ID
-      alert();
+      
       let data = {
         zoom: this.newZoom,
         center: this.newCenter
