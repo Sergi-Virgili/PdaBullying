@@ -46,33 +46,34 @@
               <v-list-item-title>Contacto</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-divider></v-divider>
-          <v-list-item :to="{name:'publish'}" link>
-            <v-list-item-action>
-              <v-icon color="#d5832e">mdi-publish</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Publicar</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item :to="{name:'users'}" link>
-            <v-list-item-action>
-              <v-icon color="#d5832e">mdi-human-greeting</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Usuarios</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item :to="{name:'types'}" link>
-            <v-list-item-action>
-              <v-icon color="#d5832e">mdi-folder</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Tipos</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-divider></v-divider>
-          
+            <v-divider></v-divider>
+          <template v-if="isAdmin">
+            <v-list-item :to="{name:'publish'}" link>
+              <v-list-item-action>
+                <v-icon color="#d5832e">mdi-publish</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Publicar</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item :to="{name:'users'}" link>
+              <v-list-item-action>
+                <v-icon color="#d5832e">mdi-human-greeting</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Usuarios</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item :to="{name:'types'}" link>
+              <v-list-item-action>
+                <v-icon color="#d5832e">mdi-folder</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Tipos</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-divider></v-divider>
+          </template>
           <v-list-item :to="{name:'profile'}" link>
             <v-list-item-action>
               <v-icon color="#d5832e">mdi-account</v-icon>
@@ -124,9 +125,9 @@
       </v-app-bar>
 
       <v-content>
-        <v-container class="full-height" fluid>
-          <v-row align="center" justify="center">
-            <v-col class="text-center">
+        <v-container class="full-height container-map" fluid>
+          <v-row class="map-container" align="center" justify="center">
+            <v-col class="text-center map-container">
               <!-- <MainApp /> -->
               <router-view></router-view>
 
@@ -165,7 +166,11 @@ export default {
   computed: {
     currentUser() {
       return this.$store.getters.currentUser;
-    }
+    },
+    isAdmin() {
+      return this.$store.getters.isAdmin;
+    },
+
   }
 };
 </script>
@@ -173,5 +178,11 @@ export default {
 a,
 a:hover {
   text-decoration: none;
+}
+.container-map{
+    height: 98%;
+}
+.map-container{
+    height: 100%;
 }
 </style>
