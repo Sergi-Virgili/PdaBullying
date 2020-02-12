@@ -100,7 +100,6 @@ class RefugeController extends Controller
      
 
         $map = $user->map;
-        dd($map);
         $map->refuges()->attach($refuge->id);
         $types = [];
         foreach($refuge->types as $type) {
