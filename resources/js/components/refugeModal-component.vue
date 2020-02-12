@@ -179,9 +179,7 @@ export default {
             editMode: false
         };
     },
-    mounted: {
-        
-    },
+    
     methods: {
 
         attachRefuge() {
