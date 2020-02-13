@@ -1,6 +1,17 @@
 
 # PDA Bullying
 
+Maps Application.
+
+Laravel and Passport
+Vue.js, Vuex, VueRouter
+Open Maps, Leaflet.js
+
+## Hoy to use application
+
+Install app.
+Use the hardcoded user (admin).
+
 ## Install
 
 ### Clone repo
@@ -27,7 +38,11 @@ and serve you database
 
 ### Migrate database
 
-php artisan migrate:fresh --seed
+php artisan migrate --seed
+
+### Install Passport / generate tokens
+
+php artisan passport:install
 
 ### run front server
 
