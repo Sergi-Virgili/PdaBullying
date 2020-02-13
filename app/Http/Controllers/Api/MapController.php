@@ -14,36 +14,47 @@ class MapController extends Controller
 {
     public function show($userId) {
 
+
         $user = User::find($userId);
-
-        $refuges = $user->refuges();
+        $map = $user->map;
+        $refuges = $map->refuges;
         $refuges = Refuge::addGeoMarkerFields($refuges);
-
-        return $refuges;
+        $center = [$user->map->lat , $user->map->lng];
+        $zoom = $map->zoom;
+        return response()->json([
+            'center' => $center,
+            'zoom' => $zoom,
+            'refuges' => $refuges]) ;
 
     }
     public function attachRefuge($refugeId) {
 
-        //TODO TOKEN AUTH !!
-        $user = User::find(1);
+        $userId = auth()->user()->id;
+        $user = User::find($userId);
         $map = $user->map;
         $map->refuges()->attach($refugeId);
 
-        return $user->refuges();
-        $refuge = Refuge::find($refugeId);
-        $msg = 'La Ubicación se ha añadido a su mapa';
-        return $msg;
+        return $map->refuges;
+
     }
 
     public function detachRefuge($refugeId) {
-        $user = User::find(1);
+
+        $userId = auth()->user()->id;
+        $user = User::find($userId);
         $map = $user->map;
         $map->refuges()->detach($refugeId);
-        return $user->refuges();
+        return $map->refuges;
     }
 
-    public function updateProperties(Request $request, $refugeId ) {
-
+    public function updateProperties(Request $request, $mapId ) {
+        $map = Map::findOrfail($mapId);
+        $map->update([
+            'lat' => $request->center[0],
+            'lng' => $request->center[1],
+            'zoom' => $request->zoom
+        ]);
+        return response()->json($map);
     }
 
 }

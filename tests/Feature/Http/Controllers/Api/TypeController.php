@@ -33,7 +33,7 @@ class TypeControllerTest extends TestCase
                     'meta'=> [
                         'current_page', 'last_page', 'from', 'to', 'path', 'per_page', 'total'
                     ]
-                
+
             ]);
 
             \Log::info($response->getContent());
@@ -41,8 +41,6 @@ class TypeControllerTest extends TestCase
 
 
     /**
-     * A basic feature test example.
-     *
      * @test
      */
     public function canCreateAType()
@@ -72,14 +70,14 @@ class TypeControllerTest extends TestCase
             'description'=> $description
             ]);
     }
-    
+
     /**
      * A basic feature test example.
      *
      * @test
      */
     public function willFailWith404IfTypeNotFound(){
-        $response = $this->json('GET', 'api/types/-1');
+        $response = $this->json('get', '/types/-5');
 
         $response->assertStatus(404);
     }
@@ -92,13 +90,13 @@ class TypeControllerTest extends TestCase
      */
     public function canReturnAType()
     {
-        
+
         $type = $this->create('Type');
 
-        $response = $this->json('GET', "api/types/$type->id");
+        $response = $this->json('GET', "api/types");
 
         $response->assertStatus(200);
-    }  
+    }
 
     /**
      * A basic feature test example.
@@ -106,7 +104,7 @@ class TypeControllerTest extends TestCase
      * @test
      */
     public function willGet404IfTypeWeWantUpdateNotExists(){
-        $response = $this->json('PUT', 'api/types/-1');
+        $response = $this->json('put', '/types/-1');
 
         $response->assertStatus(404);
     }
@@ -134,11 +132,11 @@ class TypeControllerTest extends TestCase
         ]);
 
             $this->assertDatabaseHas('types', [
-                
+
             'id' => $type->id,
             'name' => $type->name.'_updated',
             'description' => $type->description.'_updated',
-            ]);   
+            ]);
     }
 
         /**

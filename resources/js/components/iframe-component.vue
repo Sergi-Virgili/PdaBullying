@@ -1,6 +1,6 @@
 <template>
   <section class="map-wrapper">
-    <publicMap-component class="map" :refuges="refuges"></publicMap-component>
+    <publicMap-component v-if="loaded" class="map" :refuges="refuges" :center="center" :zoom="zoom"></publicMap-component>
   </section>
 </template>
 
@@ -8,16 +8,32 @@
 export default {
   data() {
     return {
-      refuges: []
+      refuges: [],
+      center: "",
+      zoom: "",
+      loaded: false
     };
   },
   created() {
     this.fetchMyRefuges();
   },
+  computed: {
+    currentUser() {
+      return this.$store.getters.currentUser
+    }
+  },
   methods: {
     fetchMyRefuges() {
-      axios.get("/api/maps/1").then(response => {
-        this.refuges = response.data;
+      let link = ''
+      if (this.currentUser) {
+        link = `/api/maps/${this.currentUser.id}`
+      }
+        //TODO URL PROPS MAP ID
+        axios.get(link).then(response => {
+          this.refuges = response.data.refuges;
+          this.center = response.data.center;
+          this.zoom = response.data.zoom;
+          this.loaded = true;
       });
     }
   }
@@ -26,11 +42,12 @@ export default {
 
 <style lang="scss" scoped>
 .map {
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 .map-wrapper {
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
-</style>>
+</style
+>>

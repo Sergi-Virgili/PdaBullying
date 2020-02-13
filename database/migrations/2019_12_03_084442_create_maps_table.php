@@ -16,9 +16,9 @@ class CreateMapsTable extends Migration
         Schema::create('maps', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
-            $table->double('lat')->nullable();
-            $table->double('lng')->nullable();
-            $table->integer('zoom')->nullable();
+            $table->double('lat')->default(41.39170655);
+            $table->double('lng')->default(2.160123347357113);
+            $table->integer('zoom')->default(13);
 
             $table->timestamps();
         });

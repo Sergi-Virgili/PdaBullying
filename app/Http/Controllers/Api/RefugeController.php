@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Type;
 use App\User;
 use App\Refuge;
 use Illuminate\Http\Request;
@@ -15,64 +16,143 @@ class RefugeController extends Controller
     {
         $refuges = Refuge::all();
 
-
         $refuges = Refuge::addGeoMarkerFields($refuges);
-
+            
         return response()->json([
             'refuge'=>$refuges,
             'msg' => 'All resource fugeces in the sistem'
-            ]);
+        ]);
+    }
+
+    public function indexPublish(){
+
+        $refuges = Refuge::all();
+
+        $refugesList = Refuge::paginate(5);
+
+        $pagination = [
+            'total' => $refugesList->total(),
+            'per_page' => $refugesList->perPage(),
+            'current_page' => $refugesList->currentPage(),
+            'length' => Refuge::length($refuges, $refugesList->perPage()),
+        ];
+            
+        return response()->json([
+            'refugesList'=>$refugesList,
+            'pagination' =>$pagination,
+            'msg' => 'Pagination fugeces in the sistem'
+        ]);
     }
 
 
     public function store(Request $request)
     {
+    
+        $userId = auth()->user()->id;
+        $user = auth()->user();
 
-        $refuge = Refuge::create([
 
-            'name'=> $request->name,
-            'description'=> $request->description,
-            'lat' => $request->lat,
-            'lng' => $request->lng,
-            'house_number' => $request->house_number,
-            'road' => $request->road,
-            'city' => $request->city,
-            'state' => $request->state,
-            'country' => $request->country,
-            'postcode' => $request->postcode,
+        $data = request()->validate([
+
+            'name'=> '',
+            'description'=> '',
+            'lat' => '',
+            'lng' => '',
+            'house_number' => '',
+            'road' => '',
+            'city' => '',
+            'state' => '',
+            'country' => '',
+            'postcode' => '',
+            'phone' => '',
+            'email' => '',
+            
 
         ]);
 
-        // TODO REFACTORING AND USER ID
-        $user = User::find(1);
+        $refuge = request()->user()->refuges()->create($data);
+
+        
+
+        $typesId = $request->types;
+        
+        foreach($typesId as $typeId) {
+            $refuge->types()->attach($typeId);
+
+          
+        }
+        
+     
+
         $map = $user->map;
         $map->refuges()->attach($refuge->id);
+        $types = [];
+        foreach($refuge->types as $type) {
+            $typeResourse = [
+                'id' => $type->id,
+                'name' => $type->name
+            ];
+            array_push($types, $typeResourse);
+        }
+        
 
+        return response()->json([
+            'data' => [
+            'type' => 'refuges',
+            'id' => $refuge->id,
+            'attributes' => [
+                'user_id' => $refuge->user_id,
+                'name' => $refuge->name,
+                'description' => $refuge->description,
+                'lat' => $refuge->lat,
+                'lng' => $refuge->lng,
+                'types' => $types
+                
+            ],
+            'links' => url('/refuges/'.$refuge->id)
+        ]] , 201);
+    }
+
+
+    public function show($refugeId)
+    {
+        $refuge = Refuge::find($refugeId);
         return response()->json($refuge, 201);
     }
 
 
-    public function show(Resource $resource)
+    public function update(Request $request, int $id)
     {
+        $refuge = Refuge::find($id);
+        $refuge->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'house_number' => $request->house_number,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'house_number' => $request->house_number,
+            'city' => $request->city,
+            'road' => $request->road,
+        ]);
+        
 
-    }
+        $refuge->save();
 
-
-    public function update(Request $request, Resource $resource)
-    {
-
+        return response()->json($refuge);
     }
 
 
     public function destroy($refugeId)
     {
-        $refuge = Refuge::find($refugeId);
+        $refuge = Refuge::findOrfail($refugeId);
         $refuge->delete();
+
+        return response()->json('recurso eliminado');
 
     }
 
     public function publish(Request $request) {
-       // return $request;
+
         $refuge = Refuge::find($request->id);
         $refuge->is_Public = true;
         $refuge->update();
@@ -80,7 +160,7 @@ class RefugeController extends Controller
     }
 
     public function hidde(Request $request) {
-        // return $request;
+
          $refuge = Refuge::find($request->id);
          $refuge->is_Public = false;
          $refuge->update();

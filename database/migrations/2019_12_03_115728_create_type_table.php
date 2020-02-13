@@ -17,7 +17,8 @@ class CreateTypeTable extends Migration
         {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
+            //$icon->string('icon_url')->nullable();
             $table->timestamps();
         });
     }

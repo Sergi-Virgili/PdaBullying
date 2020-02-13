@@ -13,40 +13,48 @@ class RefugesSeeder extends Seeder
     {
         DB::table('refuges')->insert([
             'name'=> 'Salut i educació emocional',
-            'logoUrl' => 'https://pdabullying.com/uploads/2019/08/Logo-SEER-gestora_thu.png',
+
             'description'=> 'Prevenció, detecció i actuació davant l’assetjament entre iguals',
+            'email'=>'sitio1@gmail.com',
+            'phone'=>'626626626',
             'lat'=> 41.3876768,
             'lng'=> 2.1692590,
             'is_Public' =>true
         ]);
         DB::table('refuges')->insert([
-    
+
             'name'=> "Concorci d'educació de Barcelona",
-            'logoUrl'=> 'https://pdabullying.com/uploads/2019/08/Logo-Consorci-d-39-Educacio-de-Barcelona_thu.png',
-            'description'=> 'hola',
+
+            'description'=> 'Prevenció, detecció i actuació davant l’assetjament entre iguals. Prevenció, detecció i actuació davant l’assetjament entre iguals',
+            'email'=>'sitio2@gmail.com',
+            'phone'=>'626626626',
             'lat'=> 41.4104479,
             'lng'=> 2.1584852,
             'is_Public' =>false
         ]);
         DB::table('refuges')->insert([
             'name'=> 'Salut i educació emocional',
-            'logoUrl' => 'https://pdabullying.com/uploads/2019/08/Logo-SEER-gestora_thu.png',
 
-            'description'=> 'description3',
+            'email'=>'sitio3@gmail.com',
+            'phone'=>'626626626',
+            'description'=> 'Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor N. del T. persona que se dedica a la imprenta desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. ',
             'lat'=> 41.3987704,
             'lng'=> 2.1634544,
             'is_Public' =>true
         ]);
-        DB::table('refuges')->insert([
-            'name'=> 'Salut i educació emocional',
-            'logoUrl' => 'https://pdabullying.com/uploads/2019/08/Logo-SEER-gestora_thu.png',
 
-            'description'=> 'description4',
-            'lat'=>  41.3988499,
-            'lng'=> 2.16369090,
-            'is_Public' =>false
+        DB::table('refuges')->insert([
+
+            'name'=> "Concorci d'educació de Barcelona",
+
+            'description'=> 'Prevenció, detecció i actuació davant l’assetjament entre iguals. Prevenció, detecció i actuació davant l’assetjament entre iguals',
+            'email'=>'sitio4@gmail.com',
+            'phone'=>'626626626',
+            'lat'=> 41.4104479,
+            'lng'=> 2.1584852,
+            'is_Public' =>true,
+            'user_id' =>'2'
         ]);
 
-        //
     }
 }

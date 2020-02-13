@@ -14,8 +14,9 @@ class TypeController extends Controller
 
     public function index()
     {
-        return new TypeCollection(Type::paginate());
+        return $types = new TypeCollection(Type::all());
     }
+
     public function store(Request $request)
     {
         try
@@ -27,7 +28,7 @@ class TypeController extends Controller
         {
             dd($exception);
         }
-        
+
     }
     public function show(int $id)
     {
@@ -40,7 +41,7 @@ class TypeController extends Controller
         {
             dd($exception);
         }
-        
+
     }
     public function update(Request $request, int $id)
     {
@@ -48,11 +49,9 @@ class TypeController extends Controller
 
         $type->update([
             'name' => $request->name,
-            'description' => $request->description
-
         ]);
-        
-        return response()->json(new TypeResource($type));
+        $type->save();
+        return response()->json(new TypeResource($type), 200);
     }
 
     public function destroy(int $id)
