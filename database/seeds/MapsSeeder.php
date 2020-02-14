@@ -18,5 +18,19 @@ class MapsSeeder extends Seeder
             'zoom' => 13
 
         ]);
+        DB::table('maps')->insert([
+            'user_id'=> 2,
+            'lat' => 41.3876768,
+            'lng' => 2.169259,
+            'zoom' => 13
+
+        ]);
+        DB::table('maps')->insert([
+            'user_id'=> 3,
+            'lat' => 41.3876768,
+            'lng' => 2.169259,
+            'zoom' => 13
+
+        ]);
     }
 }

@@ -152,7 +152,7 @@ export default {
         },
         getPaginatedItems(page) {
             axios.get(`/api/refugesPublish?page=${page}`).then(response => {
-                this.refuges = response.data.refuge;
+              
                 this.refugesList = response.data.refugesList.data;
                 this.page = this.pagination.current_page;
             });

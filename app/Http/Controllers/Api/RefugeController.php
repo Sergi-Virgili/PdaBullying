@@ -73,28 +73,14 @@ class RefugeController extends Controller
 
         $refuge = request()->user()->refuges()->create($data);
 
-        // [
-        //     'user_id' => $userId,
-        //     'name'=> $request->name,
-        //     'description'=> $request->description,
-        //     'lat' => $request->lat,
-        //     'lng' => $request->lng,
-        //     'house_number' => $request->house_number,
-        //     'road' => $request->road,
-        //     'city' => $request->city,
-        //     'state' => $request->state,
-        //     'country' => $request->country,
-        //     'postcode' => $request->postcode,
-        //     //'img_url' =>
-
-        // ]
+        
 
         $typesId = $request->types;
-        //dd($request->types);
+        
         foreach($typesId as $typeId) {
             $refuge->types()->attach($typeId);
 
-          //  $typeId = Type::find($typeId);
+          
         }
         
      

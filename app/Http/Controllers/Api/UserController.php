@@ -11,11 +11,17 @@ class UserController extends Controller
 
     public function index() {
 
-        return User::all();
+        $users = User::all();
+
+        return response()->json($users , 200);
     }
 
 
-    public function delete() {
+    public function destroy($userId) {
+
+        $user = User::findOrfail($userId);
+        $user->delete();
+        return response()->json(200);
 
     }
 
