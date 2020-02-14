@@ -125,9 +125,9 @@
       </v-app-bar>
 
       <v-content>
-        <v-container class="full-height" fluid>
-          <v-row align="center" justify="center">
-            <v-col class="text-center">
+        <v-container class="full-height container-map" fluid>
+          <v-row class="map-container" align="center" justify="center">
+            <v-col class="text-center map-container">
               <!-- <MainApp /> -->
               <router-view></router-view>
 
@@ -178,5 +178,11 @@ export default {
 a,
 a:hover {
   text-decoration: none;
+}
+.container-map{
+    height: 98%;
+}
+.map-container{
+    height: 100%;
 }
 </style>

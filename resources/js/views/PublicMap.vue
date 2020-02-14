@@ -17,7 +17,7 @@
             ></toolsbar-component>
         </v-navigation-drawer>
 
-        <div>
+        <v-flex class="map-container">
             <l-map
                 style="z-index:1;"
                 class="map"
@@ -95,7 +95,7 @@
                         :icon="icon2"
                         @click="OnClickRefuge(index, refuge.geoMarker)"
                     >
-                        <v-col class="text-center"> </v-col>
+                        <v-col class="text-center map-container"> </v-col>
 
                         <l-popup>
                             <div class="popUp">
@@ -162,7 +162,7 @@
             </v-navigation-drawer>
 
             
-        </div>
+        </v-flex>
         <v-bottom-sheet v-model="mode.list" class="button_list">
             <template v-slot:activator="{ on }">
                 <v-btn width="100%" v-on="on">
@@ -382,7 +382,9 @@ export default {
     color: black;
     display: inline-block;
 }
-
+.map-container{
+    height: 100%;
+}
 .button_list {
     width: 100%;
 }
