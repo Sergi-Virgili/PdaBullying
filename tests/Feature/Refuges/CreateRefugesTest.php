@@ -19,7 +19,8 @@ class CreateRefugesTest extends TestCase
     /**
      * @test
      */
-    public function auth_user_can_create_a_refuge() {
+    public function auth_user_can_create_a_refuge()
+    {
 
         $this->withoutExceptionHandling();
         $faker = Factory::create();
@@ -31,19 +32,19 @@ class CreateRefugesTest extends TestCase
 
         $response = $this->json('post', '/api/refuges', [
 
-                    'name' => $name = $faker->company,
-                    'description' => $description = $faker->text,
-                    'lat' => $lat = 41.3876768,
-                    'lng' => $lng = 2.1692590,
-                    'types'=> [0]
+            'name' => $name = $faker->company,
+            'description' => $description = $faker->text,
+            'lat' => $lat = 41.3876768,
+            'lng' => $lng = 2.1692590,
+            'types' => [0]
 
         ]);
         //TODO TEST DOMNT PASS TYPES ARRAY
         $refuge = Refuge::first();
 
         $this->assertCount(1, Refuge::all());
-        
-    
+
+
 
         $response->assertStatus(201)
             ->assertJson([
@@ -60,16 +61,16 @@ class CreateRefugesTest extends TestCase
                             'id' => 0,
                             'name' => $type->name
                         ]
-                        
                     ],
-                    'links' => url('/refuges/'.$refuge->id)
+                    'links' => url('/refuges/' . $refuge->id)
                 ]
             ]);
     }
     /**
      * @test
      */
-    public function no_auth_user_cannot_create_a_refuge() {
+    public function no_auth_user_cannot_create_a_refuge()
+    {
 
 
         $faker = Factory::create();
@@ -77,25 +78,23 @@ class CreateRefugesTest extends TestCase
 
         $response = $this->json('post', '/api/refuges', [
 
-                    'name' => $name = $faker->company,
-                    'description' => $description = $faker->text,
-                    'lat' => $lat = 41.3876768,
-                    'lng' => $lng = 2.1692590,
-                    
+            'name' => $name = $faker->company,
+            'description' => $description = $faker->text,
+            'lat' => $lat = 41.3876768,
+            'lng' => $lng = 2.1692590,
+
 
         ]);
-
-
 
         $this->assertCount(0, Refuge::all());
 
         $response->assertStatus(401);
-
     }
     /**
      * @test
      */
-    public function auth_user_refuge__created_is_attached_in_self_map() {
+    public function auth_user_refuge__created_is_attached_in_self_map()
+    {
 
         $this->actingAs($user = factory(User::class)->create(), 'api');
 
@@ -103,6 +102,5 @@ class CreateRefugesTest extends TestCase
         $map = $user->map;
 
         $this->assertCount(1, $map::all());
-
     }
 }

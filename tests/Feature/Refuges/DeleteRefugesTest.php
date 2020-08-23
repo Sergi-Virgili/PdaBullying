@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Feature\Refuges;
 
 use App\User;
@@ -17,43 +18,72 @@ class DeleteRefugesTest extends TestCase
     /**
      * @test
      */
-    public function no_auth_user_can_not_delete_a_refuge() {
+    public function no_auth_user_can_not_delete_a_refuge()
+    {
 
-        $this->actingAs($user = factory(User::class)->create());
+
         $refuge = factory(Refuge::class)->create();
 
-        $response = $this->json('delete', '/api/refuges/'.$refuge->id);
+        $response = $this->json('delete', '/api/refuges/' . $refuge->id);
 
         $this->assertCount(1, Refuge::all());
         $response->assertStatus(401);
-
     }
     /**
      * @test
      */
-    public function auth_user_can_delete_own_refuge() {
+    public function auth_user_can_delete_own_refuge()
+    {
 
-        $this->actingAs($user = factory(User::class)->create(),'api');
-        $refuge = factory(Refuge::class)->create();
+        $this->actingAs($user = factory(User::class)->create([
+            'id' => 2
+        ]), 'api');
 
-        $response = $this->json('delete', '/api/refuges/'.$refuge->id);
+        $refuge = factory(Refuge::class)->create([
+            'user_id' => $user->id
+        ]);
+
+        $response = $this->json('delete', '/api/refuges/' . $refuge->id);
         $this->assertCount(0, Refuge::all());
-
+        $response->assertStatus(200);
     }
-    public function auth_user_can_not_delete_other_users_refuges() {
+    /**
+     * @test
+     */
+    public function auth_user_can_not_delete_other_users_refuges()
+    {
 
-        // $this->actingAs($user = factory(User::class)->create(),'api');
-        // $refuge = factory(Refuge::class)->create();
+        $this->actingAs($user = factory(User::class)->create([
+            'id' => 2,
+            'is_admin' => false
+        ]), 'api');
 
-        // $response = $this->json('delete', '/api/refuges/'.$refuge->id);
-        // $this->assertCount(0, Refuge::all());
+        $refuge = factory(Refuge::class)->create([
+            'user_id' => 4
+        ]);
 
+        $response = $this->json('delete', '/api/refuges/' . $refuge->id);
+        $response->assertStatus(403);
+        $this->assertCount(1, Refuge::all());
     }
-    // public function admin_can_delete_all_refuges() {
+    /**
+     * @test
+     */
+    public function admin_can_delete_all_refuges()
+    {
 
+        $this->actingAs($user = factory(User::class)->create([
+            'is_admin' => true
+        ]), 'api');
 
+        $refuge = factory(Refuge::class)->create([
+            'user_id' => 33
+        ]);
 
-    // }
+        $response = $this->json('delete', '/api/refuges/' . $refuge->id);
+        $this->assertCount(0, Refuge::all());
+        $response->assertStatus(200);
+    }
     // public function all_attaches_map_deleted_when_refuge_is_deleted() {
 
 
