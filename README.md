@@ -1,5 +1,8 @@
 # 🧩 PDA Bullying — Plataforma de Refugios y Recursos contra el Acoso Escolar
 
+![PDA Bullying](https://barcelonainclusiva.mapainteract.es/imatges/2019/8/1083-Logo%20Plataforma%20PDA%20Bullying.jpg)
+
+
 > **PDA Bullying** es una aplicación web desarrollada con **Laravel, Vue.js, Vuetify y Leaflet**,  
 > que permite registrar, gestionar y visualizar **refugios**: lugares o entidades que ofrecen apoyo a jóvenes víctimas de acoso escolar.
 
